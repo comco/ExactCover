@@ -1,8 +1,23 @@
 package com.comco.exactcover.dancinglinks;
 
-
 public class Node {
 	private Node left, right, bottom, top;
+	private final int row, col;
+
+	public Node(final int row, final int col) {
+		if (row >= 0 && col >= 0) {
+			this.row = row;
+			this.col = col;
+
+			left = this;
+			right = this;
+			bottom = this;
+			top = this;
+		} else {
+			throw new IllegalArgumentException(
+					"Dancing links node row and column should be non-negative.");
+		}
+	}
 
 	public Node getLeft() {
 		return left;
@@ -36,6 +51,14 @@ public class Node {
 		top = node;
 	}
 
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
 	public void attachLeftRight() {
 		left.setRight(this);
 		right.setLeft(this);
@@ -54,5 +77,21 @@ public class Node {
 	public void detachBottomTop() {
 		bottom.setTop(top);
 		top.setBottom(bottom);
+	}
+
+	public void insertRight(final Node node) {
+		node.right = right;
+		right.left = node;
+
+		node.left = this;
+		right = node;
+	}
+
+	public void insertTop(final Node node) {
+		node.top = top;
+		top.bottom = node;
+
+		node.bottom = this;
+		top = node;
 	}
 }
