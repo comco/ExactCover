@@ -5,6 +5,12 @@ import java.util.Iterator;
 import com.comco.common.MapIteratorDecorator;
 import com.comco.exactcover.Row;
 
+/**
+ * A row in the Dancing Links representation of the Exact Cover problem.
+ * 
+ * @author comco
+ * 
+ */
 public class DancingLinksRow implements Row, Iterable<Node> {
 	private final Node origin;
 
@@ -17,18 +23,21 @@ public class DancingLinksRow implements Row, Iterable<Node> {
 		return this.new RowIterator();
 	}
 
+	@Override
 	public void attach() {
 		for (final Node node : this) {
 			node.attachBottomTop();
 		}
 	}
 
+	@Override
 	public void detach() {
 		for (final Node node : this) {
 			node.detachBottomTop();
 		}
 	}
 
+	@Override
 	public Iterable<DancingLinksCol> incidentCols() {
 		return new Iterable<DancingLinksCol>() {
 

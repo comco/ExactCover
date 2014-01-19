@@ -2,6 +2,12 @@ package com.comco.exactcover.dancinglinks;
 
 import com.comco.exactcover.Network;
 
+/**
+ * A Dancing Link representation for the Exact Cover problem.
+ * 
+ * @author comco
+ * 
+ */
 public class DancingLinksNetwork implements Network {
 	private final Node root;
 

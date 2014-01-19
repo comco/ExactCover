@@ -1,5 +1,11 @@
 package com.comco.exactcover.dancinglinks;
 
+/**
+ * Node inside the Dancing Links representation of the Exact Cover problem.
+ * 
+ * @author comco
+ * 
+ */
 public class Node {
 	private Node left, right, bottom, top;
 	private final int row, col;
