@@ -7,7 +7,7 @@ package com.comco.exactcover;
  * @author comco
  * 
  */
-public abstract class AlgorithmX {
+public abstract class AlgorithmX<SpecificNetwork extends Network, SpecificRow extends Row, SpecificCol extends Col> {
 
 	/**
 	 * Solves an exact cover problem, represented by a network.
@@ -17,13 +17,13 @@ public abstract class AlgorithmX {
 	 * @param partialSolution
 	 *            - stores the solutions found
 	 */
-	public void solve(final Network network, final Solution partialSolution) {
+	public void solve(final SpecificNetwork network, final Solution partialSolution) {
 		if (network.hasRows()) {
 			if (network.hasCols()) {
 				// choose a column deterministically
-				Col col = chooseCol(network);
+				SpecificCol col = chooseCol(network);
 				// choose a row non-deterministically
-				for (final Row row : enumerateRows(col)) {
+				for (final SpecificRow row : enumerateRows(col)) {
 					partialSolution.includeRow(row);
 
 					// remove incident rows and columns
@@ -60,7 +60,7 @@ public abstract class AlgorithmX {
 	 *            - the network to choose a column from
 	 * @return a column from the network.
 	 */
-	protected abstract Col chooseCol(final Network network);
+	protected abstract SpecificCol chooseCol(final SpecificNetwork network);
 
 	/**
 	 * Heuristically enumerate the possible rows incident to a column.
@@ -69,5 +69,5 @@ public abstract class AlgorithmX {
 	 *            - the column, which needs to be enumerated
 	 * @return incident rows enumeration.
 	 */
-	protected abstract Iterable<Row> enumerateRows(final Col col);
+	protected abstract Iterable<SpecificRow> enumerateRows(final SpecificCol col);
 }

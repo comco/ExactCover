@@ -29,4 +29,8 @@ public class DancingLinksNetwork implements Network {
 	public boolean hasCols() {
 		return root != root.getRight();
 	}
+	
+	public Node getRoot() {
+		return root;
+	}
 }
