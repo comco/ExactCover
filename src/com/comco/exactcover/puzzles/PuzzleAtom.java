@@ -7,6 +7,5 @@ public abstract class PuzzleAtom {
 	protected PuzzleAtom(final Puzzle puzzle) {
 		this.puzzle = puzzle;
 		this.id = puzzle.nextAtomId();
-		puzzle.addAtom(this);
 	}
 }

@@ -12,6 +12,6 @@ public class HintSudokuSet extends SudokuSet {
 		this.val = val;
 
 		addElement(row, col, val);
-		addElement(sudoku.newFreshElement());
+		addElement(sudoku.createSudokuAtom());
 	}
 }

@@ -7,7 +7,6 @@ public abstract class PuzzleSet {
 	protected PuzzleSet(final Puzzle puzzle) {
 		this.puzzle = puzzle;
 		this.id = puzzle.nextSetId();
-		puzzle.addSet(this);
 	}
 
 	public abstract Iterable<? extends PuzzleAtom> atoms();

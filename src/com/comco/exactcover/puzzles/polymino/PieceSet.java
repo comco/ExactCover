@@ -38,7 +38,7 @@ public class PieceSet extends PuzzleSet {
 	}
 
 	private void addAtom(int row, int col) {
-		atoms.add(polymino.atom(row, col));
+		atoms.add(polymino.getAtomAt(row, col));
 	}
 
 	@Override
