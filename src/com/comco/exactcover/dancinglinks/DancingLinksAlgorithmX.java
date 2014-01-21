@@ -9,15 +9,15 @@ import com.comco.exactcover.AlgorithmX;
  * 
  */
 public class DancingLinksAlgorithmX extends
-		AlgorithmX<DancingLinksNetwork, DancingLinksRow, DancingLinksCol> {
+	AlgorithmX<DancingLinksNetwork, DancingLinksRow, DancingLinksCol> {
 
-	@Override
-	protected DancingLinksCol chooseCol(final DancingLinksNetwork network) {
-		return new DancingLinksCol(network.getRoot().getRight());
-	}
+    @Override
+    protected DancingLinksCol chooseCol(final DancingLinksNetwork network) {
+	return new DancingLinksCol(network.getRoot().getRight());
+    }
 
-	@Override
-	protected Iterable<DancingLinksRow> enumerateRows(final DancingLinksCol col) {
-		return col.incidentRows();
-	}
+    @Override
+    protected Iterable<DancingLinksRow> enumerateRows(final DancingLinksCol col) {
+	return col.incidentRows();
+    }
 }

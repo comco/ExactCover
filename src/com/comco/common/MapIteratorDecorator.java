@@ -13,40 +13,40 @@ import java.util.Iterator;
  *            - the destination type of the transformation
  */
 public abstract class MapIteratorDecorator<Source, Destination> implements
-		Iterator<Destination> {
-	private final Iterator<Source> sourceIterator;
+	Iterator<Destination> {
+    private final Iterator<Source> sourceIterator;
 
-	/**
-	 * Constructs a new map iterator out of a given source iterator.
-	 * 
-	 * @param sourceIterator
-	 *            - the source iterator
-	 */
-	public MapIteratorDecorator(final Iterator<Source> sourceIterator) {
-		this.sourceIterator = sourceIterator;
-	}
+    /**
+     * Constructs a new map iterator out of a given source iterator.
+     * 
+     * @param sourceIterator
+     *            - the source iterator
+     */
+    public MapIteratorDecorator(final Iterator<Source> sourceIterator) {
+	this.sourceIterator = sourceIterator;
+    }
 
-	@Override
-	public boolean hasNext() {
-		return sourceIterator.hasNext();
-	}
+    @Override
+    public boolean hasNext() {
+	return sourceIterator.hasNext();
+    }
 
-	@Override
-	public Destination next() {
-		return transform(sourceIterator.next());
-	}
+    @Override
+    public Destination next() {
+	return transform(sourceIterator.next());
+    }
 
-	@Override
-	public void remove() {
-		sourceIterator.remove();
-	}
+    @Override
+    public void remove() {
+	sourceIterator.remove();
+    }
 
-	/**
-	 * The transformation applied to each element of an iterator.
-	 * 
-	 * @param source
-	 *            - the element to be transformed
-	 * @return the transformed element.
-	 */
-	protected abstract Destination transform(final Source source);
+    /**
+     * The transformation applied to each element of an iterator.
+     * 
+     * @param source
+     *            - the element to be transformed
+     * @return the transformed element.
+     */
+    protected abstract Destination transform(final Source source);
 }
