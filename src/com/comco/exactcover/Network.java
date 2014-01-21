@@ -7,18 +7,18 @@ package com.comco.exactcover;
  * 
  */
 public interface Network {
-    /**
-     * Checks if the network has rows.
-     * 
-     * @return
-     */
-    public boolean hasRows();
+	/**
+	 * Checks if the network has rows.
+	 * 
+	 * @return
+	 */
+	public boolean hasRows();
 
-    /**
-     * Checks if the network has columns.
-     * 
-     * @return
-     */
-    public boolean hasCols();
+	/**
+	 * Checks if the network has columns.
+	 * 
+	 * @return
+	 */
+	public boolean hasCols();
 
 }

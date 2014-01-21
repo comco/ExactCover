@@ -7,20 +7,20 @@ package com.comco.exactcover;
  * 
  */
 public interface Col {
-    /**
-     * Attaches the column to its network.
-     */
-    void attach();
+	/**
+	 * Attaches the column to its network.
+	 */
+	void attach();
 
-    /**
-     * Detaches the column from its network.
-     */
-    void detach();
+	/**
+	 * Detaches the column from its network.
+	 */
+	void detach();
 
-    /**
-     * Enumerates the incident rows of this column.
-     * 
-     * @return rows enumeration.
-     */
-    Iterable<? extends Row> incidentRows();
+	/**
+	 * Enumerates the incident rows of this column.
+	 * 
+	 * @return rows enumeration.
+	 */
+	Iterable<? extends Row> incidentRows();
 }
