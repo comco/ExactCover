@@ -19,7 +19,7 @@ public abstract class SudokuSet extends PuzzleSet {
     }
 
     protected void addElement(int row, int col, int val) {
-	addElement(sudoku.element(row, col, val));
+	addElement(sudoku.atom(row, col, val));
     }
 
     @Override

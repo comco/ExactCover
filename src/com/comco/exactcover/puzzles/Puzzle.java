@@ -32,4 +32,19 @@ public abstract class Puzzle {
     public int setsCount() {
 	return nextSetId;
     }
+    
+    /**
+     * Transforms the puzzle to an exact cover problem.
+     * @return
+     */
+    public boolean[][] toExactCover() {
+	boolean[][] result = new boolean[atoms.size()][sets.size()];
+	for (PuzzleSet set : sets) {
+	    for (PuzzleAtom atom : set.atoms()) {
+		result[atom.id][set.id] = true;
+	    }
+	}
+
+	return result;
+    }
 }
