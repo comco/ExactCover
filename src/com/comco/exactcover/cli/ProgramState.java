@@ -1,7 +1,7 @@
 package com.comco.exactcover.cli;
 
 import com.comco.exactcover.dancinglinks.DancingLinksAlgorithmX;
-import com.comco.exactcover.readers.PuzzleReader;
+import com.comco.exactcover.puzzles.PuzzleReader;
 
 public class ProgramState {
 	PuzzleReader reader;

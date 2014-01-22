@@ -1,13 +1,11 @@
-package com.comco.exactcover.readers;
+package com.comco.exactcover.puzzles.polymino;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.comco.exactcover.puzzles.polymino.MaskUtils;
-import com.comco.exactcover.puzzles.polymino.Piece;
-import com.comco.exactcover.puzzles.polymino.Polymino;
+import com.comco.exactcover.puzzles.PuzzleReader;
 
-public class PolyminoReader extends PuzzleReader {
+public class PolyminoReader implements PuzzleReader {
 	@Override
 	public Polymino read(final InputStream input) {
 		// read the rows & cols of the board, then the number of pieces

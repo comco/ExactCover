@@ -1,11 +1,11 @@
-package com.comco.exactcover.readers;
+package com.comco.exactcover.puzzles.sudoku;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.comco.exactcover.puzzles.sudoku.Sudoku;
+import com.comco.exactcover.puzzles.PuzzleReader;
 
-public class SudokuReader extends PuzzleReader {
+public class SudokuReader implements PuzzleReader {
 	@Override
 	public Sudoku read(final InputStream input) {
 		try (Scanner sc = new Scanner(input)) {
