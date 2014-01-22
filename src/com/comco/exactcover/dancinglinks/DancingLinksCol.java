@@ -20,7 +20,7 @@ public class DancingLinksCol implements Col, Iterable<Node> {
 
 	@Override
 	public int col() {
-		return origin.getCol();
+		return origin.getCol() - 1;
 	}
 
 	@Override

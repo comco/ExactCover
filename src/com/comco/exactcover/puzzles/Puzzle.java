@@ -1,5 +1,7 @@
 package com.comco.exactcover.puzzles;
 
+import com.comco.exactcover.Solution;
+
 public abstract class Puzzle {
 	public final PuzzleType type;
 	
@@ -40,13 +42,16 @@ public abstract class Puzzle {
 	 * @return
 	 */
 	public boolean[][] toExactCover() {
-		boolean[][] result = new boolean[atomsCount()][setsCount()];
+		boolean[][] result = new boolean[setsCount()][atomsCount()];
+		
 		for (PuzzleSet set : sets()) {
 			for (PuzzleAtom atom : set.atoms()) {
-				result[atom.id][set.id] = true;
+				result[set.id][atom.id] = true;
 			}
 		}
 
 		return result;
 	}
+	
+	public abstract Solution createSolution();
 }

@@ -117,4 +117,9 @@ public class Sudoku extends Puzzle {
 	public SudokuSet getSet(int id) {
 		return sets.get(id);
 	}
+
+	@Override
+	public SudokuSolution createSolution() {
+		return new SudokuSolution(this);
+	}
 }

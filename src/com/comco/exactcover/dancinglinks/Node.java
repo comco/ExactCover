@@ -100,4 +100,9 @@ public class Node {
 		node.bottom = this;
 		top = node;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("{%d, %d}", row, col);
+	}
 }

@@ -9,6 +9,7 @@ import static com.comco.exactcover.puzzles.polymino.MaskUtils.maskRows;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comco.exactcover.Solution;
 import com.comco.exactcover.puzzles.Puzzle;
 import com.comco.exactcover.puzzles.PuzzleAtom;
 import com.comco.exactcover.puzzles.PuzzleSet;
@@ -116,5 +117,11 @@ public class Polymino extends Puzzle {
 	@Override
 	public PuzzleSet getSet(int id) {
 		return sets.get(id);
+	}
+
+	@Override
+	public Solution createSolution() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,6 +1,5 @@
 package com.comco.exactcover.dancinglinks;
 
-import com.comco.exactcover.Network;
 
 /**
  * Class that builds a Dancing Link network from a boolean matrix representation
@@ -10,7 +9,7 @@ import com.comco.exactcover.Network;
  * 
  */
 public class NetworkBuilder {
-	Network buildNetwork(boolean[][] matrix) {
+	public DancingLinksNetwork buildNetwork(boolean[][] matrix) {
 		int rows = matrix.length;
 		int cols = matrix[0].length;
 
@@ -26,6 +25,7 @@ public class NetworkBuilder {
 		for (int i = 1; i <= rows; ++i) {
 			Node current = createNode(i, 0);
 			hooks[0].insertTop(current);
+			hooks[0] = current;
 			for (int j = 1; j <= cols; ++j) {
 				if (matrix[i - 1][j - 1]) {
 					Node next = createNode(i, j);
@@ -41,7 +41,7 @@ public class NetworkBuilder {
 		return createNetwork(root);
 	}
 
-	protected Network createNetwork(final Node root) {
+	protected DancingLinksNetwork createNetwork(final Node root) {
 		return new DancingLinksNetwork(root);
 	}
 

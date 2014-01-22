@@ -10,6 +10,9 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import com.comco.exactcover.AlgorithmXType;
+import com.comco.exactcover.puzzles.PuzzleType;
+
 public class Program {
 	private static final Logger LOGGER = Logger.getLogger("Program");
 	private static final Options OPTIONS = buildOptions();
@@ -23,6 +26,14 @@ public class Program {
 			if (cmd.hasOption('h')) {
 				displayHelp();
 			}
+			
+			ProgramState state = new ProgramState();
+			state.input = System.in;
+			state.puzzleType = PuzzleType.getType(cmd.getOptionValue('p'));
+			state.algorithmType = AlgorithmXType.getType(cmd.getOptionValue('a'));
+			state.build();
+			
+			state.solve();
 		} catch (ParseException e) {
 			LOGGER.severe("cannot parse command line.");
 		}

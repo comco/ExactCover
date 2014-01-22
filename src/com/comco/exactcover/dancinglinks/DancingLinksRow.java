@@ -20,7 +20,7 @@ public class DancingLinksRow implements Row, Iterable<Node> {
 
 	@Override
 	public int row() {
-		return origin.getRow();
+		return origin.getRow() - 1;
 	}
 
 	@Override
