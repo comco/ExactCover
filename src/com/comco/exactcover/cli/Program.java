@@ -31,9 +31,13 @@ public class Program {
 
 	private static Options buildOptions() {
 		Option help = new Option("h", "help", false, "help");
+		Option puzzle = new Option("p", "puzzle", true, "puzzle");
+		Option algorithm = new Option("a", "algorithm", true, "algorithm");
 		
 		Options options = new Options();
 		options.addOption(help);
+		options.addOption(puzzle);
+		options.addOption(algorithm);
 		return options;
 	}
 	
