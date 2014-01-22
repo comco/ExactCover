@@ -19,6 +19,11 @@ public class DancingLinksRow implements Row, Iterable<Node> {
 	}
 
 	@Override
+	public int row() {
+		return origin.getRow();
+	}
+
+	@Override
 	public Iterator<Node> iterator() {
 		return this.new RowIterator();
 	}

@@ -19,6 +19,11 @@ public class DancingLinksCol implements Col, Iterable<Node> {
 	}
 
 	@Override
+	public int col() {
+		return origin.getCol();
+	}
+
+	@Override
 	public Iterator<Node> iterator() {
 		return this.new ColIterator();
 	}

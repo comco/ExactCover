@@ -11,4 +11,14 @@ public class PossibleValueAtom extends SudokuAtom {
 		this.col = col;
 		this.val = val;
 	}
+	
+	@Override
+	public void attachToSolution(final SudokuSolution solution) {
+		solution.setValueAt(row, col, val);
+	}
+	
+	@Override
+	public void detachFromSolution(final SudokuSolution solution) {
+		solution.unsetValueAt(row, col);
+	}
 }

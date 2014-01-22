@@ -23,4 +23,6 @@ public interface Col {
 	 * @return rows enumeration.
 	 */
 	Iterable<? extends Row> incidentRows();
+	
+	int col();
 }
