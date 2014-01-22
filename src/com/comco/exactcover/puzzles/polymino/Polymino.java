@@ -12,6 +12,7 @@ import java.util.List;
 import com.comco.exactcover.puzzles.Puzzle;
 import com.comco.exactcover.puzzles.PuzzleAtom;
 import com.comco.exactcover.puzzles.PuzzleSet;
+import com.comco.exactcover.puzzles.PuzzleType;
 
 public class Polymino extends Puzzle {
 	final boolean[][] board;
@@ -22,6 +23,8 @@ public class Polymino extends Puzzle {
 	final List<PieceSet> sets = new ArrayList<>();
 
 	public Polymino(boolean[][] board) {
+		super(PuzzleType.POLYMINO);
+		
 		this.board = board;
 		this.atomsOnBoard = new PositionAtom[rows()][cols()];
 

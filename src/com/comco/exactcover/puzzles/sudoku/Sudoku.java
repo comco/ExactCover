@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comco.exactcover.puzzles.Puzzle;
+import com.comco.exactcover.puzzles.PuzzleType;
 
 public class Sudoku extends Puzzle {
 	private PossibleValueAtom[][][] matrix = new PossibleValueAtom[9][9][9];
@@ -11,6 +12,8 @@ public class Sudoku extends Puzzle {
 	private List<SudokuSet> sets = new ArrayList<>();
 
 	public Sudoku() {
+		super(PuzzleType.SUDOKU);
+		
 		// initialize elements
 		for (int row = 0; row < 9; ++row) {
 			for (int col = 0; col < 9; ++col) {

@@ -1,6 +1,12 @@
 package com.comco.exactcover.puzzles;
 
 public abstract class Puzzle {
+	public final PuzzleType type;
+	
+	protected Puzzle(final PuzzleType type) {
+		this.type = type;
+	}
+	
 	private int nextAtomId = 0;
 	private int nextSetId = 0;
 
