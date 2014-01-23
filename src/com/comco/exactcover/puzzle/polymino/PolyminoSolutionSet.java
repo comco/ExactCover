@@ -39,6 +39,7 @@ public class PolyminoSolutionSet implements SolutionSet {
 	}
 
 	private void printSolution() {
+		System.out.println("Solution:");
 		int rows = polymino.rows();
 		int cols = polymino.cols();
 		final int[][] board = new int[rows][cols];
@@ -62,6 +63,15 @@ public class PolyminoSolutionSet implements SolutionSet {
 						board[boardRow + row][boardCol + col] = id;
 					}
 				}
+			}
+		}
+		
+		for (int row = 0; row < rows; ++row) {
+			for (int col = 0; col < cols; ++col) {
+				if (board[row][col] >= 0) {
+					System.out.format("%d ", board[row][col]);
+				}
+				System.out.println();
 			}
 		}
 	}
