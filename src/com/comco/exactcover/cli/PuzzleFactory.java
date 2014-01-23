@@ -3,11 +3,11 @@ package com.comco.exactcover.cli;
 import com.comco.exactcover.algorithm.SolutionSet;
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleReader;
-import com.comco.exactcover.puzzles.exactcover.ExactCover;
-import com.comco.exactcover.puzzles.exactcover.ExactCoverReader;
-import com.comco.exactcover.puzzles.exactcover.ExactCoverSolution;
-import com.comco.exactcover.puzzles.polymino.PolyminoReader;
-import com.comco.exactcover.puzzles.sudoku.SudokuReader;
+import com.comco.exactcover.puzzle.exactcover.ExactCover;
+import com.comco.exactcover.puzzle.exactcover.ExactCoverReader;
+import com.comco.exactcover.puzzle.exactcover.ExactCoverSolution;
+import com.comco.exactcover.puzzle.polymino.PolyminoReader;
+import com.comco.exactcover.puzzle.sudoku.SudokuReader;
 
 public final class PuzzleFactory {
 	private static final SudokuReader SUDOKU_READER = new SudokuReader();

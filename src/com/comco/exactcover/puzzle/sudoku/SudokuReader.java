@@ -1,4 +1,4 @@
-package com.comco.exactcover.puzzles.sudoku;
+package com.comco.exactcover.puzzle.sudoku;
 
 import java.io.InputStream;
 import java.util.Scanner;

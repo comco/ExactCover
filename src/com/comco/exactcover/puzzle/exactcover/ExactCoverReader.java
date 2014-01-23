@@ -1,4 +1,4 @@
-package com.comco.exactcover.puzzles.exactcover;
+package com.comco.exactcover.puzzle.exactcover;
 
 import java.io.InputStream;
 import java.util.Scanner;

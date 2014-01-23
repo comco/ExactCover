@@ -1,9 +1,9 @@
 package com.comco.exactcover.cli;
 
 import com.comco.exactcover.puzzle.Puzzle;
-import com.comco.exactcover.puzzles.exactcover.ExactCover;
-import com.comco.exactcover.puzzles.polymino.Polymino;
-import com.comco.exactcover.puzzles.sudoku.Sudoku;
+import com.comco.exactcover.puzzle.exactcover.ExactCover;
+import com.comco.exactcover.puzzle.polymino.Polymino;
+import com.comco.exactcover.puzzle.sudoku.Sudoku;
 
 public enum PuzzleType {
 	COVER("cover", ExactCover.class),

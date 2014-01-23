@@ -1,4 +1,4 @@
-package com.comco.exactcover.puzzles.polymino;
+package com.comco.exactcover.puzzle.polymino;
 
 import com.comco.exactcover.puzzle.PuzzleAtom;
 

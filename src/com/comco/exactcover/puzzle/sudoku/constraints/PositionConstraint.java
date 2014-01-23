@@ -1,7 +1,7 @@
-package com.comco.exactcover.puzzles.sudoku.constraints;
+package com.comco.exactcover.puzzle.sudoku.constraints;
 
-import com.comco.exactcover.puzzles.sudoku.Sudoku;
-import com.comco.exactcover.puzzles.sudoku.SudokuConstraint;
+import com.comco.exactcover.puzzle.sudoku.Sudoku;
+import com.comco.exactcover.puzzle.sudoku.SudokuConstraint;
 
 public class PositionConstraint extends SudokuConstraint {
 	final int row;

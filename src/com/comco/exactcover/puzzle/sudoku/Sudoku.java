@@ -1,14 +1,14 @@
-package com.comco.exactcover.puzzles.sudoku;
+package com.comco.exactcover.puzzle.sudoku;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.comco.exactcover.puzzle.Puzzle;
-import com.comco.exactcover.puzzles.sudoku.constraints.BoxConstraint;
-import com.comco.exactcover.puzzles.sudoku.constraints.ColumnConstraint;
-import com.comco.exactcover.puzzles.sudoku.constraints.HintConstraint;
-import com.comco.exactcover.puzzles.sudoku.constraints.PositionConstraint;
-import com.comco.exactcover.puzzles.sudoku.constraints.RowConstraint;
+import com.comco.exactcover.puzzle.sudoku.constraints.BoxConstraint;
+import com.comco.exactcover.puzzle.sudoku.constraints.ColumnConstraint;
+import com.comco.exactcover.puzzle.sudoku.constraints.HintConstraint;
+import com.comco.exactcover.puzzle.sudoku.constraints.PositionConstraint;
+import com.comco.exactcover.puzzle.sudoku.constraints.RowConstraint;
 
 public class Sudoku extends Puzzle {
 	private SudokuAtom[][][] matrix = new SudokuAtom[9][9][9];

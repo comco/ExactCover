@@ -1,4 +1,4 @@
-package com.comco.exactcover.puzzles.polymino;
+package com.comco.exactcover.puzzle.polymino;
 
 import static com.comco.exactcover.utils.MaskUtils.*;
 
