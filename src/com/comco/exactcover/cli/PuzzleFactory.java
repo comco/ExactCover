@@ -6,7 +6,9 @@ import com.comco.exactcover.puzzle.PuzzleReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCover;
 import com.comco.exactcover.puzzle.exactcover.ExactCoverReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCoverSolutionSet;
+import com.comco.exactcover.puzzle.polymino.Polymino;
 import com.comco.exactcover.puzzle.polymino.PolyminoReader;
+import com.comco.exactcover.puzzle.polymino.PolyminoSolutionSet;
 import com.comco.exactcover.puzzle.sudoku.SudokuReader;
 import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
 
@@ -41,6 +43,8 @@ public final class PuzzleFactory {
 				return new ExactCoverSolutionSet((ExactCover) puzzle);
 			case SUDOKU:
 				return new SudokuSolutionSet();
+			case POLYMINO:
+				return new PolyminoSolutionSet((Polymino) puzzle);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for solution set.");

@@ -10,14 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comco.exactcover.puzzle.Puzzle;
+import com.comco.exactcover.puzzle.PuzzleAtom;
 
 public class Polymino extends Puzzle {
 	final boolean[][] board;
 	final List<Piece> pieces = new ArrayList<>();
-	final List<PieceAtom> pieceAtoms = new ArrayList<>();
+	final List<PuzzleAtom> pieceAtoms = new ArrayList<>();
 	final PositionAtom[][] atomsOnBoard;
 
-	final List<PositionAtom> atoms = new ArrayList<>();
+	final List<PuzzleAtom> atoms = new ArrayList<>();
 	final List<PieceConstraint> constraints = new ArrayList<>();
 
 	public Polymino(boolean[][] board) {
@@ -27,7 +28,7 @@ public class Polymino extends Puzzle {
 		// construct position atoms
 		for (int row = 0; row < rows(); ++row) {
 			for (int col = 0; col < cols(); ++col) {
-				if (board[row][col]) {
+				if (!board[row][col]) {
 					atomsOnBoard[row][col] = createPositionAtom(row, col);
 				}
 			}
@@ -39,19 +40,25 @@ public class Polymino extends Puzzle {
 		atoms.add(atom);
 		return atom;
 	}
+	
+	private PieceAtom createPieceAtom(final Piece piece) {
+		final PieceAtom atom = new PieceAtom(this, piece);
+		atoms.add(atom);
+		return atom;
+	}
 
 	public void addPiece(final Piece piece) {
 		pieces.add(piece);
-		final PieceAtom pieceAtom = new PieceAtom(this, piece);
+		final PieceAtom pieceAtom = createPieceAtom(piece);
 		pieceAtoms.add(pieceAtom);
 
-		addPieceRotations(piece, pieceAtom, piece.mask);
+		tryAddPieceRotations(piece, pieceAtom, piece.mask);
 		if (piece.canFlip) {
-			addPieceRotations(piece, pieceAtom, maskFlip(piece.mask));
+			tryAddPieceRotations(piece, pieceAtom, maskFlip(piece.mask));
 		}
 	}
 
-	private void addPieceRotations(final Piece piece,
+	private void tryAddPieceRotations(final Piece piece,
 			final PieceAtom pieceAtom, final boolean[][] mask) {
 		if (piece.canRotate) {
 			boolean[][] current = mask;
@@ -102,7 +109,7 @@ public class Polymino extends Puzzle {
 	}
 
 	@Override
-	public List<PositionAtom> atoms() {
+	public List<PuzzleAtom> atoms() {
 		return atoms;
 	}
 

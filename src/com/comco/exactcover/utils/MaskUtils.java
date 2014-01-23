@@ -75,7 +75,7 @@ public final class MaskUtils {
 		int pieceRows = maskRows(piece);
 		int pieceCols = maskCols(piece);
 
-		if (row + pieceRows < boardRows && col + pieceCols < boardCols) {
+		if (row + pieceRows <= boardRows && col + pieceCols <= boardCols) {
 			for (int pieceRow = 0; pieceRow < pieceRows; ++pieceRow) {
 				for (int pieceCol = 0; pieceCol < pieceCols; ++pieceCol) {
 					if (piece[pieceRow][pieceCol]

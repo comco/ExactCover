@@ -23,7 +23,8 @@ public class PolyminoReader implements PuzzleReader {
 				}
 			}
 			Polymino polymino = new Polymino(board);
-
+			
+			
 			// read pieces
 			for (int i = 0; i < pieces; ++i) {
 				int pieceRows = sc.nextInt();
@@ -42,7 +43,7 @@ public class PolyminoReader implements PuzzleReader {
 						canRotate, canFlip);
 				polymino.addPiece(piece);
 			}
-
+			System.out.println(polymino.toNetwork().dump());
 			return polymino;
 		}
 	}
