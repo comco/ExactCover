@@ -4,109 +4,109 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comco.exactcover.puzzle.Puzzle;
-import com.comco.exactcover.puzzle.sudoku.constraints.BoxConstraint;
-import com.comco.exactcover.puzzle.sudoku.constraints.ColumnConstraint;
-import com.comco.exactcover.puzzle.sudoku.constraints.HintConstraint;
-import com.comco.exactcover.puzzle.sudoku.constraints.PositionConstraint;
-import com.comco.exactcover.puzzle.sudoku.constraints.RowConstraint;
 
 public class Sudoku extends Puzzle {
-	private SudokuAtom[][][] matrix = new SudokuAtom[9][9][9];
-	private List<SudokuAtom> atoms = new ArrayList<>();
-	private List<SudokuConstraint> sets = new ArrayList<>();
-
+	private final SudokuConstraint[][][] boardConstraints = new SudokuConstraint[9][9][10];
+	private final List<SudokuConstraint> constraints = new ArrayList<>();
+	private final List<SudokuAtom> atoms = new ArrayList<SudokuAtom>();
+	private final RowAtom[][] rowAtoms = new RowAtom[9][10];
+	private final ColAtom[][] colAtoms = new ColAtom[9][10];
+	private final PositionAtom[][] positionAtoms = new PositionAtom[9][9];
+	private final BoxAtom[][][] boxAtoms = new BoxAtom[9][9][10];
+	
 	public Sudoku() {
-		// initialize elements
+		// build constraints
 		for (int row = 0; row < 9; ++row) {
 			for (int col = 0; col < 9; ++col) {
 				for (int val = 1; val <= 9; ++val) {
-					matrix[row][col][val - 1] = createSudokuAtom(row, col, val);
+					boardConstraints[row][col][val] = createSudokuConstraint(
+							row, col, val);
 				}
 			}
 		}
-
-		// initialize row constraints
+		
+		// build row atoms
 		for (int row = 0; row < 9; ++row) {
 			for (int val = 1; val <= 9; ++val) {
-				createRowSudokuSet(row, val);
+				rowAtoms[row][val] = createRowAtom(row, val);
 			}
 		}
-
-		// initialize col constraints
+		
+		// build col atoms
 		for (int col = 0; col < 9; ++col) {
 			for (int val = 1; val <= 9; ++val) {
-				createColSudokuSet(col, val);
+				colAtoms[col][val] = createColAtom(col, val);
 			}
 		}
-
-		// initialize pos constraints
+		
+		// build position atoms
 		for (int row = 0; row < 9; ++row) {
 			for (int col = 0; col < 9; ++col) {
-				createPosSudokuSet(row, col);
+				positionAtoms[row][col] = createPositionAtom(row, col);
 			}
 		}
-
-		// initialize box constraints
+		
+		// build box atoms
 		for (int row = 0; row < 9; row += 3) {
 			for (int col = 0; col < 9; col += 3) {
 				for (int val = 1; val <= 9; ++val) {
-					createBoxSudokuSet(row, col, val);
+					boxAtoms[row][col][val] = createBoxAtom(row, col, val);
 				}
 			}
 		}
 	}
-
-	SudokuAtom createSudokuAtom(int row, int col, int val) {
-		SudokuAtom atom = new SudokuAtom(this, row, col, val);
+	
+	public void addHint(int row, int col, int val) {
+		// add a unique atom to the constraint for this val
+		SudokuAtom hintAtom = createHintAtom(row, col, val);
+		boardConstraints[row][col][val].addAtom(hintAtom);
+	}
+	
+	private SudokuAtom createHintAtom(int row, int col, int val) {
+		return new HintAtom(this, row, col, val);
+	}
+	
+	private RowAtom createRowAtom(int row, int val) {
+		RowAtom atom = new RowAtom(this, row, val);
+		atoms.add(atom);
+		return atom;
+	}
+	
+	private ColAtom createColAtom(int col, int val) {
+		ColAtom atom = new ColAtom(this, col, val);
+		atoms.add(atom);
+		return atom;
+	}
+	
+	private PositionAtom createPositionAtom(int row, int col) {
+		PositionAtom atom = new PositionAtom(this, row, col);
+		atoms.add(atom);
+		return atom;
+	}
+	
+	private BoxAtom createBoxAtom(int row, int col, int val) {
+		BoxAtom atom = new BoxAtom(this, row, col, val);
 		atoms.add(atom);
 		return atom;
 	}
 
-	SudokuAtom createSudokuAtom() {
-		SudokuAtom element = new SudokuAtom(this);
-		atoms.add(element);
-		return element;
-	}
-	
-	RowConstraint createRowSudokuSet(int row, int val) {
-		RowConstraint set = new RowConstraint(this, row, val);
-		sets.add(set);
-		return set;
-	}
-	
-	ColumnConstraint createColSudokuSet(int col, int val) {
-		ColumnConstraint set = new ColumnConstraint(this, col, val);
-		sets.add(set);
-		return set;
-	}
-	
-	BoxConstraint createBoxSudokuSet(int row, int col, int val) {
-		BoxConstraint set = new BoxConstraint(this, row, col, val);
-		sets.add(set);
-		return set;
-	}
-	
-	PositionConstraint createPosSudokuSet(int row, int col) {
-		PositionConstraint set = new PositionConstraint(this, row, col);
-		sets.add(set);
-		return set;
-	}
-	
-	public SudokuAtom getAtomAt(int row, int col, int val) {
-		return matrix[row][col][val - 1];
-	}
-
-	public void addHint(int row, int col, int val) {
-		sets.add(new HintConstraint(this, row, col, val));
+	private SudokuConstraint createSudokuConstraint(int row, int col, int val) {
+		SudokuConstraint constraint = new SudokuConstraint(this, row, col, val);
+		constraints.add(constraint);
+		return constraint;
 	}
 
 	@Override
-	public List<SudokuAtom> atoms() {
+	protected List<SudokuAtom> atoms() {
 		return atoms;
 	}
 
 	@Override
-	public List<SudokuConstraint> constraints() {
-		return sets;
+	protected List<SudokuConstraint> constraints() {
+		return constraints;
+	}
+
+	public SudokuConstraint getConstraint(int row, int col, int val) {
+		return boardConstraints[row][col][val];
 	}
 }

@@ -5,29 +5,39 @@ import java.util.List;
 
 import com.comco.exactcover.puzzle.PuzzleConstraint;
 
-public abstract class SudokuConstraint extends PuzzleConstraint {
-	private final Sudoku sudoku;
-	private final List<SudokuAtom> atoms = new ArrayList<>();
+public class SudokuConstraint extends PuzzleConstraint {
+	private final int row;
+	private final int col;
+	private final int val;
 
-	public SudokuConstraint(final Sudoku sudoku) {
+	private final List<SudokuAtom> atoms = new ArrayList<SudokuAtom>();
+
+	public SudokuConstraint(final Sudoku sudoku, final int row, final int col,
+			final int val) {
 		super(sudoku);
-		this.sudoku = sudoku;
-	}
-
-	protected void addElement(final SudokuAtom atom) {
-		atoms.add(atom);
-	}
-
-	protected void addElement(int row, int col, int val) {
-		addElement(sudoku.getAtomAt(row, col, val));
-	}
-	
-	protected void addElement() {
-		addElement(sudoku.createSudokuAtom());
+		this.row = row;
+		this.col = col;
+		this.val = val;
 	}
 
 	@Override
 	public List<SudokuAtom> atoms() {
 		return atoms;
+	}
+
+	void addAtom(SudokuAtom rowAtom) {
+		atoms.add(rowAtom);
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public int getVal() {
+		return val;
 	}
 }
