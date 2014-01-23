@@ -33,7 +33,7 @@ public class Polymino extends Puzzle {
 			}
 		}
 	}
-	
+
 	private PositionAtom createPositionAtom(int row, int col) {
 		PositionAtom atom = new PositionAtom(this, row, col);
 		atoms.add(atom);
@@ -44,38 +44,43 @@ public class Polymino extends Puzzle {
 		pieces.add(piece);
 		final PieceAtom pieceAtom = new PieceAtom(this, piece);
 		pieceAtoms.add(pieceAtom);
-		
+
 		addPieceRotations(piece, pieceAtom, piece.mask);
 		if (piece.canFlip) {
 			addPieceRotations(piece, pieceAtom, maskFlip(piece.mask));
 		}
 	}
 
-	private void addPieceRotations(final Piece piece, final PieceAtom pieceAtom, final boolean[][] mask) {
+	private void addPieceRotations(final Piece piece,
+			final PieceAtom pieceAtom, final boolean[][] mask) {
 		if (piece.canRotate) {
 			boolean[][] current = mask;
 			for (int r = 0; r < 4; ++r) {
-				addPieceSet(piece, pieceAtom, current);
+				addPieceConstraint(piece, pieceAtom, current);
 				current = maskRotate(current);
 			}
 		} else {
-			addPieceSet(piece, pieceAtom, mask);
+			addPieceConstraint(piece, pieceAtom, mask);
 		}
 	}
 
-	private void addPieceSet(final Piece piece, final PieceAtom pieceAtom, boolean[][] mask) {
+	private void addPieceConstraint(final Piece piece,
+			final PieceAtom pieceAtom, boolean[][] mask) {
 		for (int row = 0; row < rows(); ++row) {
 			for (int col = 0; col < cols(); ++col) {
 				if (canPlaceAt(board, row, col, mask)) {
-					createPeaceSet(piece, pieceAtom, row, col, mask);
+					createPeaceConstraint(piece, pieceAtom, row, col, mask);
 				}
 			}
 		}
 	}
-	
-	private PieceConstraint createPeaceSet(Piece piece, PieceAtom pieceAtom, int row, int col,
-			boolean[][] mask) {
-		PieceConstraint result = new PieceConstraint(this, piece, pieceAtom, row, col, mask);
+
+	private PieceConstraint createPeaceConstraint(final Piece piece,
+			final PieceAtom pieceAtom, final int row, final int col,
+			final boolean[][] mask) {
+		
+		PieceConstraint result = new PieceConstraint(this, piece, pieceAtom,
+				row, col, mask);
 		constraints.add(result);
 		return result;
 	}
