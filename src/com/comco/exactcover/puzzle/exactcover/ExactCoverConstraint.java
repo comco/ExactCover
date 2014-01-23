@@ -6,24 +6,33 @@ import java.util.List;
 import com.comco.exactcover.puzzle.PuzzleConstraint;
 
 public class ExactCoverConstraint extends PuzzleConstraint {
-	public final ExactCover exactCover;
-	public final int row;
+	private final ExactCover puzzle;
+	private final int row;
 	private final List<ExactCoverAtom> atoms = new ArrayList<>();
-	
-	public ExactCoverConstraint(final ExactCover exactCover, final int row) {
-		super(exactCover);
-		this.exactCover = exactCover;
+
+	public ExactCoverConstraint(final ExactCover puzzle, final int row) {
+		super(puzzle);
+		this.puzzle = puzzle;
 		this.row = row;
 
-		for (int col = 0; col < exactCover.cols(); ++col) {
-			if (exactCover.matrix[row][col]) {
-				atoms.add(exactCover.atomAt(col));
+		for (int col = 0; col < puzzle.matrixCols(); ++col) {
+			if (puzzle.hasPoint(row, col)) {
+				atoms.add(puzzle.atomAt(col));
 			}
 		}
 	}
 
 	@Override
-	public List<ExactCoverAtom> atoms() {
+	public Iterable<ExactCoverAtom> atoms() {
 		return atoms;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	@Override
+	public ExactCover puzzle() {
+		return puzzle;
 	}
 }

@@ -1,6 +1,8 @@
 package com.comco.exactcover.puzzle.polymino;
 
-import static com.comco.exactcover.utils.MaskUtils.*;
+import static com.comco.exactcover.utils.MaskUtils.maskClip;
+import static com.comco.exactcover.utils.MaskUtils.maskCols;
+import static com.comco.exactcover.utils.MaskUtils.maskRows;
 
 /**
  * Piece of a polymino puzzle.
@@ -9,14 +11,16 @@ import static com.comco.exactcover.utils.MaskUtils.*;
  * 
  */
 public class Piece {
-	final int id;
+	private final Polymino puzzle;
+	private final int id;
 	final boolean[][] mask;
 	final boolean canRotate;
 	final boolean canFlip;
 
-	public Piece(int id, boolean[][] mask, boolean canRotate, boolean canFlip) {
-		super();
-		this.id = id;
+	public Piece(final Polymino puzzle, final boolean[][] mask,
+			final boolean canRotate, final boolean canFlip) {
+		this.puzzle = puzzle;
+		this.id = puzzle.nextPieceId();
 		this.mask = maskClip(mask);
 		this.canRotate = canRotate;
 		this.canFlip = canFlip;
@@ -28,5 +32,13 @@ public class Piece {
 
 	public int cols() {
 		return maskCols(mask);
+	}
+
+	public Polymino getPuzzle() {
+		return puzzle;
+	}
+
+	public int getId() {
+		return id;
 	}
 }

@@ -32,7 +32,7 @@ public class ExactCoverSolutionSet implements SolutionSet {
 	public void complete() {
 		System.out.println("Solution found:");
 		for (ExactCoverConstraint set : stack) {
-			System.out.format("%d ", set.row);
+			System.out.format("%d ", set.getRow());
 		}
 		System.out.println();
 	}

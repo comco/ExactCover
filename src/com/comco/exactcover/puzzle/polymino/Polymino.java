@@ -13,43 +13,32 @@ import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleAtom;
 
 public class Polymino extends Puzzle {
+	private int nextPieceId = 0;
+
 	final boolean[][] board;
 	final List<Piece> pieces = new ArrayList<>();
 	final List<PuzzleAtom> pieceAtoms = new ArrayList<>();
 	final PositionAtom[][] atomsOnBoard;
+	final List<PieceConstraint> pieceConstraints = new ArrayList<>();
 
-	final List<PuzzleAtom> atoms = new ArrayList<>();
-	final List<PieceConstraint> constraints = new ArrayList<>();
-
-	public Polymino(boolean[][] board) {
+	public Polymino(final boolean[][] board) {
 		this.board = board;
-		this.atomsOnBoard = new PositionAtom[rows()][cols()];
+		this.atomsOnBoard = new PositionAtom[boardRows()][boardCols()];
 
 		// construct position atoms
-		for (int row = 0; row < rows(); ++row) {
-			for (int col = 0; col < cols(); ++col) {
+		for (int row = 0; row < boardRows(); ++row) {
+			for (int col = 0; col < boardCols(); ++col) {
 				if (!board[row][col]) {
-					atomsOnBoard[row][col] = createPositionAtom(row, col);
+					PositionAtom atom = new PositionAtom(this, row, col);
+					atomsOnBoard[row][col] = atom;
 				}
 			}
 		}
 	}
 
-	private PositionAtom createPositionAtom(int row, int col) {
-		PositionAtom atom = new PositionAtom(this, row, col);
-		atoms.add(atom);
-		return atom;
-	}
-	
-	private PieceAtom createPieceAtom(final Piece piece) {
-		final PieceAtom atom = new PieceAtom(this, piece);
-		atoms.add(atom);
-		return atom;
-	}
-
 	public void addPiece(final Piece piece) {
 		pieces.add(piece);
-		final PieceAtom pieceAtom = createPieceAtom(piece);
+		final PieceAtom pieceAtom = new PieceAtom(this, piece);
 		pieceAtoms.add(pieceAtom);
 
 		tryAddPieceRotations(piece, pieceAtom, piece.mask);
@@ -72,24 +61,16 @@ public class Polymino extends Puzzle {
 	}
 
 	private void addPieceConstraint(final Piece piece,
-			final PieceAtom pieceAtom, boolean[][] mask) {
-		for (int row = 0; row < rows(); ++row) {
-			for (int col = 0; col < cols(); ++col) {
+			final PieceAtom pieceAtom, final boolean[][] mask) {
+		for (int row = 0; row < boardRows(); ++row) {
+			for (int col = 0; col < boardCols(); ++col) {
 				if (canPlaceAt(board, row, col, mask)) {
-					createPeaceConstraint(piece, pieceAtom, row, col, mask);
+					final PieceConstraint pieceConstraint = new PieceConstraint(
+							this, piece, pieceAtom, row, col, mask);
+					pieceConstraints.add(pieceConstraint);
 				}
 			}
 		}
-	}
-
-	private PieceConstraint createPeaceConstraint(final Piece piece,
-			final PieceAtom pieceAtom, final int row, final int col,
-			final boolean[][] mask) {
-		
-		PieceConstraint result = new PieceConstraint(this, piece, pieceAtom,
-				row, col, mask);
-		constraints.add(result);
-		return result;
 	}
 
 	public boolean hasAtomAt(int row, int col) {
@@ -100,21 +81,15 @@ public class Polymino extends Puzzle {
 		return atomsOnBoard[row][col];
 	}
 
-	public int rows() {
+	public int boardRows() {
 		return maskRows(board);
 	}
 
-	public int cols() {
+	public int boardCols() {
 		return maskCols(board);
 	}
 
-	@Override
-	public List<PuzzleAtom> atoms() {
-		return atoms;
-	}
-
-	@Override
-	public List<PieceConstraint> constraints() {
-		return constraints;
+	int nextPieceId() {
+		return nextPieceId++;
 	}
 }

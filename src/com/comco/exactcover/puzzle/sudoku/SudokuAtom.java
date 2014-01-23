@@ -3,14 +3,19 @@ package com.comco.exactcover.puzzle.sudoku;
 import com.comco.exactcover.puzzle.PuzzleAtom;
 
 public class SudokuAtom extends PuzzleAtom {
-	private final Sudoku sudoku;
+	private final Sudoku puzzle;
 
-	public SudokuAtom(Sudoku sudoku) {
+	public SudokuAtom(final Sudoku sudoku) {
 		super(sudoku);
-		this.sudoku = sudoku;
+		this.puzzle = sudoku;
 	}
-	
-	protected void attach(int row, int col, int val) {
-		sudoku.getConstraint(row, col, val).addAtom(this);
+
+	protected void attach(final int row, final int col, final int val) {
+		puzzle.getBoardConstraint(row, col, val).addAtom(this);
+	}
+
+	@Override
+	public Sudoku puzzle() {
+		return puzzle;
 	}
 }

@@ -40,8 +40,8 @@ public class PolyminoSolutionSet implements SolutionSet {
 
 	private void printSolution() {
 		System.out.println("Solution:");
-		int rows = polymino.rows();
-		int cols = polymino.cols();
+		int rows = polymino.boardRows();
+		int cols = polymino.boardCols();
 		final int[][] board = new int[rows][cols];
 		for (int row = 0; row < rows; ++row) {
 			for (int col = 0; col < cols; ++col) {
@@ -54,9 +54,9 @@ public class PolyminoSolutionSet implements SolutionSet {
 		for (PieceConstraint constraint : stack) {
 			int pieceRows = constraint.pieceRows();
 			int pieceCols = constraint.pieceCols();
-			int boardRow = constraint.getBoardRow();
-			int boardCol = constraint.getBoardCol();
-			int id = constraint.piece.id;
+			int boardRow = constraint.boardRow();
+			int boardCol = constraint.boardCol();
+			int id = constraint.getPiece().getId();
 			for (int row = 0; row < pieceRows; ++row) {
 				for (int col = 0; col < pieceCols; ++col) {
 					if (constraint.occupied(row, col)) {
