@@ -1,23 +1,32 @@
 package com.comco.exactcover.algorithm;
 
-public interface Node {
-	Node getLeft();
+public abstract class Node {
+	abstract Node getLeft();
 
-	void setLeft(final Node node);
+	abstract void setLeft(final Node node);
 
-	Node getRight();
+	abstract Node getRight();
 
-	void setRight(final Node node);
+	abstract void setRight(final Node node);
 
-	Node getBottom();
+	abstract Node getBottom();
 
-	void setBottom(final Node node);
+	abstract void setBottom(final Node node);
 
-	Node getTop();
+	abstract Node getTop();
 
-	void setTop(final Node node);
+	abstract void setTop(final Node node);
 
-	ColumnNode getColumnNode();
+	abstract ColumnNode getColumnNode();
 
-	Iterable<? extends Node> nodesOnRow();
+	abstract Iterable<? extends Node> nodesOnRow();
+	
+	public Node createTop(final Row row) {
+		Node node = new InternalNode(getColumnNode(), row);
+		node.setTop(getTop());
+		node.setBottom(this);
+		getTop().setBottom(node);
+		setTop(node);
+		return node;
+	}
 }

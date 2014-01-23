@@ -1,19 +1,15 @@
 package com.comco.exactcover.puzzles.polymino;
 
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.canPlaceAt;
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.maskCols;
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.maskFlip;
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.maskRotate;
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.maskRows;
+import static com.comco.exactcover.utils.MaskUtils.canPlaceAt;
+import static com.comco.exactcover.utils.MaskUtils.maskCols;
+import static com.comco.exactcover.utils.MaskUtils.maskFlip;
+import static com.comco.exactcover.utils.MaskUtils.maskRotate;
+import static com.comco.exactcover.utils.MaskUtils.maskRows;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comco.exactcover.Solution;
-import com.comco.exactcover.puzzles.Puzzle;
-import com.comco.exactcover.puzzles.PuzzleAtom;
-import com.comco.exactcover.puzzles.PuzzleSet;
-import com.comco.exactcover.puzzles.PuzzleType;
+import com.comco.exactcover.puzzle.Puzzle;
 
 public class Polymino extends Puzzle {
 	final boolean[][] board;
@@ -21,11 +17,9 @@ public class Polymino extends Puzzle {
 	final PositionAtom[][] atomsOnBoard;
 
 	final List<PositionAtom> atoms = new ArrayList<>();
-	final List<PieceSet> sets = new ArrayList<>();
+	final List<PieceConstraint> constraints = new ArrayList<>();
 
 	public Polymino(boolean[][] board) {
-		super(PuzzleType.POLYMINO);
-		
 		this.board = board;
 		this.atomsOnBoard = new PositionAtom[rows()][cols()];
 
@@ -76,10 +70,10 @@ public class Polymino extends Puzzle {
 		}
 	}
 	
-	private PieceSet createPeaceSet(Piece piece, int row, int col,
+	private PieceConstraint createPeaceSet(Piece piece, int row, int col,
 			boolean[][] mask) {
-		PieceSet result = new PieceSet(this, piece, row, col, mask);
-		sets.add(result);
+		PieceConstraint result = new PieceConstraint(this, piece, row, col, mask);
+		constraints.add(result);
 		return result;
 	}
 
@@ -100,28 +94,12 @@ public class Polymino extends Puzzle {
 	}
 
 	@Override
-	public Iterable<PositionAtom> atoms() {
+	public List<PositionAtom> atoms() {
 		return atoms;
 	}
 
 	@Override
-	public Iterable<PieceSet> sets() {
-		return sets;
-	}
-
-	@Override
-	public PuzzleAtom getAtom(int id) {
-		return atoms.get(id);
-	}
-
-	@Override
-	public PuzzleSet getSet(int id) {
-		return sets.get(id);
-	}
-
-	@Override
-	public Solution createSolution() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<PieceConstraint> constraints() {
+		return constraints;
 	}
 }

@@ -3,14 +3,14 @@ package com.comco.exactcover.puzzles.exactcover;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comco.exactcover.puzzles.PuzzleSet;
+import com.comco.exactcover.puzzle.PuzzleConstraint;
 
-public class ExactCoverSet extends PuzzleSet {
+public class ExactCoverConstraint extends PuzzleConstraint {
 	public final ExactCover exactCover;
 	public final int row;
 	private final List<ExactCoverAtom> atoms = new ArrayList<>();
 	
-	public ExactCoverSet(ExactCover exactCover, int row) {
+	public ExactCoverConstraint(final ExactCover exactCover, final int row) {
 		super(exactCover);
 		this.exactCover = exactCover;
 		this.row = row;
@@ -23,7 +23,7 @@ public class ExactCoverSet extends PuzzleSet {
 	}
 
 	@Override
-	public Iterable<ExactCoverAtom> atoms() {
+	public List<ExactCoverAtom> atoms() {
 		return atoms;
 	}
 }

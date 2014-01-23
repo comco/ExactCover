@@ -2,15 +2,30 @@ package com.comco.exactcover.algorithm;
 
 import java.util.Iterator;
 
-public class ColumnNode implements Node {
+public class ColumnNode extends Node {
+	private final Column column;
 	private ColumnNode left, right;
 	private Node bottom, top;
 
-	public ColumnNode() {
+	ColumnNode(final Column column) {
+		this.column = column;
 		left = this;
 		right = this;
 		bottom = this;
 		top = this;
+	}
+	
+	public ColumnNode createRight(final Column column) {
+		final ColumnNode node = new ColumnNode(column);
+		node.left = this;
+		node.right = right;
+		right.left = node;
+		right = node;
+		return node;
+	}
+	
+	public Column getColumn() {
+		return column;
 	}
 
 	@Override
@@ -72,6 +87,10 @@ public class ColumnNode implements Node {
 		return this == right;
 	}
 
+	public static ColumnNode createHeadColumnNode() {
+		return new ColumnNode(new HeadColumn());
+	}
+	
 	@Override
 	public Iterable<ColumnNode> nodesOnRow() {
 		return new Iterable<ColumnNode>() {

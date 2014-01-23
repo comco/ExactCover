@@ -1,4 +1,4 @@
-package com.comco.exactcover.puzzles.polymino;
+package com.comco.exactcover.utils;
 
 /**
  * 2D boolean mask utilities.

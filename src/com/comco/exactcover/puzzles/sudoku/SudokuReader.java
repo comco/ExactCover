@@ -3,7 +3,7 @@ package com.comco.exactcover.puzzles.sudoku;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.comco.exactcover.puzzles.PuzzleReader;
+import com.comco.exactcover.puzzle.PuzzleReader;
 
 public class SudokuReader implements PuzzleReader {
 	@Override

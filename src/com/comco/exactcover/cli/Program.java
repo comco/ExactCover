@@ -10,9 +10,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import com.comco.exactcover.AlgorithmXType;
-import com.comco.exactcover.puzzles.PuzzleType;
-
 public class Program {
 	private static final Logger LOGGER = Logger.getLogger("Program");
 	private static final Options OPTIONS = buildOptions();
@@ -30,7 +27,7 @@ public class Program {
 			ProgramState state = new ProgramState();
 			state.input = System.in;
 			state.puzzleType = PuzzleType.getType(cmd.getOptionValue('p'));
-			state.algorithmType = AlgorithmXType.getType(cmd.getOptionValue('a'));
+			state.algorithmType = AlgorithmType.getType(cmd.getOptionValue('a'));
 			state.build();
 			
 			state.solve();

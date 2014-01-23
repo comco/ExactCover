@@ -3,7 +3,8 @@ package com.comco.exactcover.puzzles.polymino;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.comco.exactcover.puzzles.PuzzleReader;
+import com.comco.exactcover.puzzle.PuzzleReader;
+import com.comco.exactcover.utils.MaskUtils;
 
 public class PolyminoReader implements PuzzleReader {
 	@Override

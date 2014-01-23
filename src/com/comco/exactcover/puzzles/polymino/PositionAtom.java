@@ -1,6 +1,6 @@
 package com.comco.exactcover.puzzles.polymino;
 
-import com.comco.exactcover.puzzles.PuzzleAtom;
+import com.comco.exactcover.puzzle.PuzzleAtom;
 
 public class PositionAtom extends PuzzleAtom {
 	public final int row;

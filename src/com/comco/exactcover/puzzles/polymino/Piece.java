@@ -1,6 +1,6 @@
 package com.comco.exactcover.puzzles.polymino;
 
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.*;
+import static com.comco.exactcover.utils.MaskUtils.*;
 
 /**
  * Piece of a polymino puzzle.

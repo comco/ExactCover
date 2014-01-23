@@ -3,7 +3,7 @@ package com.comco.exactcover.puzzles.exactcover;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import com.comco.exactcover.puzzles.PuzzleReader;
+import com.comco.exactcover.puzzle.PuzzleReader;
 
 public class ExactCoverReader implements PuzzleReader {
 	@Override

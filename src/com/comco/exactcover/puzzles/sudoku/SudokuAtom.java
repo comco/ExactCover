@@ -1,17 +1,24 @@
 package com.comco.exactcover.puzzles.sudoku;
 
-import com.comco.exactcover.puzzles.PuzzleAtom;
+import com.comco.exactcover.puzzle.PuzzleAtom;
 
 public class SudokuAtom extends PuzzleAtom {
-	public SudokuAtom(final Sudoku sudoku) {
+	final int row;
+	final int col;
+	final int val;
+
+	SudokuAtom(Sudoku sudoku, int row, int col, int val) {
 		super(sudoku);
+		this.row = row;
+		this.col = col;
+		this.val = val;
 	}
 	
-	public void attachToSolution(final SudokuSolution solution) {
-		// Do nothing by default.
+	public SudokuAtom(Sudoku sudoku) {
+		this(sudoku, -1, -1, 0);
 	}
 	
-	public void detachFromSolution(final SudokuSolution solution) {
-		// Do nothing by default.
+	public boolean isEmpty() {
+		return (row == -1 && col == -1 && val == 0);
 	}
 }

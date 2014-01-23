@@ -2,13 +2,13 @@ package com.comco.exactcover.algorithm;
 
 import java.util.Iterator;
 
-public class InternalNode implements Node {
+public class InternalNode extends Node {
 	private InternalNode left, right;
 	private Node bottom, top;
 	private final ColumnNode columnNode;
 	private final Row row;
 
-	public InternalNode(final ColumnNode columnNode, final Row row) {
+	InternalNode(final ColumnNode columnNode, final Row row) {
 		this.columnNode = columnNode;
 		this.row = row;
 		this.left = this;

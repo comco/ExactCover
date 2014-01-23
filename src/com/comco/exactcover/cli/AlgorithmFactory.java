@@ -1,18 +1,20 @@
 package com.comco.exactcover.cli;
 
-import com.comco.exactcover.AlgorithmXType;
-import com.comco.exactcover.dancinglinks.DancingLinksAlgorithmX;
+import com.comco.exactcover.algorithm.Algorithm;
 
 public class AlgorithmFactory {
-	private static final DancingLinksAlgorithmX BASIC_ALGORITHM_X = new DancingLinksAlgorithmX();
-
-	public static DancingLinksAlgorithmX getAlgorithm(final AlgorithmXType type) {
+	private static final Algorithm BASIC = new Algorithm();
+	
+	protected AlgorithmFactory() {}
+	
+	public Algorithm get(final AlgorithmType type) {
 		switch (type) {
-		case BASIC_ALGORITHM_X:
-			return BASIC_ALGORITHM_X;
+		case BASIC:
+			return BASIC;
 		default:
-			throw new IllegalArgumentException("Algorithm " + type
-					+ " is unsupported.");
+			throw new IllegalArgumentException("Algorithm type: " + type + " is unsupported.");
 		}
 	}
+
+	public static final AlgorithmFactory INSTANCE = new AlgorithmFactory();
 }

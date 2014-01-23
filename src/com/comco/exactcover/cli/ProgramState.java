@@ -2,47 +2,32 @@ package com.comco.exactcover.cli;
 
 import java.io.InputStream;
 
-import com.comco.exactcover.AlgorithmXType;
-import com.comco.exactcover.Solution;
-import com.comco.exactcover.dancinglinks.DancingLinksAlgorithmX;
-import com.comco.exactcover.dancinglinks.DancingLinksCol;
-import com.comco.exactcover.dancinglinks.DancingLinksNetwork;
-import com.comco.exactcover.dancinglinks.DancingLinksRow;
-import com.comco.exactcover.dancinglinks.NetworkBuilder;
-import com.comco.exactcover.dancinglinks.Node;
-import com.comco.exactcover.puzzles.Puzzle;
-import com.comco.exactcover.puzzles.PuzzleType;
+import com.comco.exactcover.algorithm.Algorithm;
+import com.comco.exactcover.algorithm.ColumnNode;
+import com.comco.exactcover.algorithm.SolutionSet;
+import com.comco.exactcover.puzzle.Puzzle;
 
 public class ProgramState {
 	InputStream input;
 	PuzzleType puzzleType;
-	AlgorithmXType algorithmType;
+	AlgorithmType algorithmType;
 
 	Puzzle puzzle;
-	DancingLinksAlgorithmX algorithm;
-
+	SolutionSet solutionSet;
+	Algorithm algorithm;
+	
 	public ProgramState() {
 	}
 
 	public void build() {
-		puzzle = PuzzleFactory.getReader(puzzleType).read(input);
-		algorithm = AlgorithmFactory.getAlgorithm(algorithmType);
+		puzzle = PuzzleFactory.INSTANCE.getPuzzleReader(puzzleType).read(input);
+		solutionSet = PuzzleFactory.INSTANCE.getSolutionSet(puzzleType, puzzle);
+		algorithm = AlgorithmFactory.INSTANCE.get(algorithmType);
 	}
 
 	public void solve() {
-		Solution solution = puzzle.createSolution();
-		DancingLinksNetwork network = new NetworkBuilder().buildNetwork(puzzle
-				.toExactCover());
-		
-		Node root = network.getRoot();
-		for (Node row : new DancingLinksCol(root)) {
-			for (Node col : new DancingLinksRow(row)) {
-				System.out.print(col + " ");
-			}
-			System.out.println();
-		}
-		
-		algorithm.solve(network, solution);
+		ColumnNode head = puzzle.toNetwork();
+		algorithm.solve(head, solutionSet);
 	}
 
 	public InputStream getInput() {
@@ -61,11 +46,11 @@ public class ProgramState {
 		this.puzzleType = puzzleType;
 	}
 
-	public AlgorithmXType getAlgorithmType() {
+	public AlgorithmType getAlgorithmType() {
 		return algorithmType;
 	}
 
-	public void setAlgorithmType(AlgorithmXType algorithmType) {
+	public void setAlgorithmType(AlgorithmType algorithmType) {
 		this.algorithmType = algorithmType;
 	}
 }

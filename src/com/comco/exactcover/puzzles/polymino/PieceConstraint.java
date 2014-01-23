@@ -1,12 +1,13 @@
 package com.comco.exactcover.puzzles.polymino;
 
+import static com.comco.exactcover.utils.MaskUtils.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comco.exactcover.puzzles.PuzzleSet;
-import static com.comco.exactcover.puzzles.polymino.MaskUtils.*;
+import com.comco.exactcover.puzzle.PuzzleConstraint;
 
-public class PieceSet extends PuzzleSet {
+public class PieceConstraint extends PuzzleConstraint {
 	final Polymino polymino;
 	final Piece piece;
 	final int boardRow;
@@ -14,7 +15,7 @@ public class PieceSet extends PuzzleSet {
 	final boolean[][] mask;
 	private final List<PositionAtom> atoms = new ArrayList<>();
 
-	public PieceSet(Polymino polymino, Piece piece, int boardRow, int boardCol,
+	public PieceConstraint(Polymino polymino, Piece piece, int boardRow, int boardCol,
 			boolean[][] mask) {
 		super(polymino);
 		this.polymino = polymino;
@@ -42,7 +43,7 @@ public class PieceSet extends PuzzleSet {
 	}
 
 	@Override
-	public Iterable<PositionAtom> atoms() {
+	public List<PositionAtom> atoms() {
 		return atoms;
 	}
 }

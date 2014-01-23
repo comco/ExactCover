@@ -3,22 +3,24 @@ package com.comco.exactcover.puzzles.sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comco.exactcover.puzzles.Puzzle;
-import com.comco.exactcover.puzzles.PuzzleType;
+import com.comco.exactcover.puzzle.Puzzle;
+import com.comco.exactcover.puzzles.sudoku.constraints.BoxConstraint;
+import com.comco.exactcover.puzzles.sudoku.constraints.ColumnConstraint;
+import com.comco.exactcover.puzzles.sudoku.constraints.HintConstraint;
+import com.comco.exactcover.puzzles.sudoku.constraints.PositionConstraint;
+import com.comco.exactcover.puzzles.sudoku.constraints.RowConstraint;
 
 public class Sudoku extends Puzzle {
-	private PossibleValueAtom[][][] matrix = new PossibleValueAtom[9][9][9];
+	private SudokuAtom[][][] matrix = new SudokuAtom[9][9][9];
 	private List<SudokuAtom> atoms = new ArrayList<>();
-	private List<SudokuSet> sets = new ArrayList<>();
+	private List<SudokuConstraint> sets = new ArrayList<>();
 
 	public Sudoku() {
-		super(PuzzleType.SUDOKU);
-		
 		// initialize elements
 		for (int row = 0; row < 9; ++row) {
 			for (int col = 0; col < 9; ++col) {
 				for (int val = 1; val <= 9; ++val) {
-					matrix[row][col][val - 1] = createPossibleValueAtom(row, col, val);
+					matrix[row][col][val - 1] = createSudokuAtom(row, col, val);
 				}
 			}
 		}
@@ -54,8 +56,8 @@ public class Sudoku extends Puzzle {
 		}
 	}
 
-	PossibleValueAtom createPossibleValueAtom(int row, int col, int val) {
-		PossibleValueAtom atom = new PossibleValueAtom(this, row, col, val);
+	SudokuAtom createSudokuAtom(int row, int col, int val) {
+		SudokuAtom atom = new SudokuAtom(this, row, col, val);
 		atoms.add(atom);
 		return atom;
 	}
@@ -66,60 +68,45 @@ public class Sudoku extends Puzzle {
 		return element;
 	}
 	
-	RowSudokuSet createRowSudokuSet(int row, int val) {
-		RowSudokuSet set = new RowSudokuSet(this, row, val);
+	RowConstraint createRowSudokuSet(int row, int val) {
+		RowConstraint set = new RowConstraint(this, row, val);
 		sets.add(set);
 		return set;
 	}
 	
-	ColSudokuSet createColSudokuSet(int col, int val) {
-		ColSudokuSet set = new ColSudokuSet(this, col, val);
+	ColumnConstraint createColSudokuSet(int col, int val) {
+		ColumnConstraint set = new ColumnConstraint(this, col, val);
 		sets.add(set);
 		return set;
 	}
 	
-	BoxSudokuSet createBoxSudokuSet(int row, int col, int val) {
-		BoxSudokuSet set = new BoxSudokuSet(this, row, col, val);
+	BoxConstraint createBoxSudokuSet(int row, int col, int val) {
+		BoxConstraint set = new BoxConstraint(this, row, col, val);
 		sets.add(set);
 		return set;
 	}
 	
-	PosSudokuSet createPosSudokuSet(int row, int col) {
-		PosSudokuSet set = new PosSudokuSet(this, row, col);
+	PositionConstraint createPosSudokuSet(int row, int col) {
+		PositionConstraint set = new PositionConstraint(this, row, col);
 		sets.add(set);
 		return set;
 	}
 	
-	public PossibleValueAtom getAtomAt(int row, int col, int val) {
+	public SudokuAtom getAtomAt(int row, int col, int val) {
 		return matrix[row][col][val - 1];
 	}
 
 	public void addHint(int row, int col, int val) {
-		sets.add(new HintSudokuSet(this, row, col, val));
+		sets.add(new HintConstraint(this, row, col, val));
 	}
 
 	@Override
-	public Iterable<SudokuAtom> atoms() {
+	public List<SudokuAtom> atoms() {
 		return atoms;
 	}
 
 	@Override
-	public Iterable<SudokuSet> sets() {
+	public List<SudokuConstraint> constraints() {
 		return sets;
-	}
-
-	@Override
-	public SudokuAtom getAtom(int id) {
-		return atoms.get(id);
-	}
-
-	@Override
-	public SudokuSet getSet(int id) {
-		return sets.get(id);
-	}
-
-	@Override
-	public SudokuSolution createSolution() {
-		return new SudokuSolution(this);
 	}
 }

@@ -2,34 +2,47 @@ package com.comco.exactcover.puzzles.exactcover;
 
 import java.util.Stack;
 
-import com.comco.exactcover.Row;
-import com.comco.exactcover.Solution;
+import com.comco.exactcover.algorithm.Row;
+import com.comco.exactcover.algorithm.SolutionSet;
 
-public class ExactCoverSolution implements Solution {
+public class ExactCoverSolution implements SolutionSet {
 	private final ExactCover exactCover;
-	private final Stack<ExactCoverSet> rows = new Stack<>();
+	private final Stack<ExactCoverConstraint> stack = new Stack<>();
 	
 	public ExactCoverSolution(ExactCover exactCover) {
 		this.exactCover = exactCover;
 	}
 	
 	@Override
-	public void includeRow(Row row) {
-		System.out.println("+ " + row.row());
-		rows.add(exactCover.getSet(row.row()));
+	public void addRow(Row row) {
+		// cast is safe
+		addConstraint((ExactCoverConstraint) row);
+	}
+	
+	private void addConstraint(final ExactCoverConstraint constraint) {
+		System.out.println("adding " + constraint.row);
 	}
 
 	@Override
-	public void excludeRow() {
-		rows.pop();
+	public void pop() {
+		stack.pop();
 	}
 
 	@Override
-	public void declareConcrete() {
+	public void complete() {
 		System.out.println("Solution found:");
-		for (ExactCoverSet set : rows) {
+		for (ExactCoverConstraint set : stack) {
 			System.out.format("%d ", set.row);
 		}
 		System.out.println();
+	}
+
+	@Override
+	public boolean shouldContinue() {
+		return true;
+	}
+
+	public ExactCover getExactCover() {
+		return exactCover;
 	}
 }
