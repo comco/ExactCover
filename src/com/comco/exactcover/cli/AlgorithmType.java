@@ -1,9 +1,11 @@
 package com.comco.exactcover.cli;
 
 import com.comco.exactcover.algorithm.Algorithm;
+import com.comco.exactcover.algorithm.SmallestColumnAlgorithm;
 
 public enum AlgorithmType {
-	BASIC("basic", Algorithm.class);
+	BASIC("basic", Algorithm.class),
+	SMALL("small", SmallestColumnAlgorithm.class);
 
 	public final String name;
 	public final Class<? extends Algorithm> algorithmClass;
