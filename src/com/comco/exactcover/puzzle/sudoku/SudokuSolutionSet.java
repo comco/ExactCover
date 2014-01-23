@@ -7,7 +7,7 @@ import com.comco.exactcover.algorithm.SolutionSet;
 
 public class SudokuSolutionSet implements SolutionSet {
 	private final Stack<SudokuConstraint> stack = new Stack<SudokuConstraint>();
-	
+
 	@Override
 	public void addRow(Row row) {
 		// cast is safe
@@ -17,7 +17,7 @@ public class SudokuSolutionSet implements SolutionSet {
 	private void addConstraint(SudokuConstraint constraint) {
 		stack.add(constraint);
 	}
-	
+
 	@Override
 	public void pop() {
 		stack.pop();
@@ -27,10 +27,18 @@ public class SudokuSolutionSet implements SolutionSet {
 	public void complete() {
 		int[][] board = new int[9][9];
 		for (SudokuConstraint constraint : stack) {
-			board[constraint.getRow()][constraint.getCol()] = constraint.getVal();
+			board[constraint.getRow()][constraint.getCol()] = constraint
+					.getVal();
 		}
-		
+
 		printSolution(board);
+//		try {
+//			Thread.sleep(20);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 	}
 
 	private void printSolution(int[][] board) {

@@ -8,6 +8,7 @@ import com.comco.exactcover.puzzle.exactcover.ExactCoverReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCoverSolutionSet;
 import com.comco.exactcover.puzzle.polymino.PolyminoReader;
 import com.comco.exactcover.puzzle.sudoku.SudokuReader;
+import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
 
 public final class PuzzleFactory {
 	private static final SudokuReader SUDOKU_READER = new SudokuReader();
@@ -38,6 +39,8 @@ public final class PuzzleFactory {
 			switch (type) {
 			case COVER:
 				return new ExactCoverSolutionSet((ExactCover) puzzle);
+			case SUDOKU:
+				return new SudokuSolutionSet();
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for solution set.");

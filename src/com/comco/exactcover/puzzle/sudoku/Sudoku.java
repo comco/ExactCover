@@ -63,7 +63,9 @@ public class Sudoku extends Puzzle {
 	}
 	
 	private SudokuAtom createHintAtom(int row, int col, int val) {
-		return new HintAtom(this, row, col, val);
+		HintAtom atom = new HintAtom(this, row, col, val);
+		atoms.add(atom);
+		return atom;
 	}
 	
 	private RowAtom createRowAtom(int row, int val) {
