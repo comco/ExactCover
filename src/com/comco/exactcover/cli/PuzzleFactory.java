@@ -5,7 +5,7 @@ import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCover;
 import com.comco.exactcover.puzzle.exactcover.ExactCoverReader;
-import com.comco.exactcover.puzzle.exactcover.ExactCoverSolution;
+import com.comco.exactcover.puzzle.exactcover.ExactCoverSolutionSet;
 import com.comco.exactcover.puzzle.polymino.PolyminoReader;
 import com.comco.exactcover.puzzle.sudoku.SudokuReader;
 
@@ -37,7 +37,7 @@ public final class PuzzleFactory {
 		if (puzzle != null && type.puzzleClass.equals(puzzle.getClass())) {
 			switch (type) {
 			case COVER:
-				return new ExactCoverSolution((ExactCover) puzzle);
+				return new ExactCoverSolutionSet((ExactCover) puzzle);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for solution set.");

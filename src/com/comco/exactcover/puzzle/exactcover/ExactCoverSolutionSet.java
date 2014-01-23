@@ -5,11 +5,11 @@ import java.util.Stack;
 import com.comco.exactcover.algorithm.Row;
 import com.comco.exactcover.algorithm.SolutionSet;
 
-public class ExactCoverSolution implements SolutionSet {
+public class ExactCoverSolutionSet implements SolutionSet {
 	private final ExactCover exactCover;
 	private final Stack<ExactCoverConstraint> stack = new Stack<>();
 	
-	public ExactCoverSolution(ExactCover exactCover) {
+	public ExactCoverSolutionSet(ExactCover exactCover) {
 		this.exactCover = exactCover;
 	}
 	
@@ -20,14 +20,12 @@ public class ExactCoverSolution implements SolutionSet {
 	}
 	
 	private void addConstraint(final ExactCoverConstraint constraint) {
-		System.out.println("adding " + constraint.row);
 		stack.add(constraint);
 	}
 
 	@Override
 	public void pop() {
 		stack.pop();
-		System.out.println("pop!");
 	}
 
 	@Override
