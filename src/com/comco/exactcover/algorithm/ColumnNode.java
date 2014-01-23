@@ -152,4 +152,16 @@ public class ColumnNode extends Node {
 			}
 		};
 	}
+	
+	public String dump() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append("Dumping head: " + this + "\n");
+		for (final ColumnNode column : nodesOnRow()) {
+			sb.append("Column: " + column + "\n");
+			for (final Node node : column.nodesOnColumn()) {
+				sb.append("   Row: " + node + ", left: " + node.getLeft() + ", right: " + node.getRight() + "\n");
+			}
+		}
+		return sb.toString();
+	}
 }

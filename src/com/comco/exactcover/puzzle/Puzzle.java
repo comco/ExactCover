@@ -43,8 +43,14 @@ public abstract class Puzzle {
 		}
 		// create constraints
 		for (final PuzzleConstraint constraint : constraints()) {
+			Node left = null;
 			for (final PuzzleAtom atom : constraint.atoms()) {
 				horizon[atom.id] = horizon[atom.id].createTop(constraint);
+				if (left == null) {
+					left = horizon[atom.id];
+				} else {
+					left = left.insertRight(horizon[atom.id]);
+				}
 			}
 		}
 		return head;

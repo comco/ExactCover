@@ -2,6 +2,7 @@ package com.comco.exactcover.algorithm;
 
 public class Algorithm {
 	public void solve(final ColumnNode head, final SolutionSet solutionSet) {
+		//System.out.println(head.dump());
 		if (head.isUnit()) {
 			solutionSet.complete();
 		} else if (solutionSet.shouldContinue()) {

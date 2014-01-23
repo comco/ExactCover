@@ -21,11 +21,13 @@ public class ExactCoverSolution implements SolutionSet {
 	
 	private void addConstraint(final ExactCoverConstraint constraint) {
 		System.out.println("adding " + constraint.row);
+		stack.add(constraint);
 	}
 
 	@Override
 	public void pop() {
 		stack.pop();
+		System.out.println("pop!");
 	}
 
 	@Override

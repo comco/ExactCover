@@ -29,4 +29,18 @@ public abstract class Node {
 		setTop(node);
 		return node;
 	}
+	
+	public Node insertRight(final Node node) {
+		node.setRight(getRight());
+		node.setLeft(this);
+		getRight().setLeft(node);
+		setRight(node);
+		return node;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO: just for informative purposes
+		return Integer.toString(System.identityHashCode(this) % 100);
+	}
 }
