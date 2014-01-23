@@ -14,6 +14,7 @@ import com.comco.exactcover.puzzle.Puzzle;
 public class Polymino extends Puzzle {
 	final boolean[][] board;
 	final List<Piece> pieces = new ArrayList<>();
+	final List<PieceAtom> pieceAtoms = new ArrayList<>();
 	final PositionAtom[][] atomsOnBoard;
 
 	final List<PositionAtom> atoms = new ArrayList<>();
@@ -23,7 +24,7 @@ public class Polymino extends Puzzle {
 		this.board = board;
 		this.atomsOnBoard = new PositionAtom[rows()][cols()];
 
-		// construct atoms
+		// construct position atoms
 		for (int row = 0; row < rows(); ++row) {
 			for (int col = 0; col < cols(); ++col) {
 				if (board[row][col]) {
@@ -41,38 +42,40 @@ public class Polymino extends Puzzle {
 
 	public void addPiece(final Piece piece) {
 		pieces.add(piece);
-
-		addPieceRotations(piece, piece.mask);
+		final PieceAtom pieceAtom = new PieceAtom(this, piece);
+		pieceAtoms.add(pieceAtom);
+		
+		addPieceRotations(piece, pieceAtom, piece.mask);
 		if (piece.canFlip) {
-			addPieceRotations(piece, maskFlip(piece.mask));
+			addPieceRotations(piece, pieceAtom, maskFlip(piece.mask));
 		}
 	}
 
-	private void addPieceRotations(final Piece piece, final boolean[][] mask) {
+	private void addPieceRotations(final Piece piece, final PieceAtom pieceAtom, final boolean[][] mask) {
 		if (piece.canRotate) {
 			boolean[][] current = mask;
 			for (int r = 0; r < 4; ++r) {
-				addPieceSet(piece, current);
+				addPieceSet(piece, pieceAtom, current);
 				current = maskRotate(current);
 			}
 		} else {
-			addPieceSet(piece, mask);
+			addPieceSet(piece, pieceAtom, mask);
 		}
 	}
 
-	private void addPieceSet(final Piece piece, boolean[][] mask) {
+	private void addPieceSet(final Piece piece, final PieceAtom pieceAtom, boolean[][] mask) {
 		for (int row = 0; row < rows(); ++row) {
 			for (int col = 0; col < cols(); ++col) {
 				if (canPlaceAt(board, row, col, mask)) {
-					createPeaceSet(piece, row, col, mask);
+					createPeaceSet(piece, pieceAtom, row, col, mask);
 				}
 			}
 		}
 	}
 	
-	private PieceConstraint createPeaceSet(Piece piece, int row, int col,
+	private PieceConstraint createPeaceSet(Piece piece, PieceAtom pieceAtom, int row, int col,
 			boolean[][] mask) {
-		PieceConstraint result = new PieceConstraint(this, piece, row, col, mask);
+		PieceConstraint result = new PieceConstraint(this, piece, pieceAtom, row, col, mask);
 		constraints.add(result);
 		return result;
 	}
