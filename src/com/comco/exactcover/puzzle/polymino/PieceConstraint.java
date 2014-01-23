@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comco.exactcover.puzzle.PuzzleConstraint;
+import com.comco.exactcover.utils.MaskUtils;
 
 public class PieceConstraint extends PuzzleConstraint {
 	final Polymino polymino;
 	final Piece piece;
-	final int boardRow;
-	final int boardCol;
+	private final int boardRow;
+	private final int boardCol;
 	final boolean[][] mask;
 	private final List<PositionAtom> atoms = new ArrayList<>();
 
@@ -45,5 +46,25 @@ public class PieceConstraint extends PuzzleConstraint {
 	@Override
 	public List<PositionAtom> atoms() {
 		return atoms;
+	}
+	
+	public int pieceRows() {
+		return MaskUtils.maskRows(mask);
+	}
+	
+	public int pieceCols() {
+		return MaskUtils.maskCols(mask);
+	}
+
+	public int getBoardRow() {
+		return boardRow;
+	}
+
+	public int getBoardCol() {
+		return boardCol;
+	}
+
+	public boolean occupied(int row, int col) {
+		return mask[row][col];
 	}
 }

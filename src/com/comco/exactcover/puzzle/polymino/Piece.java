@@ -9,12 +9,14 @@ import static com.comco.exactcover.utils.MaskUtils.*;
  * 
  */
 public class Piece {
+	final int id;
 	final boolean[][] mask;
 	final boolean canRotate;
 	final boolean canFlip;
 
-	public Piece(boolean[][] mask, boolean canRotate, boolean canFlip) {
+	public Piece(int id, boolean[][] mask, boolean canRotate, boolean canFlip) {
 		super();
+		this.id = id;
 		this.mask = maskClip(mask);
 		this.canRotate = canRotate;
 		this.canFlip = canFlip;

@@ -51,7 +51,18 @@ public class PolyminoSolutionSet implements SolutionSet {
 		}
 		
 		for (PieceConstraint constraint : stack) {
-			int pieceRows = cons
+			int pieceRows = constraint.pieceRows();
+			int pieceCols = constraint.pieceCols();
+			int boardRow = constraint.getBoardRow();
+			int boardCol = constraint.getBoardCol();
+			int id = constraint.piece.id;
+			for (int row = 0; row < pieceRows; ++row) {
+				for (int col = 0; col < pieceCols; ++col) {
+					if (constraint.occupied(row, col)) {
+						board[boardRow + row][boardCol + col] = id;
+					}
+				}
+			}
 		}
 	}
 }

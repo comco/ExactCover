@@ -28,6 +28,7 @@ public class PolyminoReader implements PuzzleReader {
 			for (int i = 0; i < pieces; ++i) {
 				int pieceRows = sc.nextInt();
 				int pieceCols = sc.nextInt();
+				int id = i + 1;
 				boolean canRotate = sc.nextBoolean();
 				boolean canFlip = sc.nextBoolean();
 				boolean[][] pieceMask = new boolean[pieceRows][pieceCols];
@@ -37,7 +38,7 @@ public class PolyminoReader implements PuzzleReader {
 						pieceMask[row][col] = (occupied != 0);
 					}
 				}
-				Piece piece = new Piece(MaskUtils.maskClip(pieceMask),
+				Piece piece = new Piece(id, MaskUtils.maskClip(pieceMask),
 						canRotate, canFlip);
 				polymino.addPiece(piece);
 			}
