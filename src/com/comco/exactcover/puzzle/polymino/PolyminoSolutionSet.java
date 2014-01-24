@@ -50,7 +50,7 @@ public class PolyminoSolutionSet implements SolutionSet {
 				}
 			}
 		}
-		
+
 		for (PieceConstraint constraint : stack) {
 			int pieceRows = constraint.pieceRows();
 			int pieceCols = constraint.pieceCols();
@@ -65,14 +65,16 @@ public class PolyminoSolutionSet implements SolutionSet {
 				}
 			}
 		}
-		
+
 		for (int row = 0; row < rows; ++row) {
 			for (int col = 0; col < cols; ++col) {
 				if (board[row][col] >= 0) {
 					System.out.format("%d ", board[row][col]);
+				} else {
+					System.out.print("# ");
 				}
-				System.out.println();
 			}
+			System.out.println();
 		}
 	}
 }
