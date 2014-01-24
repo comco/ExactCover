@@ -41,7 +41,6 @@ public class PolyminoReader implements PuzzleReader {
 						MaskUtils.maskClip(pieceMask), canRotate, canFlip);
 				polymino.addPiece(piece);
 			}
-			System.out.println(polymino.toNetwork().dump());
 			return polymino;
 		}
 	}

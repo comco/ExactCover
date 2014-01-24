@@ -28,12 +28,14 @@ public class PieceConstraint extends PuzzleConstraint {
 		// add atoms
 		atoms.add(pieceAtom);
 
-		for (int r = 0; r < pieceRows(); ++r) {
-			for (int c = 0; c < pieceCols(); ++c) {
-				int atRow = boardRow + r;
-				int atCol = boardCol + c;
-				if (puzzle.hasAtomAt(atRow, atCol)) {
-					addAtom(atRow, atCol);
+		for (int row = 0; row < pieceRows(); ++row) {
+			for (int col = 0; col < pieceCols(); ++col) {
+				if (mask[row][col]) {
+					int atRow = boardRow + row;
+					int atCol = boardCol + col;
+					if (puzzle.hasAtomAt(atRow, atCol)) {
+						addAtom(atRow, atCol);
+					}
 				}
 			}
 		}
