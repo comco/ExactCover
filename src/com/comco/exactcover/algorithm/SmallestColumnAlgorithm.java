@@ -14,10 +14,12 @@ public class SmallestColumnAlgorithm extends Algorithm {
 		}
 		return node;
 	}
-	
+
 	private int columnSize(final ColumnNode columnNode) {
 		int size = 0;
-		for (final Node at : columnNode.nodesOnColumn()) {
+		// need the number of rows in a column node
+		for (@SuppressWarnings("unused")
+		final Node at : columnNode.nodesOnColumn()) {
 			++size;
 		}
 		return size;
