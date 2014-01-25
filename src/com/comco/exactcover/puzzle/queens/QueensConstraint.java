@@ -24,4 +24,8 @@ public class QueensConstraint extends PuzzleConstraint {
 	public Iterable<QueensAtom> atoms() {
 		return atoms;
 	}
+
+	void addAtom(final QueensAtom atom) {
+		atoms.add(atom);
+	}
 }

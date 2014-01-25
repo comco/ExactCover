@@ -16,4 +16,11 @@ public class QueensAtom extends PuzzleAtom {
 		return puzzle;
 	}
 
+	protected void addPlacementConstraint(final int row, final int col) {
+		puzzle.getPlacementConstraint(row, col).addAtom(this);
+	}
+
+	protected int puzzleSize() {
+		return puzzle.getSize();
+	}
 }
