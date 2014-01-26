@@ -6,6 +6,7 @@ public class ColumnNode extends Node {
 	private final Column column;
 	private ColumnNode left, right;
 	private Node bottom, top;
+	int size = 0;
 
 	ColumnNode(final Column column) {
 		this.column = column;
@@ -14,7 +15,7 @@ public class ColumnNode extends Node {
 		bottom = this;
 		top = this;
 	}
-	
+
 	public ColumnNode createRight(final Column column) {
 		final ColumnNode node = new ColumnNode(column);
 		node.left = this;
@@ -23,7 +24,7 @@ public class ColumnNode extends Node {
 		right = node;
 		return node;
 	}
-	
+
 	public Column getColumn() {
 		return column;
 	}
@@ -32,7 +33,7 @@ public class ColumnNode extends Node {
 	public ColumnNode getLeft() {
 		return left;
 	}
-	
+
 	@Override
 	public void setLeft(final Node node) {
 		left = (ColumnNode) node;
@@ -42,7 +43,7 @@ public class ColumnNode extends Node {
 	public ColumnNode getRight() {
 		return right;
 	}
-	
+
 	@Override
 	public void setRight(final Node node) {
 		right = (ColumnNode) node;
@@ -52,12 +53,12 @@ public class ColumnNode extends Node {
 	public Node getBottom() {
 		return bottom;
 	}
-	
+
 	@Override
 	public void setBottom(final Node node) {
 		bottom = node;
 	}
-	
+
 	@Override
 	public Node getTop() {
 		return top;
@@ -67,7 +68,7 @@ public class ColumnNode extends Node {
 	public void setTop(final Node node) {
 		top = node;
 	}
-	
+
 	@Override
 	public ColumnNode getColumnNode() {
 		return this;
@@ -77,20 +78,24 @@ public class ColumnNode extends Node {
 		left.setRight(right);
 		right.setLeft(left);
 	}
-	
+
 	public void attachLeftRight() {
 		left.setRight(this);
 		right.setLeft(this);
 	}
-	
+
 	public boolean isUnit() {
 		return this == right;
+	}
+
+	public int size() {
+		return size;
 	}
 
 	public static ColumnNode createHeadColumnNode() {
 		return new ColumnNode(new HeadColumn());
 	}
-	
+
 	@Override
 	public Iterable<ColumnNode> nodesOnRow() {
 		return new Iterable<ColumnNode>() {
@@ -152,14 +157,15 @@ public class ColumnNode extends Node {
 			}
 		};
 	}
-	
+
 	public String dump() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Dumping head: " + this + "\n");
 		for (final ColumnNode column : nodesOnRow()) {
 			sb.append("Column: " + column + "\n");
 			for (final Node node : column.nodesOnColumn()) {
-				sb.append("   Row: " + node + ", left: " + node.getLeft() + ", right: " + node.getRight() + "\n");
+				sb.append("   Row: " + node + ", left: " + node.getLeft()
+						+ ", right: " + node.getRight() + "\n");
 			}
 		}
 		return sb.toString();

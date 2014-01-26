@@ -21,7 +21,7 @@ public class InternalNode extends Node {
 	public InternalNode getLeft() {
 		return left;
 	}
-	
+
 	@Override
 	public void setLeft(final Node node) {
 		left = (InternalNode) node;
@@ -31,7 +31,7 @@ public class InternalNode extends Node {
 	public InternalNode getRight() {
 		return right;
 	}
-	
+
 	@Override
 	public void setRight(final Node node) {
 		right = (InternalNode) node;
@@ -41,7 +41,7 @@ public class InternalNode extends Node {
 	public Node getBottom() {
 		return bottom;
 	}
-	
+
 	@Override
 	public void setBottom(final Node node) {
 		bottom = node;
@@ -51,7 +51,7 @@ public class InternalNode extends Node {
 	public Node getTop() {
 		return top;
 	}
-	
+
 	@Override
 	public void setTop(final Node node) {
 		top = node;
@@ -61,18 +61,21 @@ public class InternalNode extends Node {
 		return row;
 	}
 
+	@Override
 	public ColumnNode getColumnNode() {
 		return columnNode;
 	}
-	
+
 	public void detachBottomTop() {
 		bottom.setTop(top);
 		top.setBottom(bottom);
+		--columnNode.size;
 	}
-	
+
 	public void attachBottomTop() {
 		bottom.setTop(this);
 		top.setBottom(this);
+		++columnNode.size;
 	}
 
 	@Override
