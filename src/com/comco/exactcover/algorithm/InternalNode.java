@@ -67,15 +67,19 @@ public class InternalNode extends Node {
 	}
 
 	public void detachBottomTop() {
-		bottom.setTop(top);
-		top.setBottom(bottom);
-		--columnNode.size;
+		if (bottom.getTop() == this) {
+			bottom.setTop(top);
+			top.setBottom(bottom);
+			--columnNode.size;
+		}
 	}
 
 	public void attachBottomTop() {
-		bottom.setTop(this);
-		top.setBottom(this);
-		++columnNode.size;
+		if (bottom.getTop() != this) {
+			bottom.setTop(this);
+			top.setBottom(this);
+			++columnNode.size;
+		}
 	}
 
 	@Override

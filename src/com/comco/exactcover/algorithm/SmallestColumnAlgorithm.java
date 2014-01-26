@@ -8,7 +8,9 @@ public class SmallestColumnAlgorithm extends Algorithm {
 		for (final ColumnNode columnNode : head.nodesOnRow()) {
 			// int columnSize = columnSize(columnNode);
 			int columnSize = columnNode.size;
-			assert (columnNode.size == columnSize(columnNode));
+			if (columnNode.size != columnSize(columnNode)) {
+				throw new IllegalStateException("asds");
+			}
 			if (columnSize < minSize) {
 				minSize = columnSize;
 				node = columnNode;

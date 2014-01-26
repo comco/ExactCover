@@ -170,4 +170,9 @@ public class ColumnNode extends Node {
 		}
 		return sb.toString();
 	}
+
+	@Override
+	public String toString() {
+		return "(" + super.toString() + " size: " + size + ")";
+	}
 }

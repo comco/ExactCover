@@ -2,31 +2,31 @@ package com.comco.exactcover.algorithm;
 
 public class Algorithm {
 	public void solve(final ColumnNode head, final SolutionSet solutionSet) {
+		System.out.println(head.dump());
 		if (head.isUnit()) {
 			solutionSet.complete();
 		} else if (solutionSet.shouldContinue()) {
 			// select a column
 			ColumnNode column = selectColumn(head);
-			detachColumnNode(column);
+			cover(column);
 			// enumerate rows
 			for (InternalNode rowNode : column.nodesOnColumn()) {
 				solutionSet.addRow(rowNode.getRow());
 				for (InternalNode node : rowNode.nodesOnRow()) {
-					detachColumnNode(node.getColumnNode());
+					cover(node.getColumnNode());
 				}
-				
 				solve(head, solutionSet);
-				
+
 				solutionSet.pop();
 				for (InternalNode node : rowNode.nodesOnRow()) {
-					attachColumnNode(node.getColumnNode());
+					uncover(node.getColumnNode());
 				}
 			}
-			attachColumnNode(column);
+			uncover(column);
 		}
 	}
-	
-	private void detachColumnNode(final ColumnNode columnNode) {
+
+	private void cover(final ColumnNode columnNode) {
 		columnNode.detachLeftRight();
 		for (InternalNode rowNode : columnNode.nodesOnColumn()) {
 			for (InternalNode node : rowNode.nodesOnRow()) {
@@ -34,8 +34,8 @@ public class Algorithm {
 			}
 		}
 	}
-	
-	private void attachColumnNode(final ColumnNode columnNode) {
+
+	private void uncover(final ColumnNode columnNode) {
 		columnNode.attachLeftRight();
 		for (InternalNode rowNode : columnNode.nodesOnColumn()) {
 			for (InternalNode node : rowNode.nodesOnRow()) {
