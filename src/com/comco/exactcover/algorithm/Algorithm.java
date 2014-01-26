@@ -27,19 +27,23 @@ public class Algorithm {
 	}
 
 	private void cover(final ColumnNode columnNode) {
-		columnNode.detachLeftRight();
-		for (InternalNode rowNode : columnNode.nodesOnColumn()) {
-			for (InternalNode node : rowNode.nodesOnRow()) {
-				node.detachBottomTop();
+		if (columnNode.getLeft().getRight() == columnNode) {
+			columnNode.detachLeftRight();
+			for (InternalNode rowNode : columnNode.nodesOnColumn()) {
+				for (InternalNode node : rowNode.nodesOnRow()) {
+					node.detachBottomTop();
+				}
 			}
 		}
 	}
 
 	private void uncover(final ColumnNode columnNode) {
-		columnNode.attachLeftRight();
-		for (InternalNode rowNode : columnNode.nodesOnColumn()) {
-			for (InternalNode node : rowNode.nodesOnRow()) {
-				node.attachBottomTop();
+		if (columnNode.getLeft().getRight() != columnNode) {
+			columnNode.attachLeftRight();
+			for (InternalNode rowNode : columnNode.nodesOnColumn()) {
+				for (InternalNode node : rowNode.nodesOnRow()) {
+					node.attachBottomTop();
+				}
 			}
 		}
 	}
