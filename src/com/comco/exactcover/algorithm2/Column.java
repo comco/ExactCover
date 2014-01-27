@@ -5,11 +5,13 @@ public final class Column {
 	Column left;
 	Column right;
 	int size = 0;
+	final ColumnHeader header;
 
-	public Column() {
-		base = new Node(this, null);
+	public Column(final ColumnHeader header) {
+		this.header = header;
 		left = this;
 		right = this;
+		base = new Node(this, null);
 	}
 
 	public void attach() {
@@ -32,5 +34,9 @@ public final class Column {
 
 	public boolean isUnit() {
 		return (this == right);
+	}
+	
+	public static Column createHead() {
+		return new Column(null);
 	}
 }

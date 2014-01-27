@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.comco.exactcover.algorithm.ColumnNode;
 import com.comco.exactcover.algorithm.Node;
+import com.comco.exactcover.algorithm2.Column;
 
 public abstract class Puzzle {
 	private int nextAtomId = 0;

@@ -1,6 +1,12 @@
 package com.comco.exactcover.algorithm2;
 
+import java.util.ArrayDeque;
+
 public class Algorithm {
+	private final ArrayDeque<Column> columns = new ArrayDeque<>();
+	private final ArrayDeque<Node> rowNodes = new ArrayDeque<>();
+	
+	
 	public void solve(final Column head) {
 		if (head.isUnit()) {
 			complete();
