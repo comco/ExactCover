@@ -1,9 +1,12 @@
-package com.comco.exactcover.algorithm;
+package com.comco.exactcover;
 
 public interface SolutionSet {
+
 	void addRow(final Row row);
-	void pop();
+
+	void popRow();
+
 	void complete();
-	
+
 	boolean shouldContinue();
 }

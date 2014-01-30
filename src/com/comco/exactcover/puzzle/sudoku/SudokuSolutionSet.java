@@ -2,8 +2,8 @@ package com.comco.exactcover.puzzle.sudoku;
 
 import java.util.Stack;
 
-import com.comco.exactcover.algorithm.Row;
-import com.comco.exactcover.algorithm.SolutionSet;
+import com.comco.exactcover.Row;
+import com.comco.exactcover.SolutionSet;
 
 public class SudokuSolutionSet implements SolutionSet {
 	private final Stack<SudokuConstraint> stack = new Stack<SudokuConstraint>();
@@ -19,7 +19,7 @@ public class SudokuSolutionSet implements SolutionSet {
 	}
 
 	@Override
-	public void pop() {
+	public void popRow() {
 		stack.pop();
 	}
 
@@ -32,13 +32,13 @@ public class SudokuSolutionSet implements SolutionSet {
 		}
 
 		printSolution(board);
-//		try {
-//			Thread.sleep(20);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
+		// try {
+		// Thread.sleep(20);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		//
 	}
 
 	private void printSolution(int[][] board) {

@@ -1,17 +1,17 @@
 package com.comco.exactcover.cli;
 
-import com.comco.exactcover.algorithm.Algorithm;
-import com.comco.exactcover.algorithm.SmallestColumnAlgorithm;
+import com.comco.exactcover.algorithm.BasicDancingLinks;
+import com.comco.exactcover.algorithm.MinColumnDancingLinks;
 
 public enum AlgorithmType {
-	BASIC("basic", Algorithm.class),
-	SMALL("small", SmallestColumnAlgorithm.class);
+	BASIC("basic", BasicDancingLinks.class), MIN_COLUMN("min_column",
+			MinColumnDancingLinks.class);
 
 	public final String name;
-	public final Class<? extends Algorithm> algorithmClass;
-	
+	public final Class<? extends BasicDancingLinks> algorithmClass;
+
 	private AlgorithmType(final String name,
-			final Class<? extends Algorithm> algorithmClass) {
+			final Class<? extends BasicDancingLinks> algorithmClass) {
 		this.name = name;
 		this.algorithmClass = algorithmClass;
 	}

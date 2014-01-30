@@ -1,47 +1,63 @@
 package com.comco.exactcover.algorithm;
 
-public abstract class Node {
-	abstract Node getLeft();
+import com.comco.exactcover.Row;
 
-	abstract void setLeft(final Node node);
+public final class Node {
+	Node left;
+	Node right;
+	Node bottom;
+	Node top;
+	final ColumnNode column;
+	final Row row;
 
-	abstract Node getRight();
+	Node(final ColumnNode column, final Row row) {
+		this.column = column;
+		this.row = row;
+		this.left = this;
+		this.right = this;
+		this.bottom = this;
+		this.top = this;
+	}
 
-	abstract void setRight(final Node node);
+	public void attach() {
+		bottom.top = this;
+		top.bottom = this;
+		++column.size;
+	}
 
-	abstract Node getBottom();
+	public void detach() {
+		bottom.top = top;
+		top.bottom = bottom;
+		--column.size;
+	}
 
-	abstract void setBottom(final Node node);
-
-	abstract Node getTop();
-
-	abstract void setTop(final Node node);
-
-	abstract ColumnNode getColumnNode();
-
-	abstract Iterable<? extends Node> nodesOnRow();
+	public Node insertTop(final Node node) {
+		node.top = top;
+		top.bottom = node;
+		node.bottom = this;
+		top = node;
+		++column.size;
+		return node;
+	}
 
 	public Node createTop(final Row row) {
-		Node node = new InternalNode(getColumnNode(), row);
-		node.setTop(getTop());
-		node.setBottom(this);
-		getTop().setBottom(node);
-		setTop(node);
-		++getColumnNode().size;
-		return node;
+		return insertTop(new Node(column, row));
 	}
 
 	public Node insertRight(final Node node) {
-		node.setRight(getRight());
-		node.setLeft(this);
-		getRight().setLeft(node);
-		setRight(node);
+		node.right = right;
+		node.left = this;
+		right.left = node;
+		right = node;
 		return node;
 	}
 
-	@Override
-	public String toString() {
-		// TODO: just for informative purposes
-		return Integer.toString(System.identityHashCode(this) % 100);
+	public int id() {
+		return System.identityHashCode(this) % 256;
+	}
+
+	public String dump() {
+		return String.format("(%X | %X ^%X | %X)", left.id(), id(),
+				column.id(), right.id());
 	}
 }

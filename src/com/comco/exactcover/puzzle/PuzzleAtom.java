@@ -1,6 +1,6 @@
 package com.comco.exactcover.puzzle;
 
-import com.comco.exactcover.algorithm.Column;
+import com.comco.exactcover.Column;
 
 public abstract class PuzzleAtom implements Column {
 	public final int id;

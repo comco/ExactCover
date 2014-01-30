@@ -61,22 +61,26 @@ public abstract class Puzzle {
 		ColumnNode tail = head;
 
 		// create columns
-		Node[] horizon = new Node[atoms.size()];
+		ColumnNode[] columnNodes = new ColumnNode[atoms.size()];
 		int i = 0;
 		for (final PuzzleAtom atom : atoms) {
 			tail = tail.createRight(atom);
-			horizon[i++] = tail;
+			columnNodes[i++] = tail;
 		}
 
 		// create constraints
+		Node[] sweep = new Node[atoms.size()];
+		for (int j = 0; j < atoms.size(); ++j) {
+			sweep[j] = columnNodes[j].base();
+		}
 		for (final PuzzleConstraint constraint : constraints) {
 			Node left = null;
 			for (final PuzzleAtom atom : constraint.atoms()) {
-				horizon[atom.id] = horizon[atom.id].createTop(constraint);
+				sweep[atom.id] = sweep[atom.id].createTop(constraint);
 				if (left == null) {
-					left = horizon[atom.id];
+					left = sweep[atom.id];
 				} else {
-					left = left.insertRight(horizon[atom.id]);
+					left = left.insertRight(sweep[atom.id]);
 				}
 			}
 		}

@@ -2,8 +2,8 @@ package com.comco.exactcover.puzzle.polymino;
 
 import java.util.Stack;
 
-import com.comco.exactcover.algorithm.Row;
-import com.comco.exactcover.algorithm.SolutionSet;
+import com.comco.exactcover.Row;
+import com.comco.exactcover.SolutionSet;
 
 public class PolyminoSolutionSet implements SolutionSet {
 	private final Polymino polymino;
@@ -24,7 +24,7 @@ public class PolyminoSolutionSet implements SolutionSet {
 	}
 
 	@Override
-	public void pop() {
+	public void popRow() {
 		stack.pop();
 	}
 
@@ -69,7 +69,7 @@ public class PolyminoSolutionSet implements SolutionSet {
 		for (int row = 0; row < rows; ++row) {
 			for (int col = 0; col < cols; ++col) {
 				if (board[row][col] >= 0) {
-					System.out.format("%c ", (char)((int) 'A' + board[row][col]));
+					System.out.format("%c ", (char) ('A' + board[row][col]));
 				} else {
 					System.out.print("# ");
 				}

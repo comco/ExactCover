@@ -2,9 +2,8 @@ package com.comco.exactcover.cli;
 
 import java.io.InputStream;
 
-import com.comco.exactcover.algorithm.Algorithm;
-import com.comco.exactcover.algorithm.ColumnNode;
-import com.comco.exactcover.algorithm.SolutionSet;
+import com.comco.exactcover.Algorithm;
+import com.comco.exactcover.SolutionSet;
 import com.comco.exactcover.puzzle.Puzzle;
 
 public class ProgramState {
@@ -15,19 +14,18 @@ public class ProgramState {
 	Puzzle puzzle;
 	SolutionSet solutionSet;
 	Algorithm algorithm;
-	
+
 	public ProgramState() {
 	}
 
 	public void build() {
 		puzzle = PuzzleFactory.INSTANCE.getPuzzleReader(puzzleType).read(input);
 		solutionSet = PuzzleFactory.INSTANCE.getSolutionSet(puzzleType, puzzle);
-		algorithm = AlgorithmFactory.INSTANCE.get(algorithmType);
+		algorithm = AlgorithmFactory.INSTANCE.get(algorithmType, puzzle);
 	}
 
 	public void solve() {
-		ColumnNode head = puzzle.toNetwork();
-		algorithm.solve(head, solutionSet);
+		algorithm.solve(solutionSet);
 	}
 
 	public InputStream getInput() {

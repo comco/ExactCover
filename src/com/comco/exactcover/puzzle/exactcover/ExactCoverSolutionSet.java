@@ -2,29 +2,29 @@ package com.comco.exactcover.puzzle.exactcover;
 
 import java.util.Stack;
 
-import com.comco.exactcover.algorithm.Row;
-import com.comco.exactcover.algorithm.SolutionSet;
+import com.comco.exactcover.Row;
+import com.comco.exactcover.SolutionSet;
 
 public class ExactCoverSolutionSet implements SolutionSet {
 	private final ExactCover exactCover;
 	private final Stack<ExactCoverConstraint> stack = new Stack<>();
-	
+
 	public ExactCoverSolutionSet(ExactCover exactCover) {
 		this.exactCover = exactCover;
 	}
-	
+
 	@Override
 	public void addRow(Row row) {
 		// cast is safe
 		addConstraint((ExactCoverConstraint) row);
 	}
-	
+
 	private void addConstraint(final ExactCoverConstraint constraint) {
 		stack.add(constraint);
 	}
 
 	@Override
-	public void pop() {
+	public void popRow() {
 		stack.pop();
 	}
 

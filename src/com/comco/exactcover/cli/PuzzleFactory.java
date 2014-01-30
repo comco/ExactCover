@@ -1,6 +1,6 @@
 package com.comco.exactcover.cli;
 
-import com.comco.exactcover.algorithm.SolutionSet;
+import com.comco.exactcover.SolutionSet;
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCover;

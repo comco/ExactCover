@@ -1,6 +1,6 @@
 package com.comco.exactcover.puzzle;
 
-import com.comco.exactcover.algorithm.Row;
+import com.comco.exactcover.Row;
 
 public abstract class PuzzleConstraint implements Row {
 	public final int id;

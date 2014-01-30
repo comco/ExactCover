@@ -1,178 +1,75 @@
 package com.comco.exactcover.algorithm;
 
-import java.util.Iterator;
+import com.comco.exactcover.Column;
 
-public class ColumnNode extends Node {
-	private final Column column;
-	private ColumnNode left, right;
-	private Node bottom, top;
+public final class ColumnNode {
+	final Node base;
+	final Column column;
+	ColumnNode left;
+	ColumnNode right;
 	int size = 0;
 
-	ColumnNode(final Column column) {
+	private ColumnNode(final Column column) {
+		this.base = new Node(this, null);
 		this.column = column;
-		left = this;
-		right = this;
-		bottom = this;
-		top = this;
+		this.left = this;
+		this.right = this;
 	}
 
-	public ColumnNode createRight(final Column column) {
-		final ColumnNode node = new ColumnNode(column);
-		node.left = this;
-		node.right = right;
-		right.left = node;
-		right = node;
-		return node;
+	public Node base() {
+		return base;
 	}
 
-	public Column getColumn() {
+	public void attach() {
+		left.right = this;
+		right.left = this;
+	}
+
+	public void detach() {
+		left.right = right;
+		right.left = left;
+	}
+
+	public ColumnNode insertRight(final ColumnNode column) {
+		column.right = right;
+		right.left = column;
+		column.left = this;
+		right = column;
 		return column;
 	}
 
-	@Override
-	public ColumnNode getLeft() {
-		return left;
+	boolean isUnit() {
+		return (this == right);
 	}
 
-	@Override
-	public void setLeft(final Node node) {
-		left = (ColumnNode) node;
+	public ColumnNode createRight(final Column column) {
+		return insertRight(new ColumnNode(column));
 	}
 
-	@Override
-	public ColumnNode getRight() {
-		return right;
-	}
-
-	@Override
-	public void setRight(final Node node) {
-		right = (ColumnNode) node;
-	}
-
-	@Override
-	public Node getBottom() {
-		return bottom;
-	}
-
-	@Override
-	public void setBottom(final Node node) {
-		bottom = node;
-	}
-
-	@Override
-	public Node getTop() {
-		return top;
-	}
-
-	@Override
-	public void setTop(final Node node) {
-		top = node;
-	}
-
-	@Override
-	public ColumnNode getColumnNode() {
-		return this;
-	}
-
-	public void detachLeftRight() {
-		left.setRight(right);
-		right.setLeft(left);
-	}
-
-	public void attachLeftRight() {
-		left.setRight(this);
-		right.setLeft(this);
-	}
-
-	public boolean isUnit() {
-		return this == right;
-	}
-
-	public int size() {
-		return size;
-	}
-
-	public static ColumnNode createHeadColumnNode() {
-		return new ColumnNode(new HeadColumn());
-	}
-
-	@Override
-	public Iterable<ColumnNode> nodesOnRow() {
-		return new Iterable<ColumnNode>() {
-
-			@Override
-			public Iterator<ColumnNode> iterator() {
-				return new Iterator<ColumnNode>() {
-					private ColumnNode current = ColumnNode.this.right;
-
-					@Override
-					public boolean hasNext() {
-						return (current != ColumnNode.this);
-					}
-
-					@Override
-					public ColumnNode next() {
-						final ColumnNode node = current;
-						current = current.right;
-						return node;
-					}
-
-					@Override
-					public void remove() {
-						throw new UnsupportedOperationException(
-								"Row removal is unsupported.");
-					}
-				};
-			}
-		};
-	}
-
-	public Iterable<InternalNode> nodesOnColumn() {
-		return new Iterable<InternalNode>() {
-
-			@Override
-			public Iterator<InternalNode> iterator() {
-				return new Iterator<InternalNode>() {
-					private Node current = ColumnNode.this.top;
-
-					@Override
-					public boolean hasNext() {
-						return (current != ColumnNode.this);
-					}
-
-					@Override
-					public InternalNode next() {
-						// cast is safe
-						final InternalNode node = (InternalNode) current;
-						current = current.getTop();
-						return node;
-					}
-
-					@Override
-					public void remove() {
-						throw new UnsupportedOperationException(
-								"Column removal is unsupported.");
-					}
-				};
-			}
-		};
+	public int id() {
+		return System.identityHashCode(this) % 256;
 	}
 
 	public String dump() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("Dumping head: " + this + "\n");
-		for (final ColumnNode column : nodesOnRow()) {
-			sb.append("Column: " + column + "\n");
-			for (final Node node : column.nodesOnColumn()) {
-				sb.append("   Row: " + node + ", left: " + node.getLeft()
-						+ ", right: " + node.getRight() + "\n");
-			}
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("[%X]: ", id()));
+		sb.append(base.dump());
+		for (Node node = base.top; node != base; node = node.top) {
+			sb.append(node.dump() + ' ');
+		}
+		sb.append('\n');
+		return sb.toString();
+	}
+
+	public String dumpHead() {
+		StringBuilder sb = new StringBuilder();
+		for (ColumnNode node = right; node != this; node = node.right) {
+			sb.append(node.dump());
 		}
 		return sb.toString();
 	}
 
-	@Override
-	public String toString() {
-		return "(" + super.toString() + " size: " + size + ")";
+	public static ColumnNode createHeadColumnNode() {
+		return new ColumnNode(null);
 	}
 }

@@ -1,22 +1,23 @@
 package com.comco.exactcover.cli;
 
-import com.comco.exactcover.algorithm.Algorithm;
-import com.comco.exactcover.algorithm.SmallestColumnAlgorithm;
+import com.comco.exactcover.algorithm.BasicDancingLinks;
+import com.comco.exactcover.algorithm.MinColumnDancingLinks;
+import com.comco.exactcover.puzzle.Puzzle;
 
 public class AlgorithmFactory {
-	private static final Algorithm BASIC = new Algorithm();
-	private static final SmallestColumnAlgorithm SMALL = new SmallestColumnAlgorithm();
-	
-	protected AlgorithmFactory() {}
-	
-	public Algorithm get(final AlgorithmType type) {
+
+	private AlgorithmFactory() {
+	}
+
+	public BasicDancingLinks get(final AlgorithmType type, final Puzzle puzzle) {
 		switch (type) {
 		case BASIC:
-			return BASIC;
-		case SMALL:
-			return SMALL;
+			return new BasicDancingLinks(puzzle.toNetwork());
+		case MIN_COLUMN:
+			return new MinColumnDancingLinks(puzzle.toNetwork());
 		default:
-			throw new IllegalArgumentException("Algorithm type: " + type + " is unsupported.");
+			throw new IllegalArgumentException("Algorithm type: " + type
+					+ " is unsupported.");
 		}
 	}
 
