@@ -26,6 +26,9 @@ public class ProgramState {
 
 	public void solve() {
 		algorithm.solve(solutionSet);
+		System.out.println("Done!");
+		System.out.format("Total number of solutions found: %d\n",
+				solutionSet.getNumberOfSolutionsFound());
 	}
 
 	public InputStream getInput() {

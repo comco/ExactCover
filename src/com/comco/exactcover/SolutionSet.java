@@ -9,4 +9,6 @@ public interface SolutionSet {
 	void complete();
 
 	boolean shouldContinue();
+
+	int getNumberOfSolutionsFound();
 }

@@ -1,12 +1,13 @@
 package com.comco.exactcover.puzzle.sudoku;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.SolutionSet;
 
 public class SudokuSolutionSet implements SolutionSet {
-	private final Stack<SudokuConstraint> stack = new Stack<SudokuConstraint>();
+	private final ArrayDeque<SudokuConstraint> stack = new ArrayDeque<>();
+	private int numberOfSolutionsFound = 0;
 
 	@Override
 	public void addRow(Row row) {
@@ -36,6 +37,7 @@ public class SudokuSolutionSet implements SolutionSet {
 	@Override
 	public void complete() {
 		printSolution(extractBoard());
+		++numberOfSolutionsFound;
 	}
 
 	private void printSolution(int[][] board) {
@@ -51,5 +53,10 @@ public class SudokuSolutionSet implements SolutionSet {
 	@Override
 	public boolean shouldContinue() {
 		return true;
+	}
+
+	@Override
+	public int getNumberOfSolutionsFound() {
+		return numberOfSolutionsFound;
 	}
 }

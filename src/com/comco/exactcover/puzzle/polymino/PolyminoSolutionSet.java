@@ -1,13 +1,14 @@
 package com.comco.exactcover.puzzle.polymino;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.SolutionSet;
 
 public class PolyminoSolutionSet implements SolutionSet {
 	private final Polymino polymino;
-	private final Stack<PieceConstraint> stack = new Stack<PieceConstraint>();
+	private final ArrayDeque<PieceConstraint> stack = new ArrayDeque<>();
+	private int numberOfSolutionsFound = 0;
 
 	public PolyminoSolutionSet(final Polymino polymino) {
 		this.polymino = polymino;
@@ -31,6 +32,7 @@ public class PolyminoSolutionSet implements SolutionSet {
 	@Override
 	public void complete() {
 		printSolution();
+		++numberOfSolutionsFound;
 	}
 
 	@Override
@@ -76,5 +78,10 @@ public class PolyminoSolutionSet implements SolutionSet {
 			}
 			System.out.println();
 		}
+	}
+
+	@Override
+	public int getNumberOfSolutionsFound() {
+		return numberOfSolutionsFound;
 	}
 }
