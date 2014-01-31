@@ -11,9 +11,9 @@ public class ProgramState {
 	PuzzleType puzzleType;
 	AlgorithmType algorithmType;
 
-	Puzzle puzzle;
-	SolutionSet solutionSet;
-	Algorithm algorithm;
+	public Puzzle puzzle;
+	public SolutionSet solutionSet;
+	public Algorithm algorithm;
 
 	public ProgramState() {
 	}

@@ -23,22 +23,19 @@ public class SudokuSolutionSet implements SolutionSet {
 		stack.pop();
 	}
 
-	@Override
-	public void complete() {
+	public int[][] extractBoard() {
 		int[][] board = new int[9][9];
 		for (SudokuConstraint constraint : stack) {
 			board[constraint.getRow()][constraint.getCol()] = constraint
 					.getVal();
 		}
 
-		printSolution(board);
-		// try {
-		// Thread.sleep(20);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//
+		return board;
+	}
+
+	@Override
+	public void complete() {
+		printSolution(extractBoard());
 	}
 
 	private void printSolution(int[][] board) {
