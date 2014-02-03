@@ -10,6 +10,27 @@ public final class MaskUtils {
 	private MaskUtils() {
 	}
 
+	public static boolean areTheSame(final boolean[][] maskA,
+			final boolean[][] maskB) {
+		int rowsA = maskRows(maskA);
+		int rowsB = maskRows(maskB);
+		if (rowsA == rowsB) {
+			int colsA = maskCols(maskA);
+			int colsB = maskCols(maskB);
+			if (colsA == colsB) {
+				for (int i = 0; i < rowsA; ++i) {
+					for (int j = 0; j < colsB; ++j) {
+						if (maskA[i][j] != maskB[i][j]) {
+							return false;
+						}
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static int maskRows(final boolean[][] mask) {
 		return mask.length;
 	}

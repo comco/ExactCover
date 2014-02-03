@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.comco.exactcover.gui.MainFrame;
 import com.comco.exactcover.puzzle.sudoku.SudokuConstraint;
 
 public class SudokuView extends JPanel {
@@ -21,8 +22,9 @@ public class SudokuView extends JPanel {
 
 	private final SudokuPiece[][] pieces = new SudokuPiece[9][9];
 
-	public SudokuView(final SudokuModel model) {
+	public SudokuView(MainFrame frame, final SudokuModel model) {
 		super(new GridBagLayout());
+		frame.setSize(800, 800);
 		GridBagConstraints c = new GridBagConstraints();
 		for (int i = 0; i < 9; ++i) {
 			for (int j = 0; j < 9; ++j) {

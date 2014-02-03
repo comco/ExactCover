@@ -14,16 +14,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.comco.exactcover.gui.MainFrame;
+
 public class PolyminoView extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final PolyminoCell[][] cells;
 
-	public PolyminoView(final PolyminoModel model) {
+	public PolyminoView(final MainFrame frame, final PolyminoModel model) {
 		super(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		int rows = model.getRows();
 		int cols = model.getCols();
+		frame.setSize(80 * cols, 80 * rows);
 		cells = new PolyminoCell[rows][cols];
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < cols; ++j) {
@@ -53,7 +56,7 @@ class PolyminoCell extends JLabel implements Observer, EventListener {
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setVerticalAlignment(SwingConstants.CENTER);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		setPreferredSize(new Dimension(32, 32));
+		setPreferredSize(new Dimension(20, 20));
 		setOpaque(true);
 		setFont(new Font("Calibri", Font.BOLD, 32));
 		setForeground(Color.BLACK);

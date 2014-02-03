@@ -13,7 +13,6 @@ public class MainFrame extends JFrame {
 	public MainFrame(final ProgramState programState) {
 		this.programState = programState;
 		setTitle("Exact Cover");
-		setSize(800, 800);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -25,7 +24,7 @@ public class MainFrame extends JFrame {
 		programState.solutionSet = model;
 
 		JPanel view = GuiFactory.INSTANCE.getView(programState.getPuzzleType(),
-				model);
+				this, model);
 
 		mainPanel.add(view);
 		mainPanel.add(new SimulationControlView(model));

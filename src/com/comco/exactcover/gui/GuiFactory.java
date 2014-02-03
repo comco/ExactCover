@@ -31,13 +31,14 @@ public final class GuiFactory {
 		}
 	}
 
-	public JPanel getView(PuzzleType type, SolutionSetModel model) {
+	public JPanel getView(PuzzleType type, MainFrame frame,
+			SolutionSetModel model) {
 		if (model != null) {
 			switch (type) {
 			case SUDOKU:
-				return new SudokuView((SudokuModel) model);
+				return new SudokuView(frame, (SudokuModel) model);
 			case POLYMINO:
-				return new PolyminoView((PolyminoModel) model);
+				return new PolyminoView(frame, (PolyminoModel) model);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for gui.");

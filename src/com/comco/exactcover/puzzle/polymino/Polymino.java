@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleAtom;
+import com.comco.exactcover.utils.MaskUtils;
 
 public class Polymino extends Puzzle {
 	private int nextPieceId = 0;
@@ -55,11 +56,27 @@ public class Polymino extends Puzzle {
 	private void tryAddPieceRotations(final Piece piece,
 			final PieceAtom pieceAtom, final boolean[][] mask) {
 		if (piece.canRotate) {
-			boolean[][] current = mask;
-			for (int r = 0; r < 4; ++r) {
-				addPieceConstraint(piece, pieceAtom, current);
-				current = maskRotate(current);
+			boolean[][][] masks = new boolean[4][][];
+			masks[0] = mask;
+			addPieceConstraint(piece, pieceAtom, mask);
+			for (int r = 0; r < 3; ++r) {
+				masks[r + 1] = maskRotate(masks[r]);
+				boolean found = false;
+				for (int i = 0; i <= r; ++i) {
+					if (MaskUtils.areTheSame(masks[i], masks[r + 1])) {
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					addPieceConstraint(piece, pieceAtom, masks[r + 1]);
+				}
 			}
+			// boolean[][] current = mask;
+			// for (int r = 0; r < 4; ++r) {
+			// addPieceConstraint(piece, pieceAtom, current);
+			// current = maskRotate(current);
+			// }
 		} else {
 			addPieceConstraint(piece, pieceAtom, mask);
 		}
