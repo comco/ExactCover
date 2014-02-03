@@ -48,3 +48,25 @@ degree is not a good tie breaker with symmetric puzzles!
 - Total examined columns: 12128835
 
 degree has a very slight advantage here
+
+## queens-8
+### min-column:
+Total number of solutions found: 92
+Total examined nodes: 3019
+Total examined columns: 2368
+
+### degree:
+- Total number of solutions found: 92
+- Total examined nodes: 3019
+- Total examined columns: 2368
+
+### min-column (13):
+Total number of solutions found: 73712
+Total examined nodes: 6837469
+Total examined columns: 5336863
+
+### degree (13):
+Total number of solutions found: 73712
+Total examined nodes: 6837469
+Total examined columns: 5336863
+

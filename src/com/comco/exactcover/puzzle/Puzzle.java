@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.comco.exactcover.algorithm.ColumnNode;
 import com.comco.exactcover.algorithm.Node;
+import com.comco.exactcover.utils.MaskUtils;
 
 public abstract class Puzzle {
 	private int nextAtomId = 0;
@@ -53,6 +54,18 @@ public abstract class Puzzle {
 			}
 		}
 		return matrix;
+	}
+
+	public void printBooleanMatrix() {
+		boolean[][] mat = toBooleanMatrix();
+		int rows = MaskUtils.maskRows(mat);
+		int cols = MaskUtils.maskCols(mat);
+		for (int row = 0; row < rows; ++row) {
+			for (int col = 0; col < cols; ++col) {
+				System.out.print(mat[row][col] ? 1 : 0);
+			}
+			System.out.println();
+		}
 	}
 
 	public ColumnNode toNetwork() {

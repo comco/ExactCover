@@ -6,9 +6,12 @@ import com.comco.exactcover.SolutionSet;
 import com.comco.exactcover.cli.PuzzleType;
 import com.comco.exactcover.gui.polymino.PolyminoModel;
 import com.comco.exactcover.gui.polymino.PolyminoView;
+import com.comco.exactcover.gui.queens.QueensModel;
+import com.comco.exactcover.gui.queens.QueensView;
 import com.comco.exactcover.gui.sudoku.SudokuModel;
 import com.comco.exactcover.gui.sudoku.SudokuView;
 import com.comco.exactcover.puzzle.polymino.PolyminoSolutionSet;
+import com.comco.exactcover.puzzle.queens.QueensSolutionSet;
 import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
 
 public final class GuiFactory {
@@ -21,6 +24,8 @@ public final class GuiFactory {
 				return new SudokuModel((SudokuSolutionSet) solutionSet);
 			case POLYMINO:
 				return new PolyminoModel((PolyminoSolutionSet) solutionSet);
+			case QUEENS:
+				return new QueensModel((QueensSolutionSet) solutionSet);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for gui.");
@@ -39,6 +44,8 @@ public final class GuiFactory {
 				return new SudokuView(frame, (SudokuModel) model);
 			case POLYMINO:
 				return new PolyminoView(frame, (PolyminoModel) model);
+			case QUEENS:
+				return new QueensView(frame, (QueensModel) model);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for gui.");
