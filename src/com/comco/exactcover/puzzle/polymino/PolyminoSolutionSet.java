@@ -16,12 +16,11 @@ public class PolyminoSolutionSet implements SolutionSet {
 
 	@Override
 	public void addRow(Row row) {
-		// cast is safe
 		addConstraint((PieceConstraint) row);
 	}
 
 	private void addConstraint(final PieceConstraint constraint) {
-		stack.add(constraint);
+		stack.addFirst(constraint);
 	}
 
 	@Override
@@ -40,14 +39,21 @@ public class PolyminoSolutionSet implements SolutionSet {
 		return true;
 	}
 
-	private void printSolution() {
-		System.out.println("Solution:");
+	private int[][] board;
+
+	private void buildBoard() {
 		int rows = polymino.boardRows();
 		int cols = polymino.boardCols();
-		final int[][] board = new int[rows][cols];
+		if (board == null) {
+			board = new int[rows][cols];
+		}
 		for (int row = 0; row < rows; ++row) {
 			for (int col = 0; col < cols; ++col) {
-				if (polymino.board[row][col]) {
+				if (polymino.getBoard()[row][col]) {
+					// wall
+					board[row][col] = -2;
+				} else {
+					// unoccupied
 					board[row][col] = -1;
 				}
 			}
@@ -67,6 +73,13 @@ public class PolyminoSolutionSet implements SolutionSet {
 				}
 			}
 		}
+	}
+
+	private void printSolution() {
+		System.out.println("Solution:");
+		buildBoard();
+		int rows = polymino.boardRows();
+		int cols = polymino.boardCols();
 
 		for (int row = 0; row < rows; ++row) {
 			for (int col = 0; col < cols; ++col) {
@@ -83,5 +96,14 @@ public class PolyminoSolutionSet implements SolutionSet {
 	@Override
 	public int getNumberOfSolutionsFound() {
 		return numberOfSolutionsFound;
+	}
+
+	public Polymino getPolymino() {
+		return polymino;
+	}
+
+	public int getPieceIdAt(int row, int col) {
+		buildBoard();
+		return board[row][col];
 	}
 }

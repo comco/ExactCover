@@ -52,7 +52,7 @@ public final class ColumnNode {
 
 	public String dump() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("[%X]: ", id()));
+		sb.append(String.format("[%02X]: ", id()));
 		sb.append(base.dump());
 		for (Node node = base.top; node != base; node = node.top) {
 			sb.append(node.dump() + ' ');

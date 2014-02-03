@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.comco.exactcover.cli.ProgramState;
-import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -21,12 +20,15 @@ public class MainFrame extends JFrame {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-		SudokuModel sudokuModel = new SudokuModel(
-				(SudokuSolutionSet) programState.solutionSet);
-		programState.solutionSet = sudokuModel;
+		SolutionSetModel model = GuiFactory.INSTANCE.getModel(
+				programState.getPuzzleType(), programState.solutionSet);
+		programState.solutionSet = model;
 
-		mainPanel.add(new SudokuView(sudokuModel));
-		mainPanel.add(new SimulationControlView(sudokuModel));
+		JPanel view = GuiFactory.INSTANCE.getView(programState.getPuzzleType(),
+				model);
+
+		mainPanel.add(view);
+		mainPanel.add(new SimulationControlView(model));
 
 		add(mainPanel);
 		setVisible(true);

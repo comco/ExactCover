@@ -57,7 +57,7 @@ public final class Node {
 	}
 
 	public String dump() {
-		return String.format("(%X | %X ^%X | %X)", left.id(), id(),
-				column.id(), right.id());
+		return String.format("(%02X | %02X | %02X)", left.id(), id(),
+				right.id());
 	}
 }

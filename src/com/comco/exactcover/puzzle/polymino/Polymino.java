@@ -15,9 +15,10 @@ import com.comco.exactcover.puzzle.PuzzleAtom;
 public class Polymino extends Puzzle {
 	private int nextPieceId = 0;
 
-	final boolean[][] board;
+	private final boolean[][] board;
 	final List<Piece> pieces = new ArrayList<>();
 	final List<PuzzleAtom> pieceAtoms = new ArrayList<>();
+
 	final PositionAtom[][] atomsOnBoard;
 	final List<PieceConstraint> pieceConstraints = new ArrayList<>();
 
@@ -34,6 +35,10 @@ public class Polymino extends Puzzle {
 				}
 			}
 		}
+	}
+
+	public int getNumberOfPieces() {
+		return pieces.size();
 	}
 
 	public void addPiece(final Piece piece) {
@@ -64,7 +69,7 @@ public class Polymino extends Puzzle {
 			final PieceAtom pieceAtom, final boolean[][] mask) {
 		for (int row = 0; row < boardRows(); ++row) {
 			for (int col = 0; col < boardCols(); ++col) {
-				if (canPlaceAt(board, row, col, mask)) {
+				if (canPlaceAt(getBoard(), row, col, mask)) {
 					final PieceConstraint pieceConstraint = new PieceConstraint(
 							this, piece, pieceAtom, row, col, mask);
 					pieceConstraints.add(pieceConstraint);
@@ -82,14 +87,18 @@ public class Polymino extends Puzzle {
 	}
 
 	public int boardRows() {
-		return maskRows(board);
+		return maskRows(getBoard());
 	}
 
 	public int boardCols() {
-		return maskCols(board);
+		return maskCols(getBoard());
 	}
 
 	int nextPieceId() {
 		return nextPieceId++;
+	}
+
+	public boolean[][] getBoard() {
+		return board;
 	}
 }

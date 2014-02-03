@@ -1,8 +1,9 @@
-package com.comco.exactcover.gui;
+package com.comco.exactcover.gui.sudoku;
 
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
+import com.comco.exactcover.gui.SolutionSetModel;
 import com.comco.exactcover.puzzle.sudoku.SudokuConstraint;
 import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
 
@@ -31,11 +32,6 @@ public class SudokuModel extends SolutionSetModel {
 
 	public SudokuConstraint getPopped() {
 		return pop;
-	}
-
-	@Override
-	public void complete() {
-		super.complete();
 	}
 
 	public int getDigitAt(int row, int col) {

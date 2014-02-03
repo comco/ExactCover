@@ -16,7 +16,7 @@ public class SudokuSolutionSet implements SolutionSet {
 	}
 
 	private void addConstraint(SudokuConstraint constraint) {
-		stack.add(constraint);
+		stack.addFirst(constraint);
 	}
 
 	@Override

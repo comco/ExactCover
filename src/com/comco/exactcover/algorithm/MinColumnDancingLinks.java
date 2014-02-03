@@ -10,11 +10,6 @@ public class MinColumnDancingLinks extends BasicDancingLinks {
 		ColumnNode minNode = null;
 		int minSize = Integer.MAX_VALUE;
 		for (ColumnNode node = head.right; node != head; node = node.right) {
-
-			if (node.size != columnSize(node)) {
-				throw new IllegalAccessError();
-			}
-
 			if (minSize > node.size) {
 				minSize = node.size;
 				minNode = node;
@@ -23,6 +18,7 @@ public class MinColumnDancingLinks extends BasicDancingLinks {
 		return minNode;
 	}
 
+	@SuppressWarnings("unused")
 	private int columnSize(final ColumnNode columnNode) {
 		int size = 0;
 		for (Node node = columnNode.base.top; node != columnNode.base; node = node.top) {

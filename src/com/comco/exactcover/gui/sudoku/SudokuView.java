@@ -1,4 +1,4 @@
-package com.comco.exactcover.gui;
+package com.comco.exactcover.gui.sudoku;
 
 import java.awt.Color;
 import java.awt.Dimension;

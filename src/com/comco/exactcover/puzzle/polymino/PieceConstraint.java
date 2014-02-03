@@ -7,6 +7,13 @@ import com.comco.exactcover.puzzle.PuzzleAtom;
 import com.comco.exactcover.puzzle.PuzzleConstraint;
 import com.comco.exactcover.utils.MaskUtils;
 
+/**
+ * A constraint signifying that the following piece should be placed at the
+ * specified position.
+ * 
+ * @author comco
+ * 
+ */
 public class PieceConstraint extends PuzzleConstraint {
 	private final Polymino puzzle;
 	private final Piece piece;
@@ -25,24 +32,25 @@ public class PieceConstraint extends PuzzleConstraint {
 		this.boardCol = boardCol;
 		this.mask = mask;
 
-		// add atoms
+		// add the piece atom
 		atoms.add(pieceAtom);
 
+		// add the position atoms
 		for (int row = 0; row < pieceRows(); ++row) {
 			for (int col = 0; col < pieceCols(); ++col) {
 				if (mask[row][col]) {
 					int atRow = boardRow + row;
 					int atCol = boardCol + col;
-					if (puzzle.hasAtomAt(atRow, atCol)) {
-						addAtom(atRow, atCol);
-					}
+					tryAddAtom(atRow, atCol);
 				}
 			}
 		}
 	}
 
-	private void addAtom(int row, int col) {
-		atoms.add(puzzle.getAtomAt(row, col));
+	private void tryAddAtom(int row, int col) {
+		if (puzzle.hasAtomAt(row, col)) {
+			atoms.add(puzzle.getAtomAt(row, col));
+		}
 	}
 
 	@Override
@@ -77,5 +85,9 @@ public class PieceConstraint extends PuzzleConstraint {
 
 	public Piece getPiece() {
 		return piece;
+	}
+
+	public boolean[][] getMask() {
+		return mask;
 	}
 }

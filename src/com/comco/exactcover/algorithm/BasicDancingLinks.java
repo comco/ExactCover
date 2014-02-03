@@ -12,10 +12,14 @@ public class BasicDancingLinks implements Algorithm {
 
 	@Override
 	public void solve(final SolutionSet solutionSet) {
+		// System.out.println(head.dumpHead());
 		if (head.isUnit()) {
 			solutionSet.complete();
 		} else if (solutionSet.shouldContinue()) {
 			final ColumnNode column = selectColumn();
+			if (column.size == 0) {
+				return;
+			}
 			cover(column);
 			for (Node rowNode = column.base.top; rowNode != column.base; rowNode = rowNode.top) {
 				solutionSet.addRow(rowNode.row);
