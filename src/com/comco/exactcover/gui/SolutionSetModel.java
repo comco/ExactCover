@@ -125,4 +125,9 @@ public class SolutionSetModel extends Observable implements SolutionSet {
 	public int getNumberOfSolutionsFound() {
 		return base.getNumberOfSolutionsFound();
 	}
+
+	@Override
+	public int getExaminedNodes() {
+		return base.getExaminedNodes();
+	}
 }

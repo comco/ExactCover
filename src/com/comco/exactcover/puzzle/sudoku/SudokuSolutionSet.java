@@ -2,16 +2,15 @@ package com.comco.exactcover.puzzle.sudoku;
 
 import java.util.ArrayDeque;
 
+import com.comco.exactcover.AbstractSolutionSet;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.SolutionSet;
 
-public class SudokuSolutionSet implements SolutionSet {
+public class SudokuSolutionSet extends AbstractSolutionSet {
 	private final ArrayDeque<SudokuConstraint> stack = new ArrayDeque<>();
-	private int numberOfSolutionsFound = 0;
-
 	@Override
 	public void addRow(Row row) {
 		// cast is safe
+		super.addRow(row);
 		addConstraint((SudokuConstraint) row);
 	}
 
@@ -36,8 +35,8 @@ public class SudokuSolutionSet implements SolutionSet {
 
 	@Override
 	public void complete() {
+		super.complete();
 		printSolution(extractBoard());
-		++numberOfSolutionsFound;
 	}
 
 	private void printSolution(int[][] board) {
@@ -48,15 +47,5 @@ public class SudokuSolutionSet implements SolutionSet {
 			}
 			System.out.println();
 		}
-	}
-
-	@Override
-	public boolean shouldContinue() {
-		return true;
-	}
-
-	@Override
-	public int getNumberOfSolutionsFound() {
-		return numberOfSolutionsFound;
 	}
 }

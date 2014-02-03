@@ -1,11 +1,12 @@
 package com.comco.exactcover.cli;
 
 import com.comco.exactcover.algorithm.BasicDancingLinks;
+import com.comco.exactcover.algorithm.DegreeDancingLinks;
 import com.comco.exactcover.algorithm.MinColumnDancingLinks;
 
 public enum AlgorithmType {
 	BASIC("basic", BasicDancingLinks.class), MIN_COLUMN("min_column",
-			MinColumnDancingLinks.class);
+			MinColumnDancingLinks.class), DEGREE("degree", DegreeDancingLinks.class);
 
 	public final String name;
 	public final Class<? extends BasicDancingLinks> algorithmClass;

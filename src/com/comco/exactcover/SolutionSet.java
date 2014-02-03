@@ -11,4 +11,6 @@ public interface SolutionSet {
 	boolean shouldContinue();
 
 	int getNumberOfSolutionsFound();
+	
+	int getExaminedNodes();
 }

@@ -29,6 +29,10 @@ public final class ColumnNode {
 		left.right = right;
 		right.left = left;
 	}
+	
+	public boolean isAttached() {
+		return left.right == this;
+	}
 
 	public ColumnNode insertRight(final ColumnNode column) {
 		column.right = right;

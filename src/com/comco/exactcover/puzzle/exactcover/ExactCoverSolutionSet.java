@@ -2,13 +2,12 @@ package com.comco.exactcover.puzzle.exactcover;
 
 import java.util.ArrayDeque;
 
+import com.comco.exactcover.AbstractSolutionSet;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.SolutionSet;
 
-public class ExactCoverSolutionSet implements SolutionSet {
+public class ExactCoverSolutionSet extends AbstractSolutionSet {
 	private final ExactCover exactCover;
 	private final ArrayDeque<ExactCoverConstraint> stack = new ArrayDeque<>();
-	private int numberOfSolutionsFound = 0;
 
 	public ExactCoverSolutionSet(ExactCover exactCover) {
 		this.exactCover = exactCover;
@@ -17,6 +16,7 @@ public class ExactCoverSolutionSet implements SolutionSet {
 	@Override
 	public void addRow(Row row) {
 		// cast is safe
+		super.addRow(row);
 		addConstraint((ExactCoverConstraint) row);
 	}
 
@@ -31,25 +31,15 @@ public class ExactCoverSolutionSet implements SolutionSet {
 
 	@Override
 	public void complete() {
+		super.complete();
 		System.out.println("Solution found:");
 		for (ExactCoverConstraint set : stack) {
 			System.out.format("%d ", set.getRow());
 		}
 		System.out.println();
-		++numberOfSolutionsFound;
-	}
-
-	@Override
-	public boolean shouldContinue() {
-		return true;
 	}
 
 	public ExactCover getExactCover() {
 		return exactCover;
-	}
-
-	@Override
-	public int getNumberOfSolutionsFound() {
-		return numberOfSolutionsFound;
 	}
 }
