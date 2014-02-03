@@ -29,7 +29,10 @@ public class ProgramState {
 		System.out.println("Done!");
 		System.out.format("Total number of solutions found: %d\n",
 				solutionSet.getNumberOfSolutionsFound());
-		System.out.format("Total examined nodes: %d\n", solutionSet.getExaminedNodes());
+		System.out.format("Total examined nodes: %d\n",
+				solutionSet.getExaminedNodes());
+		System.out.format("Total examined columns: %d\n",
+				solutionSet.getExaminedColumns());
 	}
 
 	public InputStream getInput() {

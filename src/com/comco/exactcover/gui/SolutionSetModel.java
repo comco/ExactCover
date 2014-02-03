@@ -7,6 +7,7 @@ import javax.swing.SpinnerNumberModel;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.SolutionSet;
+import com.comco.exactcover.algorithm.ColumnNode;
 
 public class SolutionSetModel extends Observable implements SolutionSet {
 	private final SolutionSet base;
@@ -129,5 +130,20 @@ public class SolutionSetModel extends Observable implements SolutionSet {
 	@Override
 	public int getExaminedNodes() {
 		return base.getExaminedNodes();
+	}
+
+	@Override
+	public void addColumn(ColumnNode column) {
+		base.addColumn(column);
+	}
+
+	@Override
+	public void popColumn() {
+		base.popColumn();
+	}
+
+	@Override
+	public int getExaminedColumns() {
+		return base.getExaminedColumns();
 	}
 }

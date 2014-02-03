@@ -5,39 +5,43 @@ public class DegreeDancingLinks extends BasicDancingLinks {
 	public DegreeDancingLinks(final ColumnNode head) {
 		super(head);
 	}
-	
+
 	@Override
 	protected ColumnNode selectColumn() {
-		ColumnNode minNode = null;
+		ColumnNode resultNode = null;
 		int minSize = Integer.MAX_VALUE;
 		int ties = 0;
 		for (ColumnNode node = head.right; node != head; node = node.right) {
-			if (minSize > node.size) {
+			if (node.size < minSize) {
 				minSize = node.size;
-				minNode = node;
+				resultNode = node;
 				ties = 1;
-			} else if (minSize == node.size) {
+			} else if (node.size == minSize) {
 				++ties;
 			}
 		}
-		
+
 		if (minSize > 1 && ties > 1) {
 			// break the tie using the degree heuristic
-			int maxDegree = Integer.MAX_VALUE;
+			// System.out.format("tie: %d %d\n", minSize, ties);
+			int maxDegree = Integer.MIN_VALUE;
 			for (ColumnNode node = head.right; node != head; node = node.right) {
 				if (node.size == minSize) {
 					final int degree = degree(node);
-					if (degree < maxDegree) {
-						System.out.println("opt");
+					if (degree > maxDegree) {
+						// System.out.print("+");
 						maxDegree = degree;
-						minNode = node;
+						resultNode = node;
+						// } else if (degree == maxDegree) {
+						// System.out.print("=");
 					}
 				}
 			}
+			// System.out.println();
 		}
-		return minNode;
+		return resultNode;
 	}
-	
+
 	private int degree(final ColumnNode node) {
 		int degree = 0;
 		for (Node at = node.base.top; at != node.base; at = at.top) {
@@ -45,11 +49,11 @@ public class DegreeDancingLinks extends BasicDancingLinks {
 		}
 		return degree;
 	}
-	
+
 	private int degree(final Node node) {
 		int degree = 0;
 		for (Node at = node.right; at != node; at = at.right) {
-			if (at.column.isAttached()) {
+			if (node.column.isAttached()) {
 				++degree;
 			}
 		}

@@ -29,7 +29,7 @@ public final class ColumnNode {
 		left.right = right;
 		right.left = left;
 	}
-	
+
 	public boolean isAttached() {
 		return left.right == this;
 	}

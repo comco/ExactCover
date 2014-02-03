@@ -20,6 +20,7 @@ public class BasicDancingLinks implements Algorithm {
 			if (column.size == 0) {
 				return;
 			}
+			solutionSet.addColumn(column);
 			cover(column);
 			for (Node rowNode = column.base.top; rowNode != column.base; rowNode = rowNode.top) {
 				solutionSet.addRow(rowNode.row);
@@ -35,10 +36,16 @@ public class BasicDancingLinks implements Algorithm {
 				solutionSet.popRow();
 			}
 			uncover(column);
+			solutionSet.popColumn();
 		}
 	}
 
 	protected ColumnNode selectColumn() {
+		for (ColumnNode node = head.right; node != head; node = node.right) {
+			if (node.size <= 1) {
+				return node;
+			}
+		}
 		return head.right;
 	}
 
