@@ -28,15 +28,18 @@ public class Program {
 
 			ProgramState state = new ProgramState();
 			state.input = System.in;
-			state.puzzleType = PuzzleType.getType(cmd.getOptionValue('p'));
-			state.algorithmType = AlgorithmType
-					.getType(cmd.getOptionValue('a'));
-			state.build();
+			String p = cmd.getOptionValue('p');
+			if (p != null) {
+				state.puzzleType = PuzzleType.getType(p);
+				state.algorithmType = AlgorithmType.getType(cmd
+						.getOptionValue('a'));
+				state.build();
 
-			if (cmd.hasOption('g')) {
-				buildGui(state);
-			} else {
-				state.solve();
+				if (cmd.hasOption('g')) {
+					buildGui(state);
+				} else {
+					state.solve();
+				}
 			}
 		} catch (ParseException e) {
 			LOGGER.severe("cannot parse command line.");
@@ -46,8 +49,10 @@ public class Program {
 
 	private static Options buildOptions() {
 		Option help = new Option("h", "help", false, "help");
-		Option puzzle = new Option("p", "puzzle", true, "puzzle");
-		Option algorithm = new Option("a", "algorithm", true, "algorithm");
+		Option puzzle = new Option("p", "puzzle", true,
+				"puzzle: cover, polymino, queens, sudoku");
+		Option algorithm = new Option("a", "algorithm", true,
+				"algorithm: naive, basic, min_column, degree");
 		Option gui = new Option("g", "gui", false, "start a gui");
 
 		Options options = new Options();
@@ -64,13 +69,6 @@ public class Program {
 	}
 
 	private static void buildGui(final ProgramState state) {
-		// SwingUtilities.invokeLater(new Runnable() {
-		// @Override
-		// public void run() {
-		// MainFrame frame = new MainFrame(state);
-		// frame.setVisible(true);
-		// }
-		// });
 		MainFrame frame = new MainFrame(state);
 		frame.setVisible(true);
 	}

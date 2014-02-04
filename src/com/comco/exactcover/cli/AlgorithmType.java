@@ -3,10 +3,13 @@ package com.comco.exactcover.cli;
 import com.comco.exactcover.algorithm.BasicDancingLinks;
 import com.comco.exactcover.algorithm.DegreeDancingLinks;
 import com.comco.exactcover.algorithm.MinColumnDancingLinks;
+import com.comco.exactcover.algorithm.NaiveDancingLinks;
 
 public enum AlgorithmType {
-	BASIC("basic", BasicDancingLinks.class), MIN_COLUMN("min_column",
-			MinColumnDancingLinks.class), DEGREE("degree", DegreeDancingLinks.class);
+	NAIVE("naive", NaiveDancingLinks.class), BASIC("basic",
+			BasicDancingLinks.class), MIN_COLUMN("min_column",
+			MinColumnDancingLinks.class), DEGREE("degree",
+			DegreeDancingLinks.class);
 
 	public final String name;
 	public final Class<? extends BasicDancingLinks> algorithmClass;
