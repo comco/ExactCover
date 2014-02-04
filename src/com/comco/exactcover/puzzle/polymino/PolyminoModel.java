@@ -1,11 +1,9 @@
-package com.comco.exactcover.gui.polymino;
+package com.comco.exactcover.puzzle.polymino;
 
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.gui.SolutionSetModel;
-import com.comco.exactcover.puzzle.polymino.PieceConstraint;
-import com.comco.exactcover.puzzle.polymino.PolyminoSolutionSet;
 
 public class PolyminoModel extends SolutionSetModel {
 	private final PolyminoSolutionSet solutionSet;

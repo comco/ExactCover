@@ -1,4 +1,4 @@
-package com.comco.exactcover.gui.sudoku;
+package com.comco.exactcover.puzzle.sudoku;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.comco.exactcover.gui.MainFrame;
-import com.comco.exactcover.puzzle.sudoku.SudokuConstraint;
 
 public class SudokuView extends JPanel {
 	private static final long serialVersionUID = 1L;

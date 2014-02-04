@@ -1,4 +1,4 @@
-package com.comco.exactcover.gui.queens;
+package com.comco.exactcover.puzzle.queens;
 
 import java.awt.Color;
 import java.awt.Dimension;

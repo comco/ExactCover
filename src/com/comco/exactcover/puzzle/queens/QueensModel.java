@@ -1,7 +1,6 @@
-package com.comco.exactcover.gui.queens;
+package com.comco.exactcover.puzzle.queens;
 
 import com.comco.exactcover.gui.SolutionSetModel;
-import com.comco.exactcover.puzzle.queens.QueensSolutionSet;
 
 public class QueensModel extends SolutionSetModel {
 	private final QueensSolutionSet solutionSet;

@@ -1,11 +1,9 @@
-package com.comco.exactcover.gui.sudoku;
+package com.comco.exactcover.puzzle.sudoku;
 
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.gui.SolutionSetModel;
-import com.comco.exactcover.puzzle.sudoku.SudokuConstraint;
-import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
 
 public class SudokuModel extends SolutionSetModel {
 	private final SudokuSolutionSet solutionSet;
