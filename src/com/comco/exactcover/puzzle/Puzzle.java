@@ -13,7 +13,12 @@ public abstract class Puzzle {
 
 	private final List<PuzzleAtom> atoms = new ArrayList<PuzzleAtom>();
 	private final List<PuzzleConstraint> constraints = new ArrayList<PuzzleConstraint>();
+	private ColumnNode[] columnNodes;
 
+	public ColumnNode[] getColumnNodes() {
+		return columnNodes;
+	}
+	
 	public Iterable<PuzzleAtom> allAtoms() {
 		return atoms;
 	}
@@ -74,7 +79,7 @@ public abstract class Puzzle {
 		ColumnNode tail = head;
 
 		// create columns
-		ColumnNode[] columnNodes = new ColumnNode[atoms.size()];
+		columnNodes = new ColumnNode[atoms.size()];
 		int i = 0;
 		for (final PuzzleAtom atom : atoms) {
 			tail = tail.createRight(atom);

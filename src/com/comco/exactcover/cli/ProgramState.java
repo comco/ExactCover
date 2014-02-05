@@ -1,16 +1,20 @@
 package com.comco.exactcover.cli;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 
 import com.comco.exactcover.Algorithm;
 import com.comco.exactcover.SolutionSet;
+import com.comco.exactcover.algorithm.GraphvizDrawer;
 import com.comco.exactcover.puzzle.Puzzle;
 
 public class ProgramState {
 	InputStream input;
 	PuzzleType puzzleType;
 	AlgorithmType algorithmType;
-
+	
+	public boolean generateNetwork = false;
 	public Puzzle puzzle;
 	public SolutionSet solutionSet;
 	public Algorithm algorithm;
@@ -25,6 +29,9 @@ public class ProgramState {
 	}
 
 	public void solve() {
+		if (generateNetwork) {
+			generateNetworkToFile("C://network.dot");
+		}
 		algorithm.solve(solutionSet);
 		System.out.println("Done!");
 		System.out.format("Total number of solutions found: %d\n",
@@ -33,6 +40,15 @@ public class ProgramState {
 				solutionSet.getExaminedNodes());
 		System.out.format("Total examined columns: %d\n",
 				solutionSet.getExaminedColumns());
+	}
+
+	private void generateNetworkToFile(String filename) {
+		try (PrintWriter out = new PrintWriter(filename)) {
+			out.write(new GraphvizDrawer().columnsToGraphviz(puzzle.getColumnNodes()));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public InputStream getInput() {

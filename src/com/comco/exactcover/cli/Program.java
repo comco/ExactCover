@@ -33,6 +33,9 @@ public class Program {
 				state.puzzleType = PuzzleType.getType(p);
 				state.algorithmType = AlgorithmType.getType(cmd
 						.getOptionValue('a'));
+				if (cmd.hasOption('n')) {
+					state.generateNetwork = true;
+				}
 				state.build();
 
 				if (cmd.hasOption('g')) {
@@ -42,7 +45,7 @@ public class Program {
 				}
 			}
 		} catch (ParseException e) {
-			LOGGER.severe("cannot parse command line.");
+			LOGGER.severe("cannot parse command line: " + e.getMessage());
 		}
 
 	}
@@ -54,12 +57,14 @@ public class Program {
 		Option algorithm = new Option("a", "algorithm", true,
 				"algorithm: naive, basic, min_column, degree");
 		Option gui = new Option("g", "gui", false, "start a gui");
-
+		Option network = new Option("n", "network", false, "save an image of the network");
+		
 		Options options = new Options();
 		options.addOption(help);
 		options.addOption(puzzle);
 		options.addOption(algorithm);
 		options.addOption(gui);
+		options.addOption(network);
 		return options;
 	}
 
