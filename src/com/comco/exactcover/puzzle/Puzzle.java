@@ -3,6 +3,7 @@ package com.comco.exactcover.puzzle;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.comco.exactcover.Network;
 import com.comco.exactcover.algorithm.ColumnNode;
 import com.comco.exactcover.algorithm.Node;
 import com.comco.exactcover.utils.MaskUtils;
@@ -13,12 +14,7 @@ public abstract class Puzzle {
 
 	private final List<PuzzleAtom> atoms = new ArrayList<PuzzleAtom>();
 	private final List<PuzzleConstraint> constraints = new ArrayList<PuzzleConstraint>();
-	private ColumnNode[] columnNodes;
 
-	public ColumnNode[] getColumnNodes() {
-		return columnNodes;
-	}
-	
 	public Iterable<PuzzleAtom> allAtoms() {
 		return atoms;
 	}
@@ -73,13 +69,13 @@ public abstract class Puzzle {
 		}
 	}
 
-	public ColumnNode toNetwork() {
+	public Network toNetwork() {
 		// create head
 		final ColumnNode head = ColumnNode.createHeadColumnNode();
 		ColumnNode tail = head;
 
 		// create columns
-		columnNodes = new ColumnNode[atoms.size()];
+		ColumnNode[] columnNodes = new ColumnNode[atoms.size()];
 		int i = 0;
 		for (final PuzzleAtom atom : atoms) {
 			tail = tail.createRight(atom);
@@ -102,6 +98,6 @@ public abstract class Puzzle {
 				}
 			}
 		}
-		return head;
+		return new Network(head, columnNodes);
 	}
 }

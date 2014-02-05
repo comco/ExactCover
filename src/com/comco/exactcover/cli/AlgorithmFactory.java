@@ -13,16 +13,16 @@ public class AlgorithmFactory {
 	}
 
 	public BasicDancingLinks get(final AlgorithmType type, final Puzzle puzzle) {
-		ColumnNode network = puzzle.toNetwork();
+		ColumnNode head = puzzle.toNetwork().head;
 		switch (type) {
 		case NAIVE:
-			return new NaiveDancingLinks(network);
+			return new NaiveDancingLinks(head);
 		case BASIC:
-			return new BasicDancingLinks(network);
+			return new BasicDancingLinks(head);
 		case MIN_COLUMN:
-			return new MinColumnDancingLinks(network);
+			return new MinColumnDancingLinks(head);
 		case DEGREE:
-			return new DegreeDancingLinks(network);
+			return new DegreeDancingLinks(head);
 		default:
 			throw new IllegalArgumentException("Algorithm type: " + type
 					+ " is unsupported.");

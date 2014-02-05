@@ -13,7 +13,7 @@ public class ProgramState {
 	InputStream input;
 	PuzzleType puzzleType;
 	AlgorithmType algorithmType;
-	
+
 	public boolean generateNetwork = false;
 	public Puzzle puzzle;
 	public SolutionSet solutionSet;
@@ -30,7 +30,7 @@ public class ProgramState {
 
 	public void solve() {
 		if (generateNetwork) {
-			generateNetworkToFile("C://network.dot");
+			generateNetworkToFile("C:/Users/comco/network.dot");
 		}
 		algorithm.solve(solutionSet);
 		System.out.println("Done!");
@@ -42,9 +42,9 @@ public class ProgramState {
 				solutionSet.getExaminedColumns());
 	}
 
-	private void generateNetworkToFile(String filename) {
+	public void generateNetworkToFile(String filename) {
 		try (PrintWriter out = new PrintWriter(filename)) {
-			out.write(new GraphvizDrawer().columnsToGraphviz(puzzle.getColumnNodes()));
+			out.write(new GraphvizDrawer().columnsToGraphviz(puzzle.toNetwork()));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

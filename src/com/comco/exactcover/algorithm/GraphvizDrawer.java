@@ -1,59 +1,78 @@
 package com.comco.exactcover.algorithm;
 
+import com.comco.exactcover.Network;
+
 public class GraphvizDrawer {
-	
+
 	private final StringBuilder sb = new StringBuilder();
-	
+
 	public GraphvizDrawer() {
 	}
-	
+
 	void beginHeader() {
 		sb.append("digraph G {\n");
 	}
-	
+
 	void endHeader() {
 		sb.append("}\n");
 	}
-	
-	public String columnsToGraphviz(ColumnNode[] columns) {
-		beginHeader(); 
+
+	int getColumn(Node node) {
+		return node.column.column.getColumnId();
+	}
+
+	public String columnsToGraphviz(Network network) {
+		beginHeader();
 		{
 			// command: dot -Tpng -Kfdp network.dot -o network.png
-			ColumnNode head = columns[0].left;
-			
-			addHead(head);
-			int pos = 1;
-			for (ColumnNode column : columns) {
-				addColumnNode(column, pos);
-				++pos;
-			}
-			
-			addEdge(head, head.right);
-			for (ColumnNode column : columns) {
-				if (column.right != head) {
-					addEdge(column, column.right);
+			int pos = 0;
+			for (ColumnNode column : network.columnNodes) {
+				addHead(column.base, column.size, pos);
+				for (Node node = column.base.top; node != column.base; node = node.top) {
+					addNode(node, pos);
 				}
-				addEdge(column, column.left);
+				pos++;
+			}
+
+			for (ColumnNode column : network.columnNodes) {
+				addEdge(column.base, "B", column.base.top, "L");
+				for (Node node = column.base.top; node != column.base; node = node.top) {
+					if (getColumn(node.left) < getColumn(node)) {
+						addEdge(node, "L", node.left, "T");
+					}
+					if (getColumn(node) < getColumn(node.right)) {
+						addEdge(node, "R", node.right, "B");
+					}
+					addEdge(node, "T", node.bottom, "R");
+					if (node.top != column.base) {
+						addEdge(node, "B", node.top, "L");
+					}
+				}
 			}
 		}
 		endHeader();
 		return sb.toString();
 	}
-	
-	String label(ColumnNode column) {
-		return String.format("_%d", System.identityHashCode(column));
+
+	private void addNode(Node node, int pos) {
+		sb.append(String
+				.format("%s [shape=record, label=\"{<L> L|<B> B}|{<T> T|<R> R}\", pos=\"%d,%d!\"];\n",
+						label(node), pos, -(node.row.getRowId() + 1)));
 	}
 
-	private void addHead(ColumnNode head) {
-		sb.append(String.format("%s [label = \"head\", pos=\"0,0!\", shape=box];\n", label(head)));
+	String label(Node node) {
+		return String.format("_%d", System.identityHashCode(node));
 	}
 
-	private void addColumnNode(ColumnNode column, int position) {
-		sb.append(String.format("%s [label = \"%d\", pos=\"%d,0!\", shape=box];\n", label(column), column.size, position));
+	private void addHead(Node head, int size, int pos) {
+		sb.append(String
+				.format("%s [shape=record, label=\"{<L> L|<B> B}|{<T> T|<R> R}\", pos=\"%d,0!\"];\n",
+						label(head), pos));
 	}
-	
-	void addEdge(ColumnNode a, ColumnNode b) {
-		sb.append(String.format("%s -> %s;\n", label(a), label(b)));
+
+	void addEdge(Node a, String aa, Node b, String bb) {
+		sb.append(String
+				.format("%s:%s -> %s:%s;\n", label(a), aa, label(b), bb));
 	}
-	
+
 }

@@ -11,4 +11,9 @@ public abstract class PuzzleAtom implements Column {
 	}
 
 	public abstract Puzzle puzzle();
+
+	@Override
+	public int getColumnId() {
+		return id;
+	}
 }

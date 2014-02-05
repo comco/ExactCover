@@ -13,4 +13,9 @@ public abstract class PuzzleConstraint implements Row {
 	public abstract Puzzle puzzle();
 
 	public abstract Iterable<? extends PuzzleAtom> atoms();
+
+	@Override
+	public int getRowId() {
+		return id;
+	}
 }
