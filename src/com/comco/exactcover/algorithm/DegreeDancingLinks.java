@@ -23,21 +23,16 @@ public class DegreeDancingLinks extends BasicDancingLinks {
 
 		if (minSize > 1 && ties > 1) {
 			// break the tie using the degree heuristic
-			// System.out.format("tie: %d %d\n", minSize, ties);
 			int maxDegree = Integer.MIN_VALUE;
 			for (ColumnNode node = head.right; node != head; node = node.right) {
 				if (node.size == minSize) {
 					final int degree = degree(node);
 					if (degree > maxDegree) {
-						// System.out.print("+");
 						maxDegree = degree;
 						resultNode = node;
-						// } else if (degree == maxDegree) {
-						// System.out.print("=");
 					}
 				}
 			}
-			// System.out.println();
 		}
 		return resultNode;
 	}
@@ -54,7 +49,7 @@ public class DegreeDancingLinks extends BasicDancingLinks {
 		int degree = 0;
 		for (Node at = node.right; at != node; at = at.right) {
 			if (node.column.isAttached()) {
-				++degree;
+				degree += node.column.size;
 			}
 		}
 		return degree;
