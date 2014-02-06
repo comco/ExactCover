@@ -4,12 +4,14 @@ import java.util.ArrayDeque;
 
 import com.comco.exactcover.AbstractSolutionSet;
 import com.comco.exactcover.Row;
+import com.comco.exactcover.cli.ProgramState;
 
 public class ExactCoverSolutionSet extends AbstractSolutionSet {
 	private final ExactCover exactCover;
 	private final ArrayDeque<ExactCoverConstraint> stack = new ArrayDeque<>();
 
-	public ExactCoverSolutionSet(ExactCover exactCover) {
+	public ExactCoverSolutionSet(ExactCover exactCover, ProgramState state) {
+		super(state);
 		this.exactCover = exactCover;
 	}
 
@@ -32,6 +34,12 @@ public class ExactCoverSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
+		if (!quiet) {
+			printSolution();
+		}
+	}
+
+	private void printSolution() {
 		System.out.println("Solution found:");
 		for (ExactCoverConstraint set : stack) {
 			System.out.format("%d ", set.getRow());

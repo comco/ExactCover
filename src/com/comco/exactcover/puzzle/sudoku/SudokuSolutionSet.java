@@ -4,8 +4,13 @@ import java.util.ArrayDeque;
 
 import com.comco.exactcover.AbstractSolutionSet;
 import com.comco.exactcover.Row;
+import com.comco.exactcover.cli.ProgramState;
 
 public class SudokuSolutionSet extends AbstractSolutionSet {
+	public SudokuSolutionSet(ProgramState state) {
+		super(state);
+	}
+
 	private final ArrayDeque<SudokuConstraint> stack = new ArrayDeque<>();
 	@Override
 	public void addRow(Row row) {
@@ -36,7 +41,9 @@ public class SudokuSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
-		printSolution(extractBoard());
+		if (!quiet) {
+			printSolution(extractBoard());
+		}
 	}
 
 	private void printSolution(int[][] board) {

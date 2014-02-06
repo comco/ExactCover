@@ -4,12 +4,14 @@ import java.util.ArrayDeque;
 
 import com.comco.exactcover.AbstractSolutionSet;
 import com.comco.exactcover.Row;
+import com.comco.exactcover.cli.ProgramState;
 
 public class QueensSolutionSet extends AbstractSolutionSet {
 	private final Queens queens;
 	private final ArrayDeque<QueensConstraint> stack = new ArrayDeque<>();
 
-	public QueensSolutionSet(final Queens queens) {
+	public QueensSolutionSet(final Queens queens, final ProgramState state) {
+		super(state);
 		this.queens = queens;
 	}
 
@@ -31,7 +33,9 @@ public class QueensSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
-		printSolution();
+		if (!quiet) {
+			printSolution();
+		}
 	}
 
 	private void printSolution() {

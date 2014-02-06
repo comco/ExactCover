@@ -42,17 +42,17 @@ public final class PuzzleFactory {
 
 	public static PuzzleFactory INSTANCE = new PuzzleFactory();
 
-	public SolutionSet getSolutionSet(PuzzleType type, Puzzle puzzle) {
+	public SolutionSet getSolutionSet(ProgramState state, PuzzleType type, Puzzle puzzle) {
 		if (puzzle != null && type.puzzleClass.equals(puzzle.getClass())) {
 			switch (type) {
 			case COVER:
-				return new ExactCoverSolutionSet((ExactCover) puzzle);
+				return new ExactCoverSolutionSet((ExactCover) puzzle, state);
 			case SUDOKU:
-				return new SudokuSolutionSet();
+				return new SudokuSolutionSet(state);
 			case POLYMINO:
-				return new PolyminoSolutionSet((Polymino) puzzle);
+				return new PolyminoSolutionSet((Polymino) puzzle, state);
 			case QUEENS:
-				return new QueensSolutionSet((Queens) puzzle);
+				return new QueensSolutionSet((Queens) puzzle, state);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for solution set.");

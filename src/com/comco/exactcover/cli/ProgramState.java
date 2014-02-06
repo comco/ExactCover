@@ -18,13 +18,14 @@ public class ProgramState {
 	public Puzzle puzzle;
 	public SolutionSet solutionSet;
 	public Algorithm algorithm;
-
+	public boolean quiet;
+	
 	public ProgramState() {
 	}
 
 	public void build() {
 		puzzle = PuzzleFactory.INSTANCE.getPuzzleReader(puzzleType).read(input);
-		solutionSet = PuzzleFactory.INSTANCE.getSolutionSet(puzzleType, puzzle);
+		solutionSet = PuzzleFactory.INSTANCE.getSolutionSet(this, puzzleType, puzzle);
 		algorithm = AlgorithmFactory.INSTANCE.get(algorithmType, puzzle);
 	}
 
