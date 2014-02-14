@@ -14,7 +14,6 @@ public class SudokuAtom extends PuzzleAtom {
 		puzzle.getBoardConstraint(row, col, val).addAtom(this);
 	}
 
-	@Override
 	public Sudoku puzzle() {
 		return puzzle;
 	}

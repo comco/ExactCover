@@ -1,12 +1,9 @@
-package com.comco.exactcover.algorithm;
+package com.comco.exactcover.dancinglinks;
 
 import com.comco.exactcover.Row;
 
 public final class Node {
-	Node left;
-	Node right;
-	Node bottom;
-	Node top;
+	Node left, right, bottom, top;
 	final ColumnNode column;
 	final Row row;
 
@@ -59,5 +56,9 @@ public final class Node {
 	public String dump() {
 		return String.format("(%02X | %02X | %02X)", left.id(), id(),
 				right.id());
+	}
+
+	static Node createBaseNode(final ColumnNode column) {
+		return new Node(column, null);
 	}
 }

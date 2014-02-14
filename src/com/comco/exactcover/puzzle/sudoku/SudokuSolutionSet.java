@@ -2,16 +2,12 @@ package com.comco.exactcover.puzzle.sudoku;
 
 import java.util.ArrayDeque;
 
-import com.comco.exactcover.AbstractSolutionSet;
+import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.cli.ProgramState;
 
-public class SudokuSolutionSet extends AbstractSolutionSet {
-	public SudokuSolutionSet(ProgramState state) {
-		super(state);
-	}
-
+public class SudokuSolutionSet extends AbstractSolutionKnitter {
 	private final ArrayDeque<SudokuConstraint> stack = new ArrayDeque<>();
+
 	@Override
 	public void addRow(Row row) {
 		// cast is safe
@@ -41,9 +37,7 @@ public class SudokuSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
-		if (!quiet) {
-			printSolution(extractBoard());
-		}
+		printSolution(extractBoard());
 	}
 
 	private void printSolution(int[][] board) {

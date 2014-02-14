@@ -1,6 +1,6 @@
-package com.comco.exactcover.algorithm;
+package com.comco.exactcover.dancinglinks;
 
-public class DegreeDancingLinks extends BasicDancingLinks {
+public class DegreeDancingLinks extends AbstractDancingLinks {
 
 	public DegreeDancingLinks(final ColumnNode head) {
 		super(head);

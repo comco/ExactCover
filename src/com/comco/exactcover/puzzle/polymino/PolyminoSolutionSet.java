@@ -2,16 +2,14 @@ package com.comco.exactcover.puzzle.polymino;
 
 import java.util.ArrayDeque;
 
-import com.comco.exactcover.AbstractSolutionSet;
+import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.cli.ProgramState;
 
-public class PolyminoSolutionSet extends AbstractSolutionSet {
+public class PolyminoSolutionSet extends AbstractSolutionKnitter {
 	private final Polymino polymino;
 	private final ArrayDeque<PieceConstraint> stack = new ArrayDeque<>();
 
-	public PolyminoSolutionSet(final Polymino polymino, final ProgramState state) {
-		super(state);
+	public PolyminoSolutionSet(final Polymino polymino) {
 		this.polymino = polymino;
 	}
 
@@ -33,9 +31,7 @@ public class PolyminoSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
-		if (!quiet) {
-			printSolution();
-		}
+		printSolution();
 	}
 
 	private int[][] board;

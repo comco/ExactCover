@@ -3,9 +3,9 @@ package com.comco.exactcover.puzzle.sudoku;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comco.exactcover.puzzle.PuzzleConstraint;
+import com.comco.exactcover.puzzle.PuzzlePart;
 
-public class SudokuConstraint extends PuzzleConstraint {
+public class SudokuConstraint extends PuzzlePart {
 	private final Sudoku puzzle;
 	private final int row;
 	private final int col;
@@ -23,7 +23,7 @@ public class SudokuConstraint extends PuzzleConstraint {
 	}
 
 	@Override
-	public Iterable<SudokuAtom> atoms() {
+	public List<SudokuAtom> atoms() {
 		return atoms;
 	}
 
@@ -43,7 +43,6 @@ public class SudokuConstraint extends PuzzleConstraint {
 		return val;
 	}
 
-	@Override
 	public Sudoku puzzle() {
 		return puzzle;
 	}

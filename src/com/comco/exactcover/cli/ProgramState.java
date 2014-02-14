@@ -4,10 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
-import com.comco.exactcover.Algorithm;
-import com.comco.exactcover.SolutionSet;
-import com.comco.exactcover.algorithm.GraphvizDrawer;
+import com.comco.exactcover.Problem;
+import com.comco.exactcover.SolutionKnitter;
+import com.comco.exactcover.dancinglinks.GraphvizDrawer;
 import com.comco.exactcover.puzzle.Puzzle;
+import com.comco.exactcover.puzzle.PuzzleConvertor;
 
 public class ProgramState {
 	InputStream input;
@@ -16,16 +17,17 @@ public class ProgramState {
 
 	public boolean generateNetwork = false;
 	public Puzzle puzzle;
-	public SolutionSet solutionSet;
-	public Algorithm algorithm;
+	public SolutionKnitter solutionSet;
+	public Problem algorithm;
 	public boolean quiet;
-	
+
 	public ProgramState() {
 	}
 
 	public void build() {
 		puzzle = PuzzleFactory.INSTANCE.getPuzzleReader(puzzleType).read(input);
-		solutionSet = PuzzleFactory.INSTANCE.getSolutionSet(this, puzzleType, puzzle);
+		solutionSet = PuzzleFactory.INSTANCE.getSolutionSet(this, puzzleType,
+				puzzle);
 		algorithm = AlgorithmFactory.INSTANCE.get(algorithmType, puzzle);
 	}
 
@@ -36,16 +38,18 @@ public class ProgramState {
 		algorithm.solve(solutionSet);
 		System.out.println("Done!");
 		System.out.format("Total number of solutions found: %d\n",
-				solutionSet.getNumberOfSolutionsFound());
+				solutionSet.foundSolutionsCount());
 		System.out.format("Total examined nodes: %d\n",
-				solutionSet.getExaminedNodes());
+				solutionSet.addedRowsCount());
 		System.out.format("Total examined columns: %d\n",
-				solutionSet.getExaminedColumns());
+				solutionSet.addedColsCount());
 	}
 
 	public void generateNetworkToFile(String filename) {
 		try (PrintWriter out = new PrintWriter(filename)) {
-			out.write(new GraphvizDrawer().columnsToGraphviz(puzzle.toNetwork()));
+			out.write(new GraphvizDrawer()
+					.columnsToGraphviz(PuzzleConvertor.INSTANCE
+							.convertToNetwork(puzzle)));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

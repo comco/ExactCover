@@ -1,6 +1,6 @@
 package com.comco.exactcover.cli;
 
-import com.comco.exactcover.SolutionSet;
+import com.comco.exactcover.SolutionKnitter;
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCover;
@@ -42,17 +42,18 @@ public final class PuzzleFactory {
 
 	public static PuzzleFactory INSTANCE = new PuzzleFactory();
 
-	public SolutionSet getSolutionSet(ProgramState state, PuzzleType type, Puzzle puzzle) {
+	public SolutionKnitter getSolutionSet(ProgramState state, PuzzleType type,
+			Puzzle puzzle) {
 		if (puzzle != null && type.puzzleClass.equals(puzzle.getClass())) {
 			switch (type) {
 			case COVER:
-				return new ExactCoverSolutionSet((ExactCover) puzzle, state);
+				return new ExactCoverSolutionSet((ExactCover) puzzle);
 			case SUDOKU:
-				return new SudokuSolutionSet(state);
+				return new SudokuSolutionSet();
 			case POLYMINO:
-				return new PolyminoSolutionSet((Polymino) puzzle, state);
+				return new PolyminoSolutionSet((Polymino) puzzle);
 			case QUEENS:
-				return new QueensSolutionSet((Queens) puzzle, state);
+				return new QueensSolutionSet((Queens) puzzle);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for solution set.");

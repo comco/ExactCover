@@ -11,7 +11,6 @@ public class QueensAtom extends PuzzleAtom {
 		this.puzzle = puzzle;
 	}
 
-	@Override
 	public Puzzle puzzle() {
 		return puzzle;
 	}

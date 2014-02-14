@@ -3,9 +3,9 @@ package com.comco.exactcover.puzzle.exactcover;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comco.exactcover.puzzle.PuzzleConstraint;
+import com.comco.exactcover.puzzle.PuzzlePart;
 
-public class ExactCoverConstraint extends PuzzleConstraint {
+public class ExactCoverConstraint extends PuzzlePart {
 	private final ExactCover puzzle;
 	private final int row;
 	private final List<ExactCoverAtom> atoms = new ArrayList<>();
@@ -23,7 +23,7 @@ public class ExactCoverConstraint extends PuzzleConstraint {
 	}
 
 	@Override
-	public Iterable<ExactCoverAtom> atoms() {
+	public List<ExactCoverAtom> atoms() {
 		return atoms;
 	}
 
@@ -31,7 +31,6 @@ public class ExactCoverConstraint extends PuzzleConstraint {
 		return row;
 	}
 
-	@Override
 	public ExactCover puzzle() {
 		return puzzle;
 	}

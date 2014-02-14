@@ -5,12 +5,12 @@ import java.util.Observable;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
+import com.comco.exactcover.Col;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.SolutionSet;
-import com.comco.exactcover.algorithm.ColumnNode;
+import com.comco.exactcover.SolutionKnitter;
 
-public class SolutionSetModel extends Observable implements SolutionSet {
-	private final SolutionSet base;
+public class SolutionSetModel extends Observable implements SolutionKnitter {
+	private final SolutionKnitter base;
 
 	private int maxNumberOfSolutions = Integer.MAX_VALUE;
 	private int rowSleepTime = 20;
@@ -69,7 +69,7 @@ public class SolutionSetModel extends Observable implements SolutionSet {
 		};
 	}
 
-	public SolutionSetModel(final SolutionSet base) {
+	public SolutionSetModel(final SolutionKnitter base) {
 		this.base = base;
 	}
 
@@ -111,7 +111,7 @@ public class SolutionSetModel extends Observable implements SolutionSet {
 
 	@Override
 	public boolean shouldContinue() {
-		return getNumberOfSolutionsFound() < maxNumberOfSolutions;
+		return foundSolutionsCount() < maxNumberOfSolutions;
 	}
 
 	private void sleep(int time) {
@@ -123,27 +123,27 @@ public class SolutionSetModel extends Observable implements SolutionSet {
 	}
 
 	@Override
-	public int getNumberOfSolutionsFound() {
-		return base.getNumberOfSolutionsFound();
+	public void addCol(Col col) {
+		base.addCol(col);
 	}
 
 	@Override
-	public int getExaminedNodes() {
-		return base.getExaminedNodes();
+	public void popCol() {
+		base.popCol();
 	}
 
 	@Override
-	public void addColumn(ColumnNode column) {
-		base.addColumn(column);
+	public int addedRowsCount() {
+		return base.addedRowsCount();
 	}
 
 	@Override
-	public void popColumn() {
-		base.popColumn();
+	public int addedColsCount() {
+		return base.addedColsCount();
 	}
 
 	@Override
-	public int getExaminedColumns() {
-		return base.getExaminedColumns();
+	public int foundSolutionsCount() {
+		return base.foundSolutionsCount();
 	}
 }

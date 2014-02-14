@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.comco.exactcover.puzzle.PuzzleAtom;
-import com.comco.exactcover.puzzle.PuzzleConstraint;
+import com.comco.exactcover.puzzle.PuzzlePart;
 import com.comco.exactcover.utils.MaskUtils;
 
 /**
@@ -14,7 +14,7 @@ import com.comco.exactcover.utils.MaskUtils;
  * @author comco
  * 
  */
-public class PieceConstraint extends PuzzleConstraint {
+public class PieceConstraint extends PuzzlePart {
 	private final Polymino puzzle;
 	private final Piece piece;
 	private final int boardRow;
@@ -78,7 +78,6 @@ public class PieceConstraint extends PuzzleConstraint {
 		return mask[row][col];
 	}
 
-	@Override
 	public Polymino puzzle() {
 		return puzzle;
 	}

@@ -1,19 +1,23 @@
-package com.comco.exactcover.algorithm;
+package com.comco.exactcover.dancinglinks;
 
-import com.comco.exactcover.Column;
+import com.comco.exactcover.Col;
 
 public final class ColumnNode {
 	final Node base;
-	final Column column;
+	final Col column;
 	ColumnNode left;
 	ColumnNode right;
 	int size = 0;
 
-	private ColumnNode(final Column column) {
-		this.base = new Node(this, null);
+	private ColumnNode(final Col column) {
+		this.base = Node.createBaseNode(this);
 		this.column = column;
 		this.left = this;
 		this.right = this;
+	}
+
+	public boolean isHead() {
+		return (column == null);
 	}
 
 	public Node base() {
@@ -46,7 +50,7 @@ public final class ColumnNode {
 		return (this == right);
 	}
 
-	public ColumnNode createRight(final Column column) {
+	public ColumnNode createRight(final Col column) {
 		return insertRight(new ColumnNode(column));
 	}
 

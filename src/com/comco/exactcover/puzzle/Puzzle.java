@@ -1,103 +1,37 @@
 package com.comco.exactcover.puzzle;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import com.comco.exactcover.Network;
-import com.comco.exactcover.algorithm.ColumnNode;
-import com.comco.exactcover.algorithm.Node;
-import com.comco.exactcover.utils.MaskUtils;
-
 public abstract class Puzzle {
-	private int nextAtomId = 0;
-	private int nextConstraintId = 0;
-
 	private final List<PuzzleAtom> atoms = new ArrayList<PuzzleAtom>();
-	private final List<PuzzleConstraint> constraints = new ArrayList<PuzzleConstraint>();
+	private final List<PuzzlePart> parts = new ArrayList<PuzzlePart>();
 
-	public Iterable<PuzzleAtom> allAtoms() {
-		return atoms;
+	public List<PuzzleAtom> atoms() {
+		return Collections.unmodifiableList(atoms);
 	}
 
-	public Iterable<PuzzleConstraint> allConstraints() {
-		return constraints;
+	public List<PuzzlePart> parts() {
+		return Collections.unmodifiableList(parts);
 	}
-
-	public int atomsCount() {
-		return atoms.size();
-	}
-
-	public int constraintsCount() {
-		return constraints.size();
-	}
-
-	void addAtom(final PuzzleAtom atom) {
-		atoms.add(atom);
-	}
-
-	void addConstraint(final PuzzleConstraint constraint) {
-		constraints.add(constraint);
-	}
+	
+	private int nextAtomId = 0;
+	private int nextPartId = 0;
 
 	int nextAtomId() {
 		return nextAtomId++;
 	}
 
-	int nextConstraintId() {
-		return nextConstraintId++;
+	int nextPartId() {
+		return nextPartId++;
+	}
+	
+	void addAtom(final PuzzleAtom atom) {
+		atoms.add(atom);
 	}
 
-	public boolean[][] toBooleanMatrix() {
-		final boolean[][] matrix = new boolean[constraints.size()][atoms.size()];
-		for (final PuzzleConstraint constraint : constraints) {
-			for (PuzzleAtom atom : constraint.atoms()) {
-				matrix[constraint.id][atom.id] = true;
-			}
-		}
-		return matrix;
-	}
-
-	public void printBooleanMatrix() {
-		boolean[][] mat = toBooleanMatrix();
-		int rows = MaskUtils.maskRows(mat);
-		int cols = MaskUtils.maskCols(mat);
-		for (int row = 0; row < rows; ++row) {
-			for (int col = 0; col < cols; ++col) {
-				System.out.print(mat[row][col] ? 1 : 0);
-			}
-			System.out.println();
-		}
-	}
-
-	public Network toNetwork() {
-		// create head
-		final ColumnNode head = ColumnNode.createHeadColumnNode();
-		ColumnNode tail = head;
-
-		// create columns
-		ColumnNode[] columnNodes = new ColumnNode[atoms.size()];
-		int i = 0;
-		for (final PuzzleAtom atom : atoms) {
-			tail = tail.createRight(atom);
-			columnNodes[i++] = tail;
-		}
-
-		// create constraints
-		Node[] sweep = new Node[atoms.size()];
-		for (int j = 0; j < atoms.size(); ++j) {
-			sweep[j] = columnNodes[j].base();
-		}
-		for (final PuzzleConstraint constraint : constraints) {
-			Node left = null;
-			for (final PuzzleAtom atom : constraint.atoms()) {
-				sweep[atom.id] = sweep[atom.id].createTop(constraint);
-				if (left == null) {
-					left = sweep[atom.id];
-				} else {
-					left = left.insertRight(sweep[atom.id]);
-				}
-			}
-		}
-		return new Network(head, columnNodes);
+	void addPart(final PuzzlePart part) {
+		parts.add(part);
 	}
 }

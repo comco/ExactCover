@@ -2,16 +2,15 @@ package com.comco.exactcover.puzzle.exactcover;
 
 import java.util.ArrayDeque;
 
-import com.comco.exactcover.AbstractSolutionSet;
+import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.cli.ProgramState;
 
-public class ExactCoverSolutionSet extends AbstractSolutionSet {
+public class ExactCoverSolutionSet extends AbstractSolutionKnitter {
 	private final ExactCover exactCover;
 	private final ArrayDeque<ExactCoverConstraint> stack = new ArrayDeque<>();
 
-	public ExactCoverSolutionSet(ExactCover exactCover, ProgramState state) {
-		super(state);
+	public ExactCoverSolutionSet(ExactCover exactCover) {
+		super();
 		this.exactCover = exactCover;
 	}
 
@@ -34,9 +33,7 @@ public class ExactCoverSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
-		if (!quiet) {
-			printSolution();
-		}
+		printSolution();
 	}
 
 	private void printSolution() {
@@ -49,5 +46,11 @@ public class ExactCoverSolutionSet extends AbstractSolutionSet {
 
 	public ExactCover getExactCover() {
 		return exactCover;
+	}
+
+	@Override
+	public void popCol() {
+		// TODO Auto-generated method stub
+
 	}
 }

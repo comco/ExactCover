@@ -110,4 +110,15 @@ public final class MaskUtils {
 			return false;
 		}
 	}
+	
+	public static void printBooleanMatrix(final boolean[][] matrix) {
+		int rows = MaskUtils.maskRows(matrix);
+		int cols = MaskUtils.maskCols(matrix);
+		for (int row = 0; row < rows; ++row) {
+			for (int col = 0; col < cols; ++col) {
+				System.out.print(matrix[row][col] ? 1 : 0);
+			}
+			System.out.println();
+		}
+	}
 }

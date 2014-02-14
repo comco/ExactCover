@@ -1,6 +1,6 @@
-package com.comco.exactcover.algorithm;
+package com.comco.exactcover.dancinglinks;
 
-public class MinColumnDancingLinks extends BasicDancingLinks {
+public class MinColumnDancingLinks extends AbstractDancingLinks {
 	public MinColumnDancingLinks(final ColumnNode head) {
 		super(head);
 	}
@@ -18,8 +18,7 @@ public class MinColumnDancingLinks extends BasicDancingLinks {
 		return minNode;
 	}
 
-	@SuppressWarnings("unused")
-	private int columnSize(final ColumnNode columnNode) {
+	int columnSize(final ColumnNode columnNode) {
 		int size = 0;
 		for (Node node = columnNode.base.top; node != columnNode.base; node = node.top) {
 			++size;

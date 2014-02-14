@@ -1,28 +1,27 @@
-package com.comco.exactcover.algorithm;
+package com.comco.exactcover.dancinglinks;
 
-import com.comco.exactcover.Algorithm;
-import com.comco.exactcover.SolutionSet;
+import com.comco.exactcover.Problem;
+import com.comco.exactcover.SolutionKnitter;
 
-public class BasicDancingLinks implements Algorithm {
+public abstract class AbstractDancingLinks implements Problem {
 	protected final ColumnNode head;
 
-	public BasicDancingLinks(final ColumnNode head) {
+	public AbstractDancingLinks(final ColumnNode head) {
 		this.head = head;
 	}
 
 	@Override
-	public void solve(final SolutionSet solutionSet) {
-		// System.out.println(head.dumpHead());
+	public void solve(final SolutionKnitter solutionSet) {
 		if (head.isUnit()) {
 			solutionSet.complete();
 		} else if (solutionSet.shouldContinue()) {
-			final ColumnNode column = selectColumn();
-			if (column.size == 0) {
+			final ColumnNode columnNode = selectColumn();
+			if (columnNode.size == 0) {
 				return;
 			}
-			solutionSet.addColumn(column);
-			cover(column);
-			for (Node rowNode = column.base.top; rowNode != column.base; rowNode = rowNode.top) {
+			solutionSet.addCol(columnNode.column);
+			cover(columnNode);
+			for (Node rowNode = columnNode.base.top; rowNode != columnNode.base; rowNode = rowNode.top) {
 				solutionSet.addRow(rowNode.row);
 				for (Node node = rowNode.right; node != rowNode; node = node.right) {
 					cover(node.column);
@@ -35,19 +34,12 @@ public class BasicDancingLinks implements Algorithm {
 				}
 				solutionSet.popRow();
 			}
-			uncover(column);
-			solutionSet.popColumn();
+			uncover(columnNode);
+			solutionSet.popCol();
 		}
 	}
 
-	protected ColumnNode selectColumn() {
-		for (ColumnNode node = head.right; node != head; node = node.right) {
-			if (node.size <= 1) {
-				return node;
-			}
-		}
-		return head.right;
-	}
+	protected abstract ColumnNode selectColumn();
 
 	private final void cover(final ColumnNode column) {
 		column.detach();

@@ -2,16 +2,14 @@ package com.comco.exactcover.puzzle.queens;
 
 import java.util.ArrayDeque;
 
-import com.comco.exactcover.AbstractSolutionSet;
+import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
-import com.comco.exactcover.cli.ProgramState;
 
-public class QueensSolutionSet extends AbstractSolutionSet {
+public class QueensSolutionSet extends AbstractSolutionKnitter {
 	private final Queens queens;
 	private final ArrayDeque<QueensConstraint> stack = new ArrayDeque<>();
 
-	public QueensSolutionSet(final Queens queens, final ProgramState state) {
-		super(state);
+	public QueensSolutionSet(final Queens queens) {
 		this.queens = queens;
 	}
 
@@ -33,9 +31,7 @@ public class QueensSolutionSet extends AbstractSolutionSet {
 	@Override
 	public void complete() {
 		super.complete();
-		if (!quiet) {
-			printSolution();
-		}
+		printSolution();
 	}
 
 	private void printSolution() {

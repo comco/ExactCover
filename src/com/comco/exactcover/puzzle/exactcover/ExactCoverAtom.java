@@ -12,11 +12,6 @@ public class ExactCoverAtom extends PuzzleAtom {
 		this.col = col;
 	}
 
-	@Override
-	public ExactCover puzzle() {
-		return puzzle;
-	}
-
 	public int getCol() {
 		return col;
 	}

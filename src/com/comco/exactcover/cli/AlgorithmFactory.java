@@ -1,19 +1,22 @@
 package com.comco.exactcover.cli;
 
-import com.comco.exactcover.algorithm.BasicDancingLinks;
-import com.comco.exactcover.algorithm.ColumnNode;
-import com.comco.exactcover.algorithm.DegreeDancingLinks;
-import com.comco.exactcover.algorithm.MinColumnDancingLinks;
-import com.comco.exactcover.algorithm.NaiveDancingLinks;
+import com.comco.exactcover.Problem;
+import com.comco.exactcover.dancinglinks.BasicDancingLinks;
+import com.comco.exactcover.dancinglinks.ColumnNode;
+import com.comco.exactcover.dancinglinks.DegreeDancingLinks;
+import com.comco.exactcover.dancinglinks.MinColumnDancingLinks;
+import com.comco.exactcover.dancinglinks.NaiveDancingLinks;
 import com.comco.exactcover.puzzle.Puzzle;
+import com.comco.exactcover.puzzle.PuzzleConvertor;
 
 public class AlgorithmFactory {
 
 	private AlgorithmFactory() {
 	}
 
-	public BasicDancingLinks get(final AlgorithmType type, final Puzzle puzzle) {
-		ColumnNode head = puzzle.toNetwork().head;
+	public Problem get(final AlgorithmType type, final Puzzle puzzle) {
+		ColumnNode head = PuzzleConvertor.INSTANCE.convertToNetwork(puzzle)
+				.head();
 		switch (type) {
 		case NAIVE:
 			return new NaiveDancingLinks(head);

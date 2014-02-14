@@ -1,19 +1,17 @@
 package com.comco.exactcover.puzzle;
 
-import com.comco.exactcover.Column;
+import com.comco.exactcover.Col;
 
-public abstract class PuzzleAtom implements Column {
-	public final int id;
+public abstract class PuzzleAtom implements Col {
+	final int id;
 
-	public PuzzleAtom(final Puzzle puzzle) {
+	protected PuzzleAtom(final Puzzle puzzle) {
 		this.id = puzzle.nextAtomId();
 		puzzle.addAtom(this);
 	}
 
-	public abstract Puzzle puzzle();
-
 	@Override
-	public int getColumnId() {
+	public int colId() {
 		return id;
 	}
 }

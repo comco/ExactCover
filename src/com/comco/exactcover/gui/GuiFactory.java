@@ -2,7 +2,7 @@ package com.comco.exactcover.gui;
 
 import javax.swing.JPanel;
 
-import com.comco.exactcover.SolutionSet;
+import com.comco.exactcover.SolutionKnitter;
 import com.comco.exactcover.cli.PuzzleType;
 import com.comco.exactcover.puzzle.polymino.PolyminoModel;
 import com.comco.exactcover.puzzle.polymino.PolyminoSolutionSet;
@@ -17,7 +17,8 @@ import com.comco.exactcover.puzzle.sudoku.SudokuView;
 public final class GuiFactory {
 	public static GuiFactory INSTANCE = new GuiFactory();
 
-	public SolutionSetModel getModel(PuzzleType type, SolutionSet solutionSet) {
+	public SolutionSetModel getModel(PuzzleType type,
+			SolutionKnitter solutionSet) {
 		if (solutionSet != null) {
 			switch (type) {
 			case SUDOKU:

@@ -19,7 +19,7 @@ public class BlankDiagonalConstraint extends QueensConstraint {
 	}
 
 	@Override
-	public Iterable<QueensAtom> atoms() {
+	public List<QueensAtom> atoms() {
 		return atoms;
 	}
 }
