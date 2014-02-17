@@ -8,18 +8,18 @@ import com.comco.exactcover.puzzle.sudoku.SudokuPart;
 import com.comco.exactcover.puzzle.sudoku.SudokuSolutionKnitter;
 
 public class SudokuModel extends SolutionKnitterModel {
-	private final SudokuSolutionKnitter solutionSet;
-	private final ArrayDeque<SudokuPart> constraints = new ArrayDeque<>();
+	private final SudokuSolutionKnitter solutionKnitter;
+	private final ArrayDeque<SudokuPart> parts = new ArrayDeque<>();
 	private SudokuPart pop;
 
 	public SudokuModel(final SudokuSolutionKnitter solutionSet) {
 		super(solutionSet);
-		this.solutionSet = solutionSet;
+		this.solutionKnitter = solutionSet;
 	}
 
 	@Override
 	public void addRow(final Row row) {
-		constraints.add((SudokuPart) row);
+		parts.add((SudokuPart) row);
 		super.addRow(row);
 		pop = null;
 	}
@@ -27,7 +27,7 @@ public class SudokuModel extends SolutionKnitterModel {
 	@Override
 	public void popRow() {
 		super.popRow();
-		pop = constraints.pop();
+		pop = parts.pop();
 	}
 
 	public SudokuPart getPopped() {
@@ -35,10 +35,10 @@ public class SudokuModel extends SolutionKnitterModel {
 	}
 
 	public int getDigitAt(int row, int col) {
-		return solutionSet.extractBoard()[row][col];
+		return solutionKnitter.extractBoard()[row][col];
 	}
 
 	public SudokuPart getCurrentConstraint() {
-		return constraints.peekLast();
+		return parts.peekLast();
 	}
 }
