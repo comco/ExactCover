@@ -7,22 +7,22 @@ import com.comco.exactcover.puzzle.Puzzle;
 
 public class Queens extends Puzzle {
 	private final int size;
-	private final PlacementConstraint[][] placementConstraints;
+	private final PlacementPart[][] placementConstraints;
 	private final RowAtom[] rowAtoms;
 	private final ColAtom[] colAtoms;
 	private final DiagonalAtom[] diagonalAtoms;
 	private final AntidiagonalAtom[] antidiagonalAtoms;
-	private final List<BlankDiagonalConstraint> blankDiagonalConstraints = new ArrayList<>();
+	private final List<BlankDiagonalPart> blankDiagonalConstraints = new ArrayList<>();
 
 	public Queens(final int size) {
 		if (size > 0) {
 			this.size = size;
-			placementConstraints = new PlacementConstraint[size][size];
+			placementConstraints = new PlacementPart[size][size];
 
 			// build placement constraints
 			for (int row = 0; row < size; ++row) {
 				for (int col = 0; col < size; ++col) {
-					placementConstraints[row][col] = new PlacementConstraint(
+					placementConstraints[row][col] = new PlacementPart(
 							this, row, col);
 				}
 			}
@@ -44,7 +44,7 @@ public class Queens extends Puzzle {
 			for (int sum = 0; sum < 2 * size - 1; ++sum) {
 				DiagonalAtom atom = new DiagonalAtom(this, sum);
 				diagonalAtoms[sum] = atom;
-				blankDiagonalConstraints.add(new BlankDiagonalConstraint(this,
+				blankDiagonalConstraints.add(new BlankDiagonalPart(this,
 						atom));
 			}
 
@@ -53,7 +53,7 @@ public class Queens extends Puzzle {
 			for (int diff = 1 - size; diff < size; ++diff) {
 				AntidiagonalAtom atom = new AntidiagonalAtom(this, diff);
 				antidiagonalAtoms[diff + size - 1] = atom;
-				blankDiagonalConstraints.add(new BlankDiagonalConstraint(this,
+				blankDiagonalConstraints.add(new BlankDiagonalPart(this,
 						atom));
 			}
 
@@ -68,7 +68,7 @@ public class Queens extends Puzzle {
 		return size;
 	}
 
-	PlacementConstraint getPlacementConstraint(int row, int col) {
+	PlacementPart getPlacementConstraint(int row, int col) {
 		return placementConstraints[row][col];
 	}
 }

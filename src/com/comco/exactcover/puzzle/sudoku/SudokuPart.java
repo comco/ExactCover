@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.comco.exactcover.puzzle.PuzzlePart;
 
-public class SudokuConstraint extends PuzzlePart {
+public class SudokuPart extends PuzzlePart {
 	private final Sudoku puzzle;
 	private final int row;
 	private final int col;
@@ -13,7 +13,7 @@ public class SudokuConstraint extends PuzzlePart {
 
 	private final List<SudokuAtom> atoms = new ArrayList<SudokuAtom>();
 
-	public SudokuConstraint(final Sudoku puzzle, final int row, final int col,
+	public SudokuPart(final Sudoku puzzle, final int row, final int col,
 			final int val) {
 		super(puzzle);
 		this.puzzle = puzzle;

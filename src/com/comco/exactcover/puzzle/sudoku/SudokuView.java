@@ -62,12 +62,12 @@ class SudokuPiece extends JLabel implements Observer, EventListener {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		int digit = model.getDigitAt(row, col);
-		SudokuConstraint constraint = model.getCurrentConstraint();
+		SudokuPart constraint = model.getCurrentConstraint();
 		if (constraint != null && constraint.getRow() == row
 				&& constraint.getCol() == col) {
 			setBackground(Color.GREEN);
 		} else {
-			SudokuConstraint popped = model.getPopped();
+			SudokuPart popped = model.getPopped();
 			if (popped != null && popped.getRow() == row
 					&& popped.getCol() == col) {
 				setBackground(Color.RED);

@@ -3,21 +3,21 @@ package com.comco.exactcover.puzzle.polymino;
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
-import com.comco.exactcover.gui.SolutionSetModel;
+import com.comco.exactcover.gui.SolutionKnitterModel;
 
-public class PolyminoModel extends SolutionSetModel {
-	private final PolyminoSolutionSet solutionSet;
-	private final ArrayDeque<PieceConstraint> constraints = new ArrayDeque<>();
-	private PieceConstraint pop;
+public class PolyminoModel extends SolutionKnitterModel {
+	private final PolyminoSolutionKnitter solutionSet;
+	private final ArrayDeque<PiecePart> constraints = new ArrayDeque<>();
+	private PiecePart pop;
 
-	public PolyminoModel(PolyminoSolutionSet solutionSet) {
+	public PolyminoModel(PolyminoSolutionKnitter solutionSet) {
 		super(solutionSet);
 		this.solutionSet = solutionSet;
 	}
 
 	@Override
 	public void addRow(Row row) {
-		constraints.add((PieceConstraint) row);
+		constraints.add((PiecePart) row);
 		super.addRow(row);
 		pop = null;
 	}
@@ -28,11 +28,11 @@ public class PolyminoModel extends SolutionSetModel {
 		pop = constraints.pop();
 	}
 
-	public PieceConstraint getPopped() {
+	public PiecePart getPopped() {
 		return pop;
 	}
 
-	public PieceConstraint getCurrentConstraint() {
+	public PiecePart getCurrentConstraint() {
 		return constraints.peekLast();
 	}
 

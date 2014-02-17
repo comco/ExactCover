@@ -8,12 +8,12 @@ import com.comco.exactcover.puzzle.exactcover.ExactCoverReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCoverSolutionSet;
 import com.comco.exactcover.puzzle.polymino.Polymino;
 import com.comco.exactcover.puzzle.polymino.PolyminoReader;
-import com.comco.exactcover.puzzle.polymino.PolyminoSolutionSet;
+import com.comco.exactcover.puzzle.polymino.PolyminoSolutionKnitter;
 import com.comco.exactcover.puzzle.queens.Queens;
 import com.comco.exactcover.puzzle.queens.QueensReader;
-import com.comco.exactcover.puzzle.queens.QueensSolutionSet;
+import com.comco.exactcover.puzzle.queens.QueensSolutionKnitter;
 import com.comco.exactcover.puzzle.sudoku.SudokuReader;
-import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
+import com.comco.exactcover.puzzle.sudoku.SudokuSolutionKnitter;
 
 public final class PuzzleFactory {
 	private static final SudokuReader SUDOKU_READER = new SudokuReader();
@@ -49,11 +49,11 @@ public final class PuzzleFactory {
 			case COVER:
 				return new ExactCoverSolutionSet((ExactCover) puzzle);
 			case SUDOKU:
-				return new SudokuSolutionSet();
+				return new SudokuSolutionKnitter();
 			case POLYMINO:
-				return new PolyminoSolutionSet((Polymino) puzzle);
+				return new PolyminoSolutionKnitter((Polymino) puzzle);
 			case QUEENS:
-				return new QueensSolutionSet((Queens) puzzle);
+				return new QueensSolutionKnitter((Queens) puzzle);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for solution set.");

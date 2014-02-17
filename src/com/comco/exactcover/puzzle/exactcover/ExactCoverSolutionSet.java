@@ -7,7 +7,7 @@ import com.comco.exactcover.Row;
 
 public class ExactCoverSolutionSet extends AbstractSolutionKnitter {
 	private final ExactCover exactCover;
-	private final ArrayDeque<ExactCoverConstraint> stack = new ArrayDeque<>();
+	private final ArrayDeque<ExactCoverPart> stack = new ArrayDeque<>();
 
 	public ExactCoverSolutionSet(ExactCover exactCover) {
 		super();
@@ -18,10 +18,10 @@ public class ExactCoverSolutionSet extends AbstractSolutionKnitter {
 	public void addRow(Row row) {
 		// cast is safe
 		super.addRow(row);
-		addConstraint((ExactCoverConstraint) row);
+		addConstraint((ExactCoverPart) row);
 	}
 
-	private void addConstraint(final ExactCoverConstraint constraint) {
+	private void addConstraint(final ExactCoverPart constraint) {
 		stack.add(constraint);
 	}
 
@@ -38,7 +38,7 @@ public class ExactCoverSolutionSet extends AbstractSolutionKnitter {
 
 	private void printSolution() {
 		System.out.println("Solution found:");
-		for (ExactCoverConstraint set : stack) {
+		for (ExactCoverPart set : stack) {
 			System.out.format("%d ", set.getRow());
 		}
 		System.out.println();

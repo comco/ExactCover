@@ -5,28 +5,28 @@ import javax.swing.JPanel;
 import com.comco.exactcover.SolutionKnitter;
 import com.comco.exactcover.cli.PuzzleType;
 import com.comco.exactcover.puzzle.polymino.PolyminoModel;
-import com.comco.exactcover.puzzle.polymino.PolyminoSolutionSet;
+import com.comco.exactcover.puzzle.polymino.PolyminoSolutionKnitter;
 import com.comco.exactcover.puzzle.polymino.PolyminoView;
 import com.comco.exactcover.puzzle.queens.QueensModel;
-import com.comco.exactcover.puzzle.queens.QueensSolutionSet;
+import com.comco.exactcover.puzzle.queens.QueensSolutionKnitter;
 import com.comco.exactcover.puzzle.queens.QueensView;
 import com.comco.exactcover.puzzle.sudoku.SudokuModel;
-import com.comco.exactcover.puzzle.sudoku.SudokuSolutionSet;
+import com.comco.exactcover.puzzle.sudoku.SudokuSolutionKnitter;
 import com.comco.exactcover.puzzle.sudoku.SudokuView;
 
 public final class GuiFactory {
 	public static GuiFactory INSTANCE = new GuiFactory();
 
-	public SolutionSetModel getModel(PuzzleType type,
+	public SolutionKnitterModel getModel(PuzzleType type,
 			SolutionKnitter solutionSet) {
 		if (solutionSet != null) {
 			switch (type) {
 			case SUDOKU:
-				return new SudokuModel((SudokuSolutionSet) solutionSet);
+				return new SudokuModel((SudokuSolutionKnitter) solutionSet);
 			case POLYMINO:
-				return new PolyminoModel((PolyminoSolutionSet) solutionSet);
+				return new PolyminoModel((PolyminoSolutionKnitter) solutionSet);
 			case QUEENS:
-				return new QueensModel((QueensSolutionSet) solutionSet);
+				return new QueensModel((QueensSolutionKnitter) solutionSet);
 			default:
 				throw new UnsupportedOperationException("Puzzle type " + type
 						+ " is not supported for gui.");
@@ -38,7 +38,7 @@ public final class GuiFactory {
 	}
 
 	public JPanel getView(PuzzleType type, MainFrame frame,
-			SolutionSetModel model) {
+			SolutionKnitterModel model) {
 		if (model != null) {
 			switch (type) {
 			case SUDOKU:

@@ -1,11 +1,11 @@
 package com.comco.exactcover.puzzle.queens;
 
-import com.comco.exactcover.gui.SolutionSetModel;
+import com.comco.exactcover.gui.SolutionKnitterModel;
 
-public class QueensModel extends SolutionSetModel {
-	private final QueensSolutionSet solutionSet;
+public class QueensModel extends SolutionKnitterModel {
+	private final QueensSolutionKnitter solutionSet;
 
-	public QueensModel(final QueensSolutionSet solutionSet) {
+	public QueensModel(final QueensSolutionKnitter solutionSet) {
 		super(solutionSet);
 		this.solutionSet = solutionSet;
 	}

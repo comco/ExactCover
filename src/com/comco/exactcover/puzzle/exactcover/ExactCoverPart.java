@@ -5,12 +5,12 @@ import java.util.List;
 
 import com.comco.exactcover.puzzle.PuzzlePart;
 
-public class ExactCoverConstraint extends PuzzlePart {
+public class ExactCoverPart extends PuzzlePart {
 	private final ExactCover puzzle;
 	private final int row;
 	private final List<ExactCoverAtom> atoms = new ArrayList<>();
 
-	public ExactCoverConstraint(final ExactCover puzzle, final int row) {
+	public ExactCoverPart(final ExactCover puzzle, final int row) {
 		super(puzzle);
 		this.puzzle = puzzle;
 		this.row = row;

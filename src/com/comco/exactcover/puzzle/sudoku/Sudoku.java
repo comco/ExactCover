@@ -3,7 +3,7 @@ package com.comco.exactcover.puzzle.sudoku;
 import com.comco.exactcover.puzzle.Puzzle;
 
 public class Sudoku extends Puzzle {
-	private final SudokuConstraint[][][] boardConstraints = new SudokuConstraint[9][9][10];
+	private final SudokuPart[][][] boardConstraints = new SudokuPart[9][9][10];
 	private final RowAtom[][] rowAtoms = new RowAtom[9][10];
 	private final ColAtom[][] colAtoms = new ColAtom[9][10];
 	private final PositionAtom[][] positionAtoms = new PositionAtom[9][9];
@@ -14,7 +14,7 @@ public class Sudoku extends Puzzle {
 		for (int row = 0; row < 9; ++row) {
 			for (int col = 0; col < 9; ++col) {
 				for (int val = 1; val <= 9; ++val) {
-					SudokuConstraint constraint = new SudokuConstraint(this,
+					SudokuPart constraint = new SudokuPart(this,
 							row, col, val);
 					boardConstraints[row][col][val] = constraint;
 				}
@@ -62,7 +62,7 @@ public class Sudoku extends Puzzle {
 		boardConstraints[row][col][val].addAtom(atom);
 	}
 
-	public SudokuConstraint getBoardConstraint(final int row, final int col,
+	public SudokuPart getBoardConstraint(final int row, final int col,
 			final int val) {
 		return boardConstraints[row][col][val];
 	}

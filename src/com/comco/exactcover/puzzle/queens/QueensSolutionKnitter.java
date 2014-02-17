@@ -5,21 +5,21 @@ import java.util.ArrayDeque;
 import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
 
-public class QueensSolutionSet extends AbstractSolutionKnitter {
+public class QueensSolutionKnitter extends AbstractSolutionKnitter {
 	private final Queens queens;
-	private final ArrayDeque<QueensConstraint> stack = new ArrayDeque<>();
+	private final ArrayDeque<QueensPart> stack = new ArrayDeque<>();
 
-	public QueensSolutionSet(final Queens queens) {
+	public QueensSolutionKnitter(final Queens queens) {
 		this.queens = queens;
 	}
 
 	@Override
 	public void addRow(Row row) {
 		super.addRow(row);
-		addConstraint((QueensConstraint) row);
+		addConstraint((QueensPart) row);
 	}
 
-	private void addConstraint(QueensConstraint constraint) {
+	private void addConstraint(QueensPart constraint) {
 		stack.addFirst(constraint);
 	}
 
@@ -53,9 +53,9 @@ public class QueensSolutionSet extends AbstractSolutionKnitter {
 	public boolean[][] extractBoard() {
 		int size = queens.getSize();
 		boolean[][] board = new boolean[size][size];
-		for (QueensConstraint constraint : stack) {
-			if (constraint instanceof PlacementConstraint) {
-				PlacementConstraint placementConstraint = (PlacementConstraint) constraint;
+		for (QueensPart constraint : stack) {
+			if (constraint instanceof PlacementPart) {
+				PlacementPart placementConstraint = (PlacementPart) constraint;
 				int row = placementConstraint.getRow();
 				int col = placementConstraint.getCol();
 				board[row][col] = true;

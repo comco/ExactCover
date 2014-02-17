@@ -14,7 +14,7 @@ import com.comco.exactcover.utils.MaskUtils;
  * @author comco
  * 
  */
-public class PieceConstraint extends PuzzlePart {
+public class PiecePart extends PuzzlePart {
 	private final Polymino puzzle;
 	private final Piece piece;
 	private final int boardRow;
@@ -22,7 +22,7 @@ public class PieceConstraint extends PuzzlePart {
 	private final boolean[][] mask;
 	private final List<PuzzleAtom> atoms = new ArrayList<>();
 
-	public PieceConstraint(final Polymino puzzle, final Piece piece,
+	public PiecePart(final Polymino puzzle, final Piece piece,
 			final PieceAtom pieceAtom, final int boardRow, final int boardCol,
 			final boolean[][] mask) {
 		super(puzzle);

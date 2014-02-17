@@ -8,7 +8,7 @@ import javax.swing.SpinnerModel;
 public class SimulationControlView extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	public SimulationControlView(final SolutionSetModel model) {
+	public SimulationControlView(final SolutionKnitterModel model) {
 		super();
 		addLabeledSpinner("row sleep time: ", model.getRowSleepTimeModel());
 		addLabeledSpinner("solution sleep time: ",

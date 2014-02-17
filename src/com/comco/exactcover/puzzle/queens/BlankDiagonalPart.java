@@ -3,11 +3,11 @@ package com.comco.exactcover.puzzle.queens;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlankDiagonalConstraint extends QueensConstraint {
+public class BlankDiagonalPart extends QueensPart {
 	private final QueensAtom diagonalAtom;
 	private final List<QueensAtom> atoms = new ArrayList<>();
 
-	public BlankDiagonalConstraint(final Queens puzzle,
+	public BlankDiagonalPart(final Queens puzzle,
 			final QueensAtom diagonalAtom) {
 		super(puzzle);
 		this.diagonalAtom = diagonalAtom;

@@ -5,21 +5,21 @@ import java.util.ArrayDeque;
 import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
 
-public class PolyminoSolutionSet extends AbstractSolutionKnitter {
+public class PolyminoSolutionKnitter extends AbstractSolutionKnitter {
 	private final Polymino polymino;
-	private final ArrayDeque<PieceConstraint> stack = new ArrayDeque<>();
+	private final ArrayDeque<PiecePart> stack = new ArrayDeque<>();
 
-	public PolyminoSolutionSet(final Polymino polymino) {
+	public PolyminoSolutionKnitter(final Polymino polymino) {
 		this.polymino = polymino;
 	}
 
 	@Override
 	public void addRow(Row row) {
 		super.addRow(row);
-		addConstraint((PieceConstraint) row);
+		addConstraint((PiecePart) row);
 	}
 
-	private void addConstraint(final PieceConstraint constraint) {
+	private void addConstraint(final PiecePart constraint) {
 		stack.addFirst(constraint);
 	}
 
@@ -54,7 +54,7 @@ public class PolyminoSolutionSet extends AbstractSolutionKnitter {
 			}
 		}
 
-		for (PieceConstraint constraint : stack) {
+		for (PiecePart constraint : stack) {
 			int pieceRows = constraint.pieceRows();
 			int pieceCols = constraint.pieceCols();
 			int boardRow = constraint.boardRow();

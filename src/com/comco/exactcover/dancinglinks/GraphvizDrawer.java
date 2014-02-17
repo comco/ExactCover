@@ -24,31 +24,29 @@ public class GraphvizDrawer {
 		{
 			// command: dot -Tpng -Kfdp network.dot -o network.png
 			int pos = 0;
-			// for (ColumnNode column : network.columnNodes) {
-			// addHead(column.base, column.size, pos);
-			// for (Node node = column.base.top; node != column.base; node =
-			// node.top) {
-			// addNode(node, pos);
-			// }
-			// pos++;
-			// }
-			//
-			// for (ColumnNode column : network.columnNodes) {
-			// addEdge(column.base, "B", column.base.top, "L");
-			// for (Node node = column.base.top; node != column.base; node =
-			// node.top) {
-			// if (getColumn(node.left) < getColumn(node)) {
-			// addEdge(node, "L", node.left, "T");
-			// }
-			// if (getColumn(node) < getColumn(node.right)) {
-			// addEdge(node, "R", node.right, "B");
-			// }
-			// addEdge(node, "T", node.bottom, "R");
-			// if (node.top != column.base) {
-			// addEdge(node, "B", node.top, "L");
-			// }
-			// }
-			// }
+			for (ColumnNode column : network.columnNodes()) {
+				addHead(column.base, column.size, pos);
+				for (Node node = column.base.top; node != column.base; node = node.top) {
+					addNode(node, pos);
+				}
+				pos++;
+			}
+
+			for (ColumnNode column : network.columnNodes()) {
+				addEdge(column.base, "B", column.base.top, "L");
+				for (Node node = column.base.top; node != column.base; node = node.top) {
+					if (getColumn(node.left) < getColumn(node)) {
+						addEdge(node, "L", node.left, "T");
+					}
+					if (getColumn(node) < getColumn(node.right)) {
+						addEdge(node, "R", node.right, "B");
+					}
+					addEdge(node, "T", node.bottom, "R");
+					if (node.top != column.base) {
+						addEdge(node, "B", node.top, "L");
+					}
+				}
+			}
 		}
 		endHeader();
 		return sb.toString();

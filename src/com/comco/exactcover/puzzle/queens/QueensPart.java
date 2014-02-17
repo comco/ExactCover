@@ -6,11 +6,11 @@ import java.util.List;
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzlePart;
 
-public class QueensConstraint extends PuzzlePart {
+public class QueensPart extends PuzzlePart {
 	private final Queens puzzle;
 	private final List<QueensAtom> atoms = new ArrayList<QueensAtom>();
 
-	protected QueensConstraint(final Queens puzzle) {
+	protected QueensPart(final Queens puzzle) {
 		super(puzzle);
 		this.puzzle = puzzle;
 	}

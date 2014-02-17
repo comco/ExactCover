@@ -3,21 +3,21 @@ package com.comco.exactcover.puzzle.sudoku;
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
-import com.comco.exactcover.gui.SolutionSetModel;
+import com.comco.exactcover.gui.SolutionKnitterModel;
 
-public class SudokuModel extends SolutionSetModel {
-	private final SudokuSolutionSet solutionSet;
-	private final ArrayDeque<SudokuConstraint> constraints = new ArrayDeque<>();
-	private SudokuConstraint pop;
+public class SudokuModel extends SolutionKnitterModel {
+	private final SudokuSolutionKnitter solutionSet;
+	private final ArrayDeque<SudokuPart> constraints = new ArrayDeque<>();
+	private SudokuPart pop;
 
-	public SudokuModel(final SudokuSolutionSet solutionSet) {
+	public SudokuModel(final SudokuSolutionKnitter solutionSet) {
 		super(solutionSet);
 		this.solutionSet = solutionSet;
 	}
 
 	@Override
 	public void addRow(final Row row) {
-		constraints.add((SudokuConstraint) row);
+		constraints.add((SudokuPart) row);
 		super.addRow(row);
 		pop = null;
 	}
@@ -28,7 +28,7 @@ public class SudokuModel extends SolutionSetModel {
 		pop = constraints.pop();
 	}
 
-	public SudokuConstraint getPopped() {
+	public SudokuPart getPopped() {
 		return pop;
 	}
 
@@ -36,7 +36,7 @@ public class SudokuModel extends SolutionSetModel {
 		return solutionSet.extractBoard()[row][col];
 	}
 
-	public SudokuConstraint getCurrentConstraint() {
+	public SudokuPart getCurrentConstraint() {
 		return constraints.peekLast();
 	}
 }

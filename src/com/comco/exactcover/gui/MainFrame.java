@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-		SolutionSetModel model = GuiFactory.INSTANCE.getModel(
+		SolutionKnitterModel model = GuiFactory.INSTANCE.getModel(
 				programState.getPuzzleType(), programState.solutionSet);
 		programState.solutionSet = model;
 

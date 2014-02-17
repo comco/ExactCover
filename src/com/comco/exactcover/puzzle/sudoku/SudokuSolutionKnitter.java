@@ -5,17 +5,17 @@ import java.util.ArrayDeque;
 import com.comco.exactcover.AbstractSolutionKnitter;
 import com.comco.exactcover.Row;
 
-public class SudokuSolutionSet extends AbstractSolutionKnitter {
-	private final ArrayDeque<SudokuConstraint> stack = new ArrayDeque<>();
+public class SudokuSolutionKnitter extends AbstractSolutionKnitter {
+	private final ArrayDeque<SudokuPart> stack = new ArrayDeque<>();
 
 	@Override
 	public void addRow(Row row) {
 		// cast is safe
 		super.addRow(row);
-		addConstraint((SudokuConstraint) row);
+		addConstraint((SudokuPart) row);
 	}
 
-	private void addConstraint(SudokuConstraint constraint) {
+	private void addConstraint(SudokuPart constraint) {
 		stack.addFirst(constraint);
 	}
 
@@ -26,7 +26,7 @@ public class SudokuSolutionSet extends AbstractSolutionKnitter {
 
 	public int[][] extractBoard() {
 		int[][] board = new int[9][9];
-		for (SudokuConstraint constraint : stack) {
+		for (SudokuPart constraint : stack) {
 			board[constraint.getRow()][constraint.getCol()] = constraint
 					.getVal();
 		}

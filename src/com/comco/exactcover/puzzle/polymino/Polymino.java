@@ -21,7 +21,7 @@ public class Polymino extends Puzzle {
 	final List<PuzzleAtom> pieceAtoms = new ArrayList<>();
 
 	final PositionAtom[][] atomsOnBoard;
-	final List<PieceConstraint> pieceConstraints = new ArrayList<>();
+	final List<PiecePart> pieceParts = new ArrayList<>();
 
 	public Polymino(final boolean[][] board) {
 		this.board = board;
@@ -58,7 +58,7 @@ public class Polymino extends Puzzle {
 		if (piece.canRotate) {
 			boolean[][][] masks = new boolean[4][][];
 			masks[0] = mask;
-			addPieceConstraint(piece, pieceAtom, mask);
+			addPiecePart(piece, pieceAtom, mask);
 			for (int r = 0; r < 3; ++r) {
 				masks[r + 1] = maskRotate(masks[r]);
 				boolean found = false;
@@ -69,27 +69,22 @@ public class Polymino extends Puzzle {
 					}
 				}
 				if (!found) {
-					addPieceConstraint(piece, pieceAtom, masks[r + 1]);
+					addPiecePart(piece, pieceAtom, masks[r + 1]);
 				}
 			}
-			// boolean[][] current = mask;
-			// for (int r = 0; r < 4; ++r) {
-			// addPieceConstraint(piece, pieceAtom, current);
-			// current = maskRotate(current);
-			// }
 		} else {
-			addPieceConstraint(piece, pieceAtom, mask);
+			addPiecePart(piece, pieceAtom, mask);
 		}
 	}
 
-	private void addPieceConstraint(final Piece piece,
-			final PieceAtom pieceAtom, final boolean[][] mask) {
+	private void addPiecePart(final Piece piece, final PieceAtom pieceAtom,
+			final boolean[][] mask) {
 		for (int row = 0; row < boardRows(); ++row) {
 			for (int col = 0; col < boardCols(); ++col) {
 				if (canPlaceAt(getBoard(), row, col, mask)) {
-					final PieceConstraint pieceConstraint = new PieceConstraint(
-							this, piece, pieceAtom, row, col, mask);
-					pieceConstraints.add(pieceConstraint);
+					final PiecePart part = new PiecePart(this, piece,
+							pieceAtom, row, col, mask);
+					pieceParts.add(part);
 				}
 			}
 		}
