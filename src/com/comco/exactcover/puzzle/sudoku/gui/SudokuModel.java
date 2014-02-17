@@ -1,9 +1,11 @@
-package com.comco.exactcover.puzzle.sudoku;
+package com.comco.exactcover.puzzle.sudoku.gui;
 
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.gui.SolutionKnitterModel;
+import com.comco.exactcover.puzzle.sudoku.SudokuPart;
+import com.comco.exactcover.puzzle.sudoku.SudokuSolutionKnitter;
 
 public class SudokuModel extends SolutionKnitterModel {
 	private final SudokuSolutionKnitter solutionSet;

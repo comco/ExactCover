@@ -1,4 +1,4 @@
-package com.comco.exactcover.puzzle.polymino;
+package com.comco.exactcover.puzzle.polymino.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;

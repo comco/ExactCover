@@ -1,6 +1,7 @@
-package com.comco.exactcover.puzzle.queens;
+package com.comco.exactcover.puzzle.queens.gui;
 
 import com.comco.exactcover.gui.SolutionKnitterModel;
+import com.comco.exactcover.puzzle.queens.QueensSolutionKnitter;
 
 public class QueensModel extends SolutionKnitterModel {
 	private final QueensSolutionKnitter solutionSet;

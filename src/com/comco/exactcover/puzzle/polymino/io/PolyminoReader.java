@@ -1,9 +1,11 @@
-package com.comco.exactcover.puzzle.polymino;
+package com.comco.exactcover.puzzle.polymino.io;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 import com.comco.exactcover.puzzle.PuzzleReader;
+import com.comco.exactcover.puzzle.polymino.Piece;
+import com.comco.exactcover.puzzle.polymino.Polymino;
 import com.comco.exactcover.utils.MaskUtils;
 
 public class PolyminoReader implements PuzzleReader {

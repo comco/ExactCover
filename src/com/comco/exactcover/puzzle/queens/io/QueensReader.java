@@ -1,10 +1,11 @@
-package com.comco.exactcover.puzzle.queens;
+package com.comco.exactcover.puzzle.queens.io;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleReader;
+import com.comco.exactcover.puzzle.queens.Queens;
 
 public class QueensReader implements PuzzleReader {
 

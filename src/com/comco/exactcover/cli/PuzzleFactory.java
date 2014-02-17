@@ -4,16 +4,16 @@ import com.comco.exactcover.SolutionKnitter;
 import com.comco.exactcover.puzzle.Puzzle;
 import com.comco.exactcover.puzzle.PuzzleReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCover;
-import com.comco.exactcover.puzzle.exactcover.ExactCoverReader;
 import com.comco.exactcover.puzzle.exactcover.ExactCoverSolutionSet;
+import com.comco.exactcover.puzzle.exactcover.io.ExactCoverReader;
 import com.comco.exactcover.puzzle.polymino.Polymino;
-import com.comco.exactcover.puzzle.polymino.PolyminoReader;
 import com.comco.exactcover.puzzle.polymino.PolyminoSolutionKnitter;
+import com.comco.exactcover.puzzle.polymino.io.PolyminoReader;
 import com.comco.exactcover.puzzle.queens.Queens;
-import com.comco.exactcover.puzzle.queens.QueensReader;
 import com.comco.exactcover.puzzle.queens.QueensSolutionKnitter;
-import com.comco.exactcover.puzzle.sudoku.SudokuReader;
+import com.comco.exactcover.puzzle.queens.io.QueensReader;
 import com.comco.exactcover.puzzle.sudoku.SudokuSolutionKnitter;
+import com.comco.exactcover.puzzle.sudoku.io.SudokuReader;
 
 public final class PuzzleFactory {
 	private static final SudokuReader SUDOKU_READER = new SudokuReader();

@@ -1,9 +1,11 @@
-package com.comco.exactcover.puzzle.polymino;
+package com.comco.exactcover.puzzle.polymino.gui;
 
 import java.util.ArrayDeque;
 
 import com.comco.exactcover.Row;
 import com.comco.exactcover.gui.SolutionKnitterModel;
+import com.comco.exactcover.puzzle.polymino.PiecePart;
+import com.comco.exactcover.puzzle.polymino.PolyminoSolutionKnitter;
 
 public class PolyminoModel extends SolutionKnitterModel {
 	private final PolyminoSolutionKnitter solutionSet;

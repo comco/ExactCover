@@ -1,9 +1,10 @@
-package com.comco.exactcover.puzzle.exactcover;
+package com.comco.exactcover.puzzle.exactcover.io;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 import com.comco.exactcover.puzzle.PuzzleReader;
+import com.comco.exactcover.puzzle.exactcover.ExactCover;
 
 public class ExactCoverReader implements PuzzleReader {
 	@Override

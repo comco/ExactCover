@@ -1,9 +1,10 @@
-package com.comco.exactcover.puzzle.sudoku;
+package com.comco.exactcover.puzzle.sudoku.io;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 import com.comco.exactcover.puzzle.PuzzleReader;
+import com.comco.exactcover.puzzle.sudoku.Sudoku;
 
 public class SudokuReader implements PuzzleReader {
 

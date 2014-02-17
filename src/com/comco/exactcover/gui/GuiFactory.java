@@ -4,15 +4,15 @@ import javax.swing.JPanel;
 
 import com.comco.exactcover.SolutionKnitter;
 import com.comco.exactcover.cli.PuzzleType;
-import com.comco.exactcover.puzzle.polymino.PolyminoModel;
 import com.comco.exactcover.puzzle.polymino.PolyminoSolutionKnitter;
-import com.comco.exactcover.puzzle.polymino.PolyminoView;
-import com.comco.exactcover.puzzle.queens.QueensModel;
+import com.comco.exactcover.puzzle.polymino.gui.PolyminoModel;
+import com.comco.exactcover.puzzle.polymino.gui.PolyminoView;
 import com.comco.exactcover.puzzle.queens.QueensSolutionKnitter;
-import com.comco.exactcover.puzzle.queens.QueensView;
-import com.comco.exactcover.puzzle.sudoku.SudokuModel;
+import com.comco.exactcover.puzzle.queens.gui.QueensModel;
+import com.comco.exactcover.puzzle.queens.gui.QueensView;
 import com.comco.exactcover.puzzle.sudoku.SudokuSolutionKnitter;
-import com.comco.exactcover.puzzle.sudoku.SudokuView;
+import com.comco.exactcover.puzzle.sudoku.gui.SudokuModel;
+import com.comco.exactcover.puzzle.sudoku.gui.SudokuView;
 
 public final class GuiFactory {
 	public static GuiFactory INSTANCE = new GuiFactory();

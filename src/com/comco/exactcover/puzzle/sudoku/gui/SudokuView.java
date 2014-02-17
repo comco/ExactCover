@@ -1,7 +1,8 @@
-package com.comco.exactcover.puzzle.queens;
+package com.comco.exactcover.puzzle.sudoku.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.EventListener;
@@ -14,39 +15,37 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.comco.exactcover.gui.MainFrame;
+import com.comco.exactcover.puzzle.sudoku.SudokuPart;
 
-public class QueensView extends JPanel {
+public class SudokuView extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private final QueensPiece[][] pieces;
+	private final SudokuPiece[][] pieces = new SudokuPiece[9][9];
 
-	public QueensView(MainFrame frame, final QueensModel model) {
+	public SudokuView(MainFrame frame, final SudokuModel model) {
 		super(new GridBagLayout());
 		frame.setSize(800, 800);
-		int size = model.getSize();
 		GridBagConstraints c = new GridBagConstraints();
-		pieces = new QueensPiece[size][size];
-		for (int row = 0; row < size; ++row) {
-			for (int col = 0; col < size; ++col) {
-				pieces[row][col] = new QueensPiece(model, row, col);
+		for (int i = 0; i < 9; ++i) {
+			for (int j = 0; j < 9; ++j) {
+				pieces[i][j] = new SudokuPiece(model, i, j);
 				c.weightx = 1.0;
 				c.weighty = 1.0;
 				c.fill = GridBagConstraints.BOTH;
-				c.gridx = col;
-				c.gridy = row;
-				add(pieces[row][col], c);
+				c.gridx = j;
+				c.gridy = i;
+				add(pieces[i][j], c);
 			}
 		}
 	}
 }
 
-class QueensPiece extends JLabel implements Observer, EventListener {
+class SudokuPiece extends JLabel implements Observer, EventListener {
 	private static final long serialVersionUID = 1L;
-	private static final String QUEENS_UNICODE_SYMBOL = "\u2654";
-	private final QueensModel model;
+	private final SudokuModel model;
 	private final int row, col;
 
-	public QueensPiece(final QueensModel model, int row, int col) {
+	public SudokuPiece(final SudokuModel model, final int row, final int col) {
 		this.model = model;
 		model.addObserver(this);
 		update(null, null);
@@ -56,25 +55,28 @@ class QueensPiece extends JLabel implements Observer, EventListener {
 		setVerticalAlignment(SwingConstants.CENTER);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		setPreferredSize(new Dimension(32, 32));
-		setFont(getFont().deriveFont(30f));
+		setFont(new Font("Calibri", Font.BOLD, 32));
 		setForeground(Color.BLACK);
 		setOpaque(true);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		boolean hasQueen = model.hasQueenAt(row, col);
-		if (hasQueen) {
-			setText(QUEENS_UNICODE_SYMBOL);
+		int digit = model.getDigitAt(row, col);
+		SudokuPart constraint = model.getCurrentConstraint();
+		if (constraint != null && constraint.getRow() == row
+				&& constraint.getCol() == col) {
 			setBackground(Color.GREEN);
 		} else {
-			setText("");
-			if (model.canPutQueenAt(row, col)) {
-				setBackground(Color.WHITE);
-			} else {
+			SudokuPart popped = model.getPopped();
+			if (popped != null && popped.getRow() == row
+					&& popped.getCol() == col) {
 				setBackground(Color.RED);
+			} else {
+				setBackground(Color.WHITE);
 			}
 		}
-	}
 
+		setText(digit > 0 ? Integer.toString(digit) : "");
+	}
 }
